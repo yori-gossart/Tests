@@ -643,11 +643,22 @@ def write_report(ctx: dict) -> Path:
     A("| # | target | result | exact error |")
     A("|---|---|---|---|")
     for a in provenance["attempts_in_protocol_order"]:
-        err = a.get("exact_error") or a.get("detail", "")
+        # Attempts record their outcome under whichever key fits: a single
+        # exact_error, a list of them, a prose detail, or the probe lists of
+        # the mirror sweep. Fall through all of them so no row renders blank.
+        err = (
+            a.get("exact_error")
+            or a.get("exact_errors")
+            or a.get("detail")
+            or a.get("also_failed")
+            or a.get("other_hosts_blocked")
+            or a.get("probed")
+            or ""
+        )
         if isinstance(err, list):
-            err = "; ".join(err)
-        err = str(err).replace("\n", " ").replace("|", "\\|")[:220]
-        A(f"| {a['order']} | {a['target'][:80]} | {a['result']} | `{err}` |")
+            err = "; ".join(str(e) for e in err)
+        err = str(err).replace("\n", " ").replace("|", "\\|")[:260]
+        A(f"| {a['order']} | {a['target'][:110]} | {a['result']} | `{err}` |")
     A("")
     A("**The published SCADA CSVs were never obtained.** Everything downstream runs on")
     A("data regenerated with the official generator, the official network model and the")
