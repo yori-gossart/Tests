@@ -1,0 +1,121 @@
+{
+  "dataset": "BattLeDIM 2020 / L-Town",
+  "canonical_citation": "S. G. Vrachimis, D. G. Eliades, R. Taormina, Z. Kapelan, A. Ostfeld, S. Liu, M. Kyriakou, P. Pavlou, M. Qiu, M. M. Polycarpou, 'Battle of the Leakage Detection and Isolation Methods', Journal of Water Resources Planning and Management, doi:10.1061/(ASCE)WR.1943-5452.0001601",
+  "license": "EUPL v1.1 (see data/raw/battledim_official/LICENSE.md)",
+  "acquisition_utc": "2026-08-13T10:12:00Z",
+
+  "source_used": {
+    "kind": "official_upstream_git_repository",
+    "url": "https://github.com/KIOS-Research/BattLeDIM",
+    "commit": "ea81f544debb21587e09c32801ce605f8305720a",
+    "tags_at_commit": ["v1.0", "v1.1"],
+    "transport": [
+      "git clone --depth 1 via the session git proxy (anonymous public read)",
+      "https://media.githubusercontent.com/media/... for Git-LFS-tracked *.inp payloads"
+    ],
+    "note": "This is the organisers' own repository (KIOS Research and Innovation Centre of Excellence, University of Cyprus), i.e. the official upstream, not a third-party mirror."
+  },
+
+  "attempts_in_protocol_order": [
+    {
+      "order": 1,
+      "target": "Official BattLeDIM website - https://battledim.ucy.ac.cy/ (Data page ?page_id=33)",
+      "result": "FAILED",
+      "exact_error": "curl: (56) CONNECT tunnel failed, response 403  (HTTP code 000)"
+    },
+    {
+      "order": 1,
+      "target": "Official BattLeDIM rules PDF - https://www.battledim.ucy.ac.cy/wp-content/uploads/2020/02/BattLeDIM_Problem_Description_and_Rules-v1.3.1.pdf",
+      "result": "FAILED",
+      "exact_error": "{\"error_type\":\"EGRESS_BLOCKED\",\"domain\":\"www.battledim.ucy.ac.cy\",\"message\":\"Access to www.battledim.ucy.ac.cy is blocked by the network egress proxy.\"}"
+    },
+    {
+      "order": 2,
+      "target": "Zenodo record 4017659 - https://zenodo.org/records/4017659 (canonical dataset DOI 10.5281/zenodo.4017659)",
+      "result": "FAILED",
+      "exact_error": "curl: (56) CONNECT tunnel failed, response 403  (HTTP code 000)",
+      "proxy_status_endpoint_record": {
+        "ts": "2026-08-13T10:02:27.707Z",
+        "kind": "connect_rejected",
+        "detail": "gateway answered 403 to CONNECT (policy denial or upstream failure)",
+        "host": "zenodo.org:443"
+      },
+      "also_failed": [
+        "https://doi.org/10.5281/zenodo.4017659 -> 000",
+        "https://www.zenodo.org -> 000",
+        "https://sandbox.zenodo.org/ -> 000"
+      ]
+    },
+    {
+      "order": 3,
+      "target": "Public GitHub mirror - https://github.com/KIOS-Research/BattLeDIM",
+      "result": "PARTIAL SUCCESS",
+      "detail": "github.com, api.github.com and codeload.github.com all return HTTP 403 through the egress proxy, but anonymous git clone via the session git proxy succeeds and raw.githubusercontent.com / media.githubusercontent.com return HTTP 200.",
+      "exact_errors": [
+        "https://github.com/KIOS-Research/BattLeDIM -> HTTP 403",
+        "https://api.github.com/repos/KIOS-Research/BattLeDIM -> HTTP 403",
+        "https://codeload.github.com/KIOS-Research/BattLeDIM/tar.gz/refs/heads/master -> HTTP 403"
+      ]
+    },
+    {
+      "order": 4,
+      "target": "File-by-file download of Git-LFS payloads",
+      "result": "SUCCESS",
+      "detail": "The three *.inp files are Git-LFS tracked; the anonymous git lane serves only 131-byte pointer stubs. Real payloads retrieved individually from media.githubusercontent.com (HTTP 200): L-TOWN_v2_Real.inp 177151858 B, L-TOWN_v2_Model.inp 409786 B, L-TOWN.inp 412164 B."
+    },
+    {
+      "order": 5,
+      "target": "Other mirrors probed for the published SCADA CSVs",
+      "result": "FAILED - no mirror of the published CSV/XLSX SCADA files found",
+      "probed": [
+        "GardarGardarsson/GSP_for_Leak_Detection (notebooks only, no raw SCADA)",
+        "jorgeps86/LeakLocalization (pScada2018.mat / pScada2019.mat exist but are MATLAB MCOS `table` objects; payload not extractable with scipy/h5py in this environment, and it is a participant re-export, not the official artefact)",
+        "erytheis/BattLeDIM (empty tree)",
+        "inaamashraf/SPIGNNs_for_WDSs (toy networks only)",
+        "KIOS-Research/LeakDB, WaterFutures/EPyT-Flow, KIOS-Research/EPyT-Flow (loaders that download from Zenodo at runtime -> blocked)"
+      ],
+      "other_hosts_blocked": [
+        "huggingface.co, gitlab.com, osf.io, figshare.com, data.4tu.nl, kaggle.com, gitee.com, archive.softwareheritage.org, drive.google.com, ucy.ac.cy -> all HTTP 000 (CONNECT 403)"
+      ]
+    }
+  ],
+
+  "obtained": {
+    "epanet_model_L-TOWN.inp": "YES - official, scoring-algorithm copy",
+    "epanet_model_L-TOWN_v2_Model.inp": "YES - official nominal model",
+    "epanet_model_L-TOWN_v2_Real.inp": "YES - official 'real' model incl. 5-min demand patterns",
+    "leak_ground_truth_2018": "YES - dataset_configuration_historical.yalm (14 events)",
+    "leak_ground_truth_2019_benchmark": "YES - leakages_info.yalm (23 events) and dataset_configuration.yalm (33 events over 2018+2019)",
+    "official_dataset_generator": "YES - Dataset Generator/dataset_generator.py",
+    "official_scoring_code": "YES - Scoring_Algorithm.m + functions/scoring_function.m (MATLAB)",
+    "true_leak_flow_series_2019": "YES - competition_leakages/Leak_p*.xlsx (23 files)",
+    "SCADA_2018_csv_published": "NO - blocked (Zenodo + official site)",
+    "SCADA_2019_csv_published": "NO - blocked (Zenodo + official site)"
+  },
+
+  "critical_findings": [
+    {
+      "id": "F1",
+      "severity": "blocking-for-verbatim-reproduction",
+      "finding": "The published SCADA measurement files (2018_SCADA_*.csv / .xlsx, 2019_SCADA_*.csv / .xlsx) could not be downloaded from any reachable host. Only the generator, the network models and the leak ground truth are recoverable."
+    },
+    {
+      "id": "F2",
+      "severity": "material-for-external-validity",
+      "finding": "L-TOWN_v2_Real.inp contains 104 demand patterns of length 105120 at a 300 s pattern timestep, i.e. exactly 365.0 days. dataset_configuration.yalm requests 2018-01-01 -> 2019-12-31 (210240 steps). EPANET/WNTR pattern indexing wraps modulo pattern length, so a two-year run reproduces the 2018 demand series verbatim in 2019. Verified empirically: pattern.at(t) == pattern.at(t + 105120*300) for all sampled patterns and offsets. Consequence: any dataset regenerated from this published artefact has identical demands in both years, which is very likely NOT true of the official published SCADA and which removes demand uncertainty from the 2019 test set.",
+      "verification": "src/audit_data.py records pattern_length_histogram and max_pattern_span_days per .inp file."
+    },
+    {
+      "id": "F3",
+      "severity": "material-for-external-validity",
+      "finding": "The published dataset_generator.py applies NO measurement noise. It defines self.unc_range = np.arange(0, 0.25, 0.05) but never uses it, indicating the released generator is not the exact version that produced the published SCADA. The official noise specification lives in the rules PDF, which is on a blocked host."
+    },
+    {
+      "id": "F4",
+      "severity": "protocol-exposure",
+      "finding": "The 2019 leak ground truth (link IDs, start/end/peak times, diameters) is stored in the SAME files as the 2018 configuration (dataset_configuration.yalm) and in leakages_info.yalm. It was therefore visible during the mandatory data-inventory step, before FROZEN_PROTOCOL.json existed. Mitigation is procedural and code-level, not informational: no threshold, hyperparameter, sensor subset or FO criterion is derived from any 2019 quantity, and the freezing code reads only 2018-derived artefacts. This exposure is recorded rather than concealed."
+    }
+  ],
+
+  "integrity_note": "All files under data/raw/ are byte-identical to their upstream sources and are never modified by any script in this repository. SHA256 of every file is recorded in DATA_MANIFEST.json."
+}

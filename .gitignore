@@ -1,0 +1,7 @@
+# Raw payload too large for git (177 MB, exceeds GitHub's 100 MB blob limit).
+# Retrieval is fully specified in data/raw/PROVENANCE.json and its SHA256 is
+# pinned in DATA_MANIFEST.json; src/fetch_data.sh re-downloads it verbatim.
+data/raw/battledim_official/L-TOWN_v2_Real.inp
+data/processed/**/*.csv
+__pycache__/
+*.pyc
