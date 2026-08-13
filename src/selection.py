@@ -363,7 +363,18 @@ def select_all(
     inp_path: Path,
     budgets=BUDGETS,
     goal_sample: int = 400,
+    allow_exhaustive: bool = True,
+    topology: tuple[np.ndarray, np.ndarray] | None = None,
+    verbose: bool = True,
 ) -> dict:
+    """Select a sensor subset per method per budget.
+
+    allow_exhaustive : False forces greedy everywhere. The LOLEO folds use this
+        so that all 14 folds share one optimiser and the fold results are not a
+        mixture of exhaustive and greedy searches.
+    topology : optional precomputed (pairwise distance matrix, betweenness
+        vector) so the all-pairs Dijkstra is not repeated for every fold.
+    """
     rng = np.random.default_rng(seed)
     sensor_ids = [str(s) for s in lib.sensors]
     n_sensors = lib.n_sensors
@@ -384,8 +395,11 @@ def select_all(
     Hn = H / np.maximum(np.linalg.norm(H, axis=0, keepdims=True), 1e-12)
     goal_idx = rng.choice(lib.n_scen, size=min(goal_sample, lib.n_scen), replace=False)
 
-    D_top = build_graph_distances(inp_path, sensor_ids)
-    bc = betweenness_centrality(inp_path, sensor_ids)
+    if topology is None:
+        D_top = build_graph_distances(inp_path, sensor_ids)
+        bc = betweenness_centrality(inp_path, sensor_ids)
+    else:
+        D_top, bc = topology
 
     out: dict = {
         "sensor_ids": sensor_ids,
@@ -404,10 +418,11 @@ def select_all(
         res: dict = {}
 
         fo_score = fo_objective(vis, eligible, kappa, eta)
-        subset, how = optimise(n_sensors, k, fo_score, minimise=True, allow_exhaustive=True)
+        subset, how = optimise(n_sensors, k, fo_score, minimise=True,
+                               allow_exhaustive=allow_exhaustive)
         res["FO"] = {"subset": list(subset), "optimiser": how}
 
-        if k == min(budgets):
+        if k == min(budgets) and allow_exhaustive:
             g_subset = greedy_forward(n_sensors, k, fo_score, minimise=True)
             res["FO"]["greedy_subset_for_gap_check"] = list(g_subset)
             res["FO"]["greedy_gap"] = {
@@ -430,7 +445,8 @@ def select_all(
             "goal_oriented_oed": lambda s: crit_goal_oriented(Hn[list(s), :], goal_idx),
         }
         for name, fn in methods.items():
-            sub, how = optimise(n_sensors, k, fn, minimise=False, allow_exhaustive=True)
+            sub, how = optimise(n_sensors, k, fn, minimise=False,
+                                allow_exhaustive=allow_exhaustive)
             res[name] = {"subset": list(sub), "optimiser": how}
 
         res["topological_dispersion"] = {
@@ -460,7 +476,8 @@ def select_all(
 
         res["_wall_clock_s"] = round(time.time() - t0, 1)
         out["budgets"][str(k)] = res
-        print(f"budget k={k} done in {res['_wall_clock_s']}s", flush=True)
+        if verbose:
+            print(f"budget k={k} done in {res['_wall_clock_s']}s", flush=True)
 
     return out
 
