@@ -133,6 +133,9 @@ def main() -> int:
 
     ts18, X18, P18 = detector.load_year(dir18, 2018, ctx.sensor_ids)
     nominal = detector.fit_nominal(X18, P18, np.ones(len(ts18), bool), ctx.sensor_ids)
+    nominal.bias = np.array(
+        [frozen["model_bias_per_sensor_sigma_units"][s] for s in ctx.sensor_ids]
+    )
     resid18 = nominal.residuals(X18, P18)
 
     ts19, X19, P19 = detector.load_year(dir19, 2019, ctx.sensor_ids)

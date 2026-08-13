@@ -193,7 +193,8 @@ def track_a(
         train[leak.start_idx : leak.end_idx + 1] = False   # hold the event out
 
         nominal = detector.fit_nominal(X, P, train, ctx.sensor_ids)
-        # sigma is fold-specific, so the localiser must be re-whitened with it.
+        # sigma and the model bias are both fold-specific.
+        nominal.bias = nominal.estimate_bias(XN, PN)
         ctx.localiser.sigma = nominal.sigma
         Z = nominal.standardised(X, P)
         ZN = nominal.standardised(XN, PN)
@@ -273,7 +274,9 @@ def track_b(
     c = frozen["constants"]
     ts18, X18, P18 = detector.load_year(dir_2018, 2018, ctx.sensor_ids)
     nominal = detector.fit_nominal(X18, P18, np.ones(len(ts18), dtype=bool), ctx.sensor_ids)
-
+    nominal.bias = np.array(
+        [frozen["model_bias_per_sensor_sigma_units"][s] for s in ctx.sensor_ids]
+    )
     ctx.localiser.sigma = nominal.sigma
     ts19, X19, P19 = detector.load_year(dir_2019, 2019, ctx.sensor_ids)
     Z19 = nominal.standardised(X19, P19)

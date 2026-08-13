@@ -138,6 +138,10 @@ def main() -> int:
           flush=True)
 
     tsN, XN, PN = detector.load_year(dir_noleak, 2018, sensor_ids)
+    nominal.bias = nominal.estimate_bias(XN, PN)
+    print(f"model bias (sigma units): min {nominal.bias.min():+.3f} "
+          f"median {np.median(nominal.bias):+.3f} max {nominal.bias.max():+.3f}",
+          flush=True)
     ZN = nominal.standardised(XN, PN)
     all_sensors = list(range(len(sensor_ids)))
     h = calibrate_threshold(ZN, all_sensors, K_CUSUM, FALSE_ALARM_BUDGET, MIN_GAP_STEPS)
@@ -175,6 +179,27 @@ def main() -> int:
             "seed": SEED, "n_random_replications": N_RANDOM,
         },
         "sigma_per_sensor_m": {sid: float(s) for sid, s in zip(sensor_ids, sigma)},
+        "model_bias_per_sensor_sigma_units": {
+            sid: float(b) for sid, b in zip(sensor_ids, nominal.bias)
+        },
+        "correction_applied": {
+            "id": "C-BIAS",
+            "problem": (
+                "The 2018 training year is not leak-free (a leak runs from "
+                "8 January onwards), so the fitted nominal model is biased. On the "
+                "leak-free control year the standardised residual sits at +0.37 "
+                "sigma on median and up to +2.45 sigma on 6 of 33 sensors. A CUSUM "
+                "with slack k accumulates without bound whenever |mean| > k, so "
+                "with k = 0.5 the bias alone drove the chart and the calibrated "
+                "threshold exploded to h = 4094."
+            ),
+            "correction": (
+                "Subtract a per-sensor bias estimated as the median standardised "
+                "residual on the leak-free 2018 control year, which contains no "
+                "leaks and therefore isolates pure model bias."
+            ),
+            "chosen_using": "2018 artefacts only; 2019 had not been simulated yet",
+        },
         "nominal_model": {
             "form": "ridge on [1, 3 inlet flows, tank level, 3 daily harmonics, day-of-week]",
             "n_features": int(X18.shape[1]),

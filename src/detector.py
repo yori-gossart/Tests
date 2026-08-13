@@ -20,9 +20,24 @@ PIPELINE
    raises total inflow but its pressure signature is spatially structured, so
    the residual keeps the spatial information the sensor placement controls.
 
-2. Residual and scale.  r_j(t) = p_j(t) - p_hat_j(t),
+2. Residual, scale and bias.  r_j(t) = p_j(t) - p_hat_j(t),
    sigma_j = 1.4826 * MAD(r_j) over the training index (robust to the leaks
    that are present in the training year).
+
+   The training year is NOT leak-free -- BattLeDIM has a leak running from
+   8 January 2018 onwards -- so the fitted model is systematically biased: it
+   has learned pressures depressed by standing leaks. Applied to a leak-free
+   record the standardised residual sits at +0.37 sigma on median and up to
+   +2.45 sigma on six of the 33 sensors. A CUSUM with slack k accumulates
+   without bound whenever |mean| > k, so with k = 0.5 that bias alone drives
+   the chart, and the threshold calibrated against it exploded to h = 4094.
+
+   The correction, chosen from 2018 artefacts only: subtract a per-sensor bias
+   estimated as the median standardised residual on the LEAK-FREE 2018 control
+   year. That year contains no leaks, so its median residual is pure model
+   bias; removing it corrects the drift without touching any leak signal. The
+   bias is frozen alongside sigma and applied identically to every year, every
+   method and every fold.
 
 3. Statistic. Each sensor runs its OWN two-sided CUSUM chart on its
    standardised residual, which responds to abrupt steps and to the slow ramps
@@ -103,12 +118,26 @@ class NominalModel:
     weights: np.ndarray     # (n_features, n_sensors)
     sigma: np.ndarray       # (n_sensors,)
     sensor_ids: list[str]
+    bias: np.ndarray | None = None   # (n_sensors,), in sigma units
 
     def residuals(self, X: np.ndarray, P: np.ndarray) -> np.ndarray:
         return P - X @ self.weights
 
     def standardised(self, X: np.ndarray, P: np.ndarray) -> np.ndarray:
-        return self.residuals(X, P) / self.sigma[None, :]
+        z = self.residuals(X, P) / self.sigma[None, :]
+        if self.bias is not None:
+            z = z - self.bias[None, :]
+        return z
+
+    def estimate_bias(self, X_noleak: np.ndarray, P_noleak: np.ndarray) -> np.ndarray:
+        """Per-sensor model bias, as the median standardised residual on a
+        leak-free record. Computed with bias temporarily cleared so the estimate
+        is never taken through an existing correction."""
+        keep, self.bias = self.bias, None
+        try:
+            return np.median(self.standardised(X_noleak, P_noleak), axis=0)
+        finally:
+            self.bias = keep
 
 
 def fit_nominal(X: np.ndarray, P: np.ndarray, train_mask: np.ndarray,

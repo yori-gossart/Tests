@@ -1,0 +1,11 @@
+sigma (m): min 0.0078 median 0.0493 max 0.0875
+model bias (sigma units): min +0.228 median +0.370 max +2.446
+calibrated h = 359.154 -> 6 alarms on the leak-free 2018 year
+budget k=4 done in 1.3s
+budget k=6 done in 1.2s
+budget k=8 done in 1.6s
+budget k=10 done in 2.0s
+budget k=12 done in 2.4s
+
+wrote /home/user/Tests/FROZEN_PROTOCOL.json
+FROZEN_PROTOCOL.json sha256 = 09b5530432925a17f53c9c4e8dd4f7d6c41652bab3578faf1e81b761b33dfde2
