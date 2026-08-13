@@ -1,0 +1,90 @@
+{
+  "phase": "C -- EPA source identification dataset acquisition",
+  "status": "BLOCKED_NOT_ACQUIRED",
+  "attempted_utc": "2026-08-13T20:23:00Z",
+  "dataset": {
+    "title": "Dataset for Testing Contamination Source Identification Methods for Water Distribution Networks",
+    "data_gov_id": "A-pg4z-149",
+    "file": "Dataset_A-pg4z_TestSourceInversion_Haxton_20160728.zip",
+    "announced_primary_source": "https://pasteur.epa.gov/uploads/149/Dataset_A-pg4z_TestSourceInversion_Haxton_20160728.zip",
+    "associated_paper": "Seth et al. 2016, doi:10.1061/(ASCE)WR.1943-5452.0000619",
+    "expected_contents_per_catalogue_description": "results of a simulation study using the source inversion techniques in the Water Security Toolkit, plus the two EPANET input files used in the paper (looped system and block system)"
+  },
+
+  "attempts_in_prescribed_order": [
+    {
+      "order": 1,
+      "target": "EPA primary URL",
+      "url": "https://pasteur.epa.gov/uploads/149/Dataset_A-pg4z_TestSourceInversion_Haxton_20160728.zip",
+      "result": "FAILED",
+      "exact_error": "curl: (56) CONNECT tunnel failed, response 403   (http_code=000)",
+      "proxy_record": {
+        "ts": "2026-08-13T20:23:25.207Z",
+        "kind": "connect_rejected",
+        "detail": "gateway answered 403 to CONNECT (policy denial or upstream failure)",
+        "host": "pasteur.epa.gov:443"
+      }
+    },
+    {
+      "order": 2,
+      "target": "Data.gov catalogue page and CKAN resource endpoint",
+      "urls": [
+        "https://catalog.data.gov/dataset/dataset-for-testing-contamination-source-identification-methods-for-water-distribution-net",
+        "https://catalog.data.gov/api/3/action/package_show?id=A-pg4z-149"
+      ],
+      "result": "FAILED",
+      "exact_error": "curl: (56) CONNECT tunnel failed, response 403   (http_code=000)",
+      "proxy_record": {
+        "ts": "2026-08-13T20:23:25.550Z",
+        "kind": "connect_rejected",
+        "detail": "gateway answered 403 to CONNECT (policy denial or upstream failure)",
+        "host": "catalog.data.gov:443"
+      }
+    },
+    {
+      "order": 3,
+      "target": "EPA ScienceHub / Pasteur / Environmental Dataset Gateway",
+      "urls": [
+        "https://sciencehub.epa.gov/sciencehub/datasets",
+        "https://pasteur.epa.gov/",
+        "https://www.epa.gov/",
+        "https://edg.epa.gov/metadata/rest/document?id=A-pg4z-149"
+      ],
+      "result": "FAILED",
+      "exact_error": "curl: (56) CONNECT tunnel failed, response 403   (http_code=000) for every host",
+      "proxy_records": [
+        {"host": "sciencehub.epa.gov:443", "detail": "gateway answered 403 to CONNECT"},
+        {"host": "www.epa.gov:443", "detail": "gateway answered 403 to CONNECT"},
+        {"host": "edg.epa.gov:443", "detail": "gateway answered 403 to CONNECT"}
+      ]
+    },
+    {
+      "order": 4,
+      "target": "Any integral mirror verifiable by SHA256",
+      "result": "FAILED - none exists on any reachable host",
+      "detail": "GitHub is the only reachable non-package host in this environment. Probed: USEPA/Water-Security-Toolkit (REACHABLE - the inversion tool, not the dataset), sandialabs/chama (reachable), USEPA/EPANET2.2 (reachable), sandialabs/wst, USEPA/WST, USEPA/SourceInversion (do not exist). A targeted web search for the exact filename returned only the Data.gov catalogue entry and the EPA metadata gateway, both blocked. No repository carries the ZIP.",
+      "also_blocked": [
+        "https://doi.org/10.1061/(ASCE)WR.1943-5452.0000619 -> CONNECT 403 (doi.org:443)"
+      ]
+    }
+  ],
+
+  "sha256_of_acquired_zip": null,
+  "bytes": null,
+  "contents": null,
+
+  "consequence": {
+    "phase_C": "not completed -- dataset never acquired",
+    "phase_D": "NOT RUN. Pure reconstructibility on official EPA test cases is impossible without the test cases. No substitute dataset was used, per instruction.",
+    "phase_E": "run in a clearly-labelled BattLeDIM substitute form only; see RAPPORT_PHASE10_FINAL.md",
+    "phase_F": "FO_RECONSTRUCTIBILITY verdict cannot be issued from data that does not exist"
+  },
+
+  "pipeline_readiness": {
+    "entry_point": "run_phase10.py --phase D",
+    "expected_input_path": "phase10_reset/data/epa_source_inversion/Dataset_A-pg4z_TestSourceInversion_Haxton_20160728.zip",
+    "behaviour_without_zip": "reports BLOCKED and exits without fabricating results",
+    "behaviour_with_zip": "verifies SHA256 if a reference digest is supplied, unpacks, inventories the EPANET networks and test cases, and runs the Phase D design comparison",
+    "note": "Drop the ZIP at the path above and re-run; nothing else needs changing."
+  }
+}

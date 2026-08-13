@@ -1,0 +1,19 @@
+A1 event-level table
+["p232"]
+A2 surrogate correlations
+  2018 k=4: 1000 designs in 17s
+  2018 k=6: 1000 designs in 19s
+  2018 k=8: 1000 designs in 20s
+  2018 k=10: 1000 designs in 21s
+  2018 k=12: 1000 designs in 22s
+/usr/local/lib/python3.11/dist-packages/numpy/lib/_function_base_impl.py:3023: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[:, None]
+/usr/local/lib/python3.11/dist-packages/numpy/lib/_function_base_impl.py:3024: RuntimeWarning: invalid value encountered in divide
+  c /= stddev[None, :]
+  2019 k=4: 1000 designs in 26s
+  2019 k=6: 1000 designs in 27s
+  2019 k=8: 1000 designs in 29s
+  2019 k=10: 1000 designs in 30s
+  2019 k=12: 1000 designs in 30s
+A3 freeze chronology
+done

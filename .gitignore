@@ -21,3 +21,6 @@ temp.rpt
 
 # Chunk checkpoints: regenerable, and large
 data/processed/**/chunks/
+
+# Phase 10 all-junctions library: 118 MB, regenerable via src/sensitivity.py --all-junctions
+phase10_reset/data/*.npz

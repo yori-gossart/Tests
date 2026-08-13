@@ -1,0 +1,247 @@
+{
+  "fo_floor": {
+    "per_budget": {
+      "4": {
+        "n_events": 14,
+        "missed": [
+          {
+            "event": "p232",
+            "leak_type": "incipient",
+            "diameter_m": 0.020108
+          },
+          {
+            "event": "p183",
+            "leak_type": "abrupt",
+            "diameter_m": 0.015853
+          }
+        ],
+        "false_forgetting_rate": 0.1428571428571429
+      },
+      "6": {
+        "n_events": 14,
+        "missed": [
+          {
+            "event": "p232",
+            "leak_type": "incipient",
+            "diameter_m": 0.020108
+          }
+        ],
+        "false_forgetting_rate": 0.0714285714285714
+      },
+      "8": {
+        "n_events": 14,
+        "missed": [
+          {
+            "event": "p232",
+            "leak_type": "incipient",
+            "diameter_m": 0.020108
+          }
+        ],
+        "false_forgetting_rate": 0.0714285714285714
+      },
+      "10": {
+        "n_events": 14,
+        "missed": [
+          {
+            "event": "p232",
+            "leak_type": "incipient",
+            "diameter_m": 0.020108
+          }
+        ],
+        "false_forgetting_rate": 0.0714285714285714
+      },
+      "12": {
+        "n_events": 14,
+        "missed": [
+          {
+            "event": "p232",
+            "leak_type": "incipient",
+            "diameter_m": 0.020108
+          }
+        ],
+        "false_forgetting_rate": 0.0714285714285714
+      }
+    },
+    "persistently_missed_at_k>=6": [
+      "p232"
+    ],
+    "who_detects_it_at_k8": {
+      "p232": {
+        "FO": 0,
+        "D_optimal_bayesian": 1,
+        "A_optimal_bayesian": 1,
+        "E_optimal_observable_subspace": 1,
+        "bayesian_information_gain": 1,
+        "D_optimal_rank_reduced": 1,
+        "A_optimal_rank_reduced": 1,
+        "E_optimal_rank_reduced": 1,
+        "goal_oriented_oed": 1,
+        "topological_dispersion": 1,
+        "centrality": 0
+      }
+    }
+  },
+  "freeze_chronology": {
+    "n_commits": 28,
+    "freeze_commit": {
+      "sha": "b92b8e534a90697c45be44d0e161b5781f39bb7a",
+      "iso": "2026-08-13T14:36:35+00:00",
+      "subject": "Correct a CUSUM specification defect found before 2019 existed (C-BIAS)"
+    },
+    "track_b_commit": {
+      "sha": "6a16fce5046ef912717ede8a4d9073dc6d828868",
+      "iso": "2026-08-13T14:45:23+00:00",
+      "subject": "Record Track A and Track B results"
+    },
+    "final_commit": {
+      "sha": "714132176c0bf63f470ad20a352aa9372994d85f",
+      "iso": "2026-08-13T15:06:24+00:00",
+      "subject": "Final results: FO NOT_SUPPORTED on all three tracks"
+    },
+    "note": "The freeze was reissued once (correction C-BIAS). Both protocols are committed. Track B results were committed strictly after the freeze commit; the ordering is visible in git history and is not merely asserted.",
+    "all_commits": [
+      {
+        "sha": "7d58b6c94dfe3f207b7861e4e78b2e277a6d0319",
+        "iso": "2026-08-13T10:19:12+00:00",
+        "subject": "Data acquisition and audit: official BattLeDIM artefacts + manifest"
+      },
+      {
+        "sha": "23873db9974668bd10ca25c084b69bc3298ea2ed",
+        "iso": "2026-08-13T10:33:51+00:00",
+        "subject": "Port the official BattLeDIM generator to Linux/wntr 1.5 and launch regeneration"
+      },
+      {
+        "sha": "320fe06cd9887d9f9b5ba5eb72ddf4557364a015",
+        "iso": "2026-08-13T10:39:33+00:00",
+        "subject": "Add leak-sensitivity library builder with verified emitter leak model"
+      },
+      {
+        "sha": "5377b754b96f5cda3ee89ced727da9347fe9e0ff",
+        "iso": "2026-08-13T10:42:58+00:00",
+        "subject": "Fix .gitignore: drop stray negations, cover EPANET scratch files"
+      },
+      {
+        "sha": "50508982369af3b4eacc3248ee9454621f91f2b1",
+        "iso": "2026-08-13T11:05:45+00:00",
+        "subject": "Add selection methods, shared detector and official BattLeDIM scoring"
+      },
+      {
+        "sha": "aac155a810d9341b3d8cbd47097ff80f985ba546",
+        "iso": "2026-08-13T11:07:31+00:00",
+        "subject": "Add protocol freeze with an enforced 2019 contamination guard"
+      },
+      {
+        "sha": "038ed3c47715217b61f3f732758f23282b105249",
+        "iso": "2026-08-13T11:10:58+00:00",
+        "subject": "Restructure detector to per-sensor charts; exact k-by-k OED criteria"
+      },
+      {
+        "sha": "35d867dcbb9d0870b674ade75ad9415eca8a626a",
+        "iso": "2026-08-13T11:13:23+00:00",
+        "subject": "Add Track A and Track B runners plus paired-bootstrap statistics"
+      },
+      {
+        "sha": "1fdfeb16b2b6497aaaab5ce61217f144f022a351",
+        "iso": "2026-08-13T11:16:18+00:00",
+        "subject": "Add single-command orchestrator, data fetch script and pinned requirements"
+      },
+      {
+        "sha": "dfc90330d0fec5873e016d9923fc5ea8382a99bb",
+        "iso": "2026-08-13T11:20:11+00:00",
+        "subject": "Add Track C robustness study and the analysis/figure layer"
+      },
+      {
+        "sha": "eeb4a4fbbbaeb318275323a7fa9fd9a3abdabdb9",
+        "iso": "2026-08-13T11:22:36+00:00",
+        "subject": "Complete the analysis driver: tables, figures, verdicts and final report"
+      },
+      {
+        "sha": "25f7717674c81bd51e019fadd09fda29fc975216",
+        "iso": "2026-08-13T11:24:07+00:00",
+        "subject": "Add fidelity check against the official published leak-flow series"
+      },
+      {
+        "sha": "4a42d8e0e8f2a5e4177a3137de78fd88fa512e97",
+        "iso": "2026-08-13T11:40:04+00:00",
+        "subject": "Use one optimiser for every method; measure the greedy gap by bitset enumeration"
+      },
+      {
+        "sha": "bf9e32389cbc7446370533fe0fcee77641070a76",
+        "iso": "2026-08-13T11:59:31+00:00",
+        "subject": "Record sensitivity library build log"
+      },
+      {
+        "sha": "718a210d2acfe935aeb7ac1b37df7a37e8ee0871",
+        "iso": "2026-08-13T12:00:59+00:00",
+        "subject": "Allow outputs to be redirected to an alternate work root"
+      },
+      {
+        "sha": "84f3862d380db227e238fe91e6947d6d25bb0452",
+        "iso": "2026-08-13T12:34:13+00:00",
+        "subject": "Make regeneration resumable via bit-exact chunking"
+      },
+      {
+        "sha": "7af51bf99f95711d4872838b2ebe87518bb1d62f",
+        "iso": "2026-08-13T12:42:12+00:00",
+        "subject": "Tighten the 2019 contamination guard; guard empty forest plots"
+      },
+      {
+        "sha": "78b5ccabbd51cab3bd579d218091c6c05cace0d0",
+        "iso": "2026-08-13T13:09:09+00:00",
+        "subject": "Fix three defects found by dry-running the whole pipeline on fixtures"
+      },
+      {
+        "sha": "449879b539bf5cf001b1d315ed70f3b0dad27b5f",
+        "iso": "2026-08-13T13:19:55+00:00",
+        "subject": "Add repository README; render every provenance row"
+      },
+      {
+        "sha": "9d3745a83831b46732d89af6b85c7e7a763b40a5",
+        "iso": "2026-08-13T13:29:47+00:00",
+        "subject": "Ignore chunk checkpoint directories"
+      },
+      {
+        "sha": "924ea637ac20288e184fef02bdcd9a4e9da402db",
+        "iso": "2026-08-13T13:32:48+00:00",
+        "subject": "Separate detection from localisation; whiten the localiser by sigma"
+      },
+      {
+        "sha": "6e5eb32a348976787ba929d957bb311863799693",
+        "iso": "2026-08-13T14:07:21+00:00",
+        "subject": "Record the leak-free 2018 control year metadata"
+      },
+      {
+        "sha": "b92b8e534a90697c45be44d0e161b5781f39bb7a",
+        "iso": "2026-08-13T14:36:35+00:00",
+        "subject": "Correct a CUSUM specification defect found before 2019 existed (C-BIAS)"
+      },
+      {
+        "sha": "71278587b3bdeb0fd13e1c6825c6a30f0da3c151",
+        "iso": "2026-08-13T14:37:11+00:00",
+        "subject": "Record 2018 and 2019 regeneration metadata"
+      },
+      {
+        "sha": "8fe13eae67e8ca7ce00e4a6899a6a0179c6d7cd9",
+        "iso": "2026-08-13T14:40:43+00:00",
+        "subject": "Validate the regeneration against official output; F2 confirmed for the real benchmark"
+      },
+      {
+        "sha": "6a16fce5046ef912717ede8a4d9073dc6d828868",
+        "iso": "2026-08-13T14:45:23+00:00",
+        "subject": "Record Track A and Track B results"
+      },
+      {
+        "sha": "714132176c0bf63f470ad20a352aa9372994d85f",
+        "iso": "2026-08-13T15:06:24+00:00",
+        "subject": "Final results: FO NOT_SUPPORTED on all three tracks"
+      },
+      {
+        "sha": "304dce18e218e8d21aeef3f124555f04a726ca5b",
+        "iso": "2026-08-13T20:27:17+00:00",
+        "subject": "Phase B: B* support-frozen metric, with the FO-v1 defect demonstrated"
+      }
+    ]
+  },
+  "n_designs_per_budget": 1000,
+  "audit_seed": 20260813
+}

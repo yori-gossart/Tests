@@ -1,0 +1,102 @@
+{
+  "FO_DIAGNOSTIC": "FO_DIAGNOSTIC_NOT_SUPPORTED",
+  "FO_DIAGNOSTIC_reasons": [
+    "On 2018 FO visibility predicts detection failure well: AUROC 0.821 CI [0.768, 0.868], above every simple competitor (best: neg_isolability_margin at 0.562). That is a real signal.",
+    "But the decile failure-rate gradient on 2018 is not monotone (78% of steps non-decreasing; rates ['0.00', '0.00', '0.03', '0.00', '0.00', '0.01', '0.01', '0.22', '0.06', '0.21']), and the brief requires a clear monotone gradient.",
+    "The 2019 year cannot supply the required out-of-sample confirmation in either direction: its 2 failing events fail under EVERY design, so the outcome is design-independent and no sensor-set-dependent score can be evaluated on it. FO's 0.478 there is not evidence against FO, and the 0.771 of the best competitor is not evidence for it.",
+    "The out-of-sample test the brief requires is Phase D/E on the EPA source-identification dataset, which could not be acquired. FO_DIAGNOSTIC_NOT_SUPPORTED here means NOT DEMONSTRATED, not refuted."
+  ],
+  "FO_RECONSTRUCTIBILITY": "NOT_EVALUATED_DATASET_UNAVAILABLE",
+  "FO_RECONSTRUCTIBILITY_note": "Requires the EPA source-identification test cases (Phase C/D). The dataset is unreachable from this environment; exact errors in EPA_DATA_MANIFEST.json. Reporting NOT_SUPPORTED for a test that was never run would present missing data as a negative result, so a distinct status is used. Under the brief's literal binary this would read NOT_SUPPORTED; the distinction is flagged for the reader to override if they prefer the literal reading.",
+  "FO_v1_verdict_unchanged": "NOT_SUPPORTED (frozen, not re-run)",
+  "no_fo_v2_optimiser_created": true,
+  "checks": {
+    "2018": {
+      "auroc": 0.8214776295133438,
+      "auroc_ci": [
+        0.7679378140093025,
+        0.8680627507759928
+      ],
+      "auroc_above_floor": true,
+      "auprc": 0.1509089629087442,
+      "failure_prevalence": 0.0545454545454545,
+      "auprc_ci_above_prevalence": true,
+      "decile_monotone_fraction": 0.7777777777777778,
+      "decile_failure_rates": [
+        0.0,
+        0.0,
+        0.0259740259740259,
+        0.0,
+        0.0,
+        0.0129870129870129,
+        0.0129870129870129,
+        0.2207792207792207,
+        0.0649350649350649,
+        0.2077922077922078
+      ],
+      "best_competing_predictor": "neg_isolability_margin",
+      "best_competing_auroc": 0.5624018838304553,
+      "fo_beats_all_simple_predictors": true
+    },
+    "2019": {
+      "auroc": 0.477646595828414,
+      "auroc_ci": [
+        0.4311508729610757,
+        0.5253433010743978
+      ],
+      "auroc_above_floor": false,
+      "auprc": 0.0966931553491496,
+      "failure_prevalence": 0.0869565217391304,
+      "auprc_ci_above_prevalence": false,
+      "decile_monotone_fraction": 0.6666666666666666,
+      "decile_failure_rates": [
+        0.0,
+        0.0873015873015873,
+        0.0,
+        0.238095238095238,
+        0.1968503937007874,
+        0.2222222222222222,
+        0.0,
+        0.0,
+        0.0317460317460317,
+        0.0944881889763779
+      ],
+      "best_competing_predictor": "neg_snr",
+      "best_competing_auroc": 0.7712317985045257,
+      "fo_beats_all_simple_predictors": false
+    },
+    "test_year_degeneracy": {
+      "n_events": 23,
+      "events_failing_under_every_design": [
+        "p523",
+        "p827"
+      ],
+      "events_succeeding_under_every_design": [
+        "p123",
+        "p142",
+        "p193",
+        "p257",
+        "p277",
+        "p280",
+        "p331",
+        "p426",
+        "p427",
+        "p455",
+        "p514",
+        "p586",
+        "p653",
+        "p654",
+        "p680",
+        "p710",
+        "p721",
+        "p762",
+        "p800",
+        "p810",
+        "p879"
+      ],
+      "design_dependent_events": 0,
+      "degenerate": true,
+      "consequence": "Every event's outcome is fixed by the event, not by the sensor set, so the number of independent units is the number of events (23), not the number of rows, and no design-dependent score can rank them above chance for a design-related reason. The test-year AUROC of ANY predictor here is uninformative about that predictor."
+    }
+  }
+}

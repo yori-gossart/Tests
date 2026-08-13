@@ -1,0 +1,55 @@
+{
+  "phase": "10 -- reset / audit / pure reconstructibility",
+  "frozen_utc": "2026-08-13T20:40:00Z",
+  "principle": "FO-v1 is frozen and NOT_SUPPORTED. Nothing here re-runs or modifies it.",
+  "fo_v1_reference": {
+    "FROZEN_PROTOCOL.json_sha256": "09b5530432925a17f53c9c4e8dd4f7d6c41652bab3578faf1e81b761b33dfde2",
+    "verdicts": "NOT_SUPPORTED"
+  },
+  "phase_A_audit": {
+    "n_random_designs_per_budget": 1000,
+    "budgets": [
+      4,
+      6,
+      8,
+      10,
+      12
+    ],
+    "audit_seed": 20260813,
+    "correlation_statistic": "Spearman rho, pairwise-complete"
+  },
+  "phase_B_metrics": {
+    "B_dynamic": "support E_kappa recomputed from the sigma handed in (FO-v1 behaviour)",
+    "B_star": "support E* frozen once from the rich reference under nominal TRAIN sigma",
+    "kappa": 3.0,
+    "eta": 3.0,
+    "invariance_test": "src/fo_metrics.py::test_b_star_denominator_invariance",
+    "b_star_not_used_for_hyperparameter_selection_on_test": true
+  },
+  "phase_E_substitute": {
+    "label": "BATTLEDIM_SUBSTITUTE -- not the EPA source-identification study",
+    "failure_label": "event not detected inside its own window by the sensor set under test",
+    "predictors": [
+      "fo_neg_visibility",
+      "neg_snr",
+      "neg_isolability_margin",
+      "neg_smallest_sv"
+    ],
+    "bootstrap": 10000,
+    "seed": 20260813
+  },
+  "verdict_rules_as_specified": {
+    "FO_DIAGNOSTIC_SUPPORTED": [
+      "AUROC > 0.70 out of training",
+      "AUPRC CI above failure prevalence",
+      "clear monotone failure-rate gradient across deciles",
+      "behaviour preserved under measurement AND model error",
+      "not entirely dominated by a simple metric"
+    ],
+    "FO_RECONSTRUCTIBILITY_SUPPORTED": [
+      "FO/B* designs advantaged out of training on >= 2 source-reconstruction endpoints",
+      "without major degradation of the others"
+    ]
+  },
+  "no_fo_v2_optimiser_created": true
+}
