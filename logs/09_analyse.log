@@ -1,0 +1,7 @@
+/usr/local/lib/python3.11/dist-packages/numpy/lib/_nanfunctions_impl.py:1396: RuntimeWarning: All-NaN slice encountered
+  return _nanquantile_unchecked(
+EVENT_HELDOUT_2018_VERDICT   = NOT_SUPPORTED
+RECONSTRUCTED_2019_VERDICT   = NOT_SUPPORTED
+ROBUSTNESS_VERDICT           = NOT_SUPPORTED
+GLOBAL_VERDICT               = NOT_SUPPORTED
+wrote /home/user/Tests/FO_BATTLEDIM_EXTERNAL_VALIDATION_FINAL.md

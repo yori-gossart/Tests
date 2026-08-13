@@ -1,0 +1,6 @@
+  grid budget k=4 done (168s)
+  grid budget k=6 done (296s)
+  grid budget k=8 done (420s)
+  grid budget k=10 done (545s)
+  grid budget k=12 done (678s)
+wrote /home/user/Tests/results/track_c_robustness.json

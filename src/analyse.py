@@ -576,6 +576,12 @@ def md_table(df: pd.DataFrame, cols: list[str], budget: int) -> str:
 REPORT_NAME = "FO_BATTLEDIM_EXTERNAL_VALIDATION_FINAL.md"
 
 
+def _pct(x: float) -> str:
+    """Relative difference as a percentage; 'n/a' when the baseline rate is 0,
+    which makes the ratio undefined rather than infinite."""
+    return "n/a" if not np.isfinite(x) else f"{x * 100:+.1f}%"
+
+
 def _ci_lines(comparison: dict, budget: str) -> str:
     entry = comparison["budgets"].get(budget)
     if not entry:
@@ -588,7 +594,7 @@ def _ci_lines(comparison: dict, budget: str) -> str:
         rows.append(
             f"| {b} | {ff['mean_fo']:.3f} | {ff['mean_baseline']:.3f} | "
             f"{ff['absolute_difference']:+.3f} | "
-            f"{(ff['relative_difference']*100):+.1f}% | "
+            f"{_pct(ff['relative_difference'])} | "
             f"[{ff['ci95_absolute'][0]:+.3f}, {ff['ci95_absolute'][1]:+.3f}] | "
             f"{'yes' if ff['ci_entirely_favourable'] else 'no'} | "
             f"{(d['recall_loss_points']*100 if d['recall_loss_points'] is not None else float('nan')):+.1f} |"
@@ -681,6 +687,47 @@ def write_report(ctx: dict) -> Path:
     A("")
     for f in provenance["critical_findings"]:
         A(f"**{f['id']} ({f['severity']})** — {f['finding']}")
+        A("")
+    A("## 2b. Fidelity of the regeneration, and whether F2 applies to the real benchmark")
+    A("")
+    fid = ctx.get("fidelity")
+    if fid:
+        A(f"The organisers ship 23 official `Leak_p*.xlsx` series with their scoring code")
+        A("— their own generator run, 105120 five-minute samples each. Comparing our")
+        A("regenerated 2019 leak flows against them:")
+        A("")
+        A("| statistic | value |")
+        A("|---|---|")
+        A(f"| series compared | {fid['n_series_compared']} |")
+        A(f"| worst relative disagreement of any series **mean** | "
+          f"{fid['worst_relative_disagreement_of_series_mean']:.2e} |")
+        A(f"| mean fraction of samples within the generator's 0.01 rounding | "
+          f"{fid['mean_fraction_within_generator_rounding']:.4f} |")
+        A(f"| worst max absolute difference | {fid['worst_max_abs_diff_cmh']:.3f} m3/h |")
+        A(f"| verdict | **{fid['verdict']}** |")
+        A("")
+        A(f"{fid['f2_interpretation']}")
+        A("")
+        A("This raises what Track B is worth — the leak physics of the reconstruction")
+        A("matches official output to solver precision — but it does **not** make Track B")
+        A("a validation on the published SCADA. The published pressure and flow")
+        A("measurements remain unreachable, and with them whatever measurement noise the")
+        A("organisers added (F3).")
+        A("")
+    corr = frozen.get("correction_applied")
+    if corr:
+        A("## 2c. Correction applied before the test year was opened")
+        A("")
+        A(f"**{corr['id']}**")
+        A("")
+        A(f"- *Problem*: {corr['problem']}")
+        A(f"- *Correction*: {corr['correction']}")
+        A(f"- *Chosen using*: {corr['chosen_using']}")
+        A("")
+        A("The freeze was therefore reissued once. The superseded protocol is committed")
+        A("as `FROZEN_PROTOCOL_superseded_C-BIAS.json` so the change is auditable. The")
+        A("2019 regeneration was still running when the corrected freeze completed, and")
+        A("the runtime guard was armed throughout and did not fire.")
         A("")
     A("## 3. Methodology")
     A("")
@@ -843,13 +890,27 @@ def write_report(ctx: dict) -> Path:
         perm = ctrl["C1_label_permutation"]["false_forgetting_rate_per_replication"]
         fo_perm = float(np.mean([p["FO"] for p in perm]))
         A(f"- **C1 label permutation** ({len(perm)} replications, budget 8): FO "
-          f"false-forgetting rises to **{fo_perm:.3f}** when leak labels are shuffled. "
-          "A spatial advantage that survived permutation would indicate a bug or a "
-          "leak of information; it must collapse, and this is the check.")
+          f"false-forgetting is **{fo_perm:.3f}** under shuffled leak labels, "
+          "unchanged from the unpermuted value. That is not a pass — it is the "
+          "control failing to be informative. Time-based matching does not use the "
+          "pipe label, so permuting labels leaves the detection endpoint invariant "
+          "*by construction* and C1 cannot detect information leakage in it. The "
+          "control would bite on localisation distance, which this implementation "
+          "does not record under permutation. See §9.")
     if "C3_no_leak_false_alarms" in ctrl:
-        A("- **C3 no-leak control**: alarms raised on the leak-free 2018 year "
-          "(every one is a false alarm) — "
-          f"`{json.dumps(ctrl['C3_no_leak_false_alarms']['counts_per_budget'])}`")
+        counts = ctrl["C3_no_leak_false_alarms"]["counts_per_budget"]
+        budgets_c = sorted(counts.keys(), key=int)
+        methods_c = sorted({m for b in counts.values() for m in b})
+        A("- **C3 no-leak control**: alarms raised on the leak-free 2018 year; every "
+          "one is by construction a false alarm. The threshold was calibrated to at "
+          "most 6 per year on the full 33-sensor array, and every subset stays "
+          "within that.")
+        A("")
+        A("| method | " + " | ".join(f"k={b}" for b in budgets_c) + " |")
+        A("|---|" + "|".join("---" for _ in budgets_c) + "|")
+        for m in methods_c:
+            A(f"| {m} | " + " | ".join(str(counts[b].get(m, "-")) for b in budgets_c) + " |")
+        A("")
     if "C4_threshold_sensitivity" in ctrl:
         A("- **C4 threshold sensitivity**: reported across `h x "
           f"{list(ctrl['C4_threshold_sensitivity']['by_scale'].keys())}`. The best "
@@ -863,6 +924,27 @@ def write_report(ctx: dict) -> Path:
     A("")
     A("## 9. Anomalies kept")
     A("")
+    A("- **The Track B detection endpoint saturates.** Every method at every budget")
+    A("  returns the identical false-forgetting rate, missing the same two events.")
+    A("  There is no discrimination to measure. This is the direct consequence of F2:")
+    A("  with demands repeating between years, the 2018-fitted nominal model predicts")
+    A("  2019 almost exactly, so the residual is nearly pure leak signal and even four")
+    A("  sensors see almost everything. Track B therefore cannot support a claim in")
+    A("  either direction on detection, and its informative content is confined to the")
+    A("  secondary endpoints, where the methods do separate.")
+    A("- **Adding noise in Track C lowers the false-forgetting rate**, which is")
+    A("  backwards on its face. The alarm threshold is frozen and deliberately not")
+    A("  recalibrated per perturbation cell, so more noise means more CUSUM excursions,")
+    A("  more alarms, more events picking up a time-matched alarm — and more false")
+    A("  positives. The operating point moves between cells. Comparisons across cells")
+    A("  are therefore not like-for-like; comparisons between methods within a cell are,")
+    A("  because all methods share that cell's threshold.")
+    A("- **The label-permutation control C1 is uninformative for the detection")
+    A("  endpoint.** Permuting leak pipe labels leaves time-based matching invariant by")
+    A("  construction, so C1 cannot detect information leakage in the primary endpoint.")
+    A("  It would be informative for localisation distance, which this implementation")
+    A("  does not record under permutation. Reported as a weakness of the control, not")
+    A("  as a control that passed.")
     A("- Literal Bayesian E-optimality is degenerate in this regime (§3.4).")
     A("- The published model artefact repeats its demand year (F2), so the")
     A("  reconstructed 2019 test set carries no demand novelty. This makes detection")
@@ -938,6 +1020,8 @@ def main() -> int:
     frozen = json.loads((WORK / "FROZEN_PROTOCOL.json").read_text())
     ta = json.loads((RESULTS / "track_a_event_heldout_2018.json").read_text())
     tb = json.loads((RESULTS / "track_b_reconstructed_2019.json").read_text())
+    fid_path = RESULTS / "regeneration_fidelity.json"
+    fidelity = json.loads(fid_path.read_text()) if fid_path.exists() else None
     tc_path = RESULTS / "track_c_robustness.json"
     tc = json.loads(tc_path.read_text()) if tc_path.exists() else {"cells": [], "controls": {},
                                                                    "grid": {}}
@@ -1015,7 +1099,7 @@ def main() -> int:
     path = write_report(
         {
             "manifest": manifest, "provenance": provenance, "frozen": frozen,
-            "track_a": ta, "track_b": tb, "track_c": tc,
+            "track_a": ta, "track_b": tb, "track_c": tc, "fidelity": fidelity,
             "cmp_a": ca, "cmp_b": cb,
             "verdict_a": va, "verdict_b": vb, "verdict_c": vc,
             "verdict_global": vg, "verdict_global_reason": vg_reason,
