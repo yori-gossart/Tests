@@ -59,11 +59,18 @@ separately because the protocol asks for both.
 
 OPTIMISER
 ---------
-Subset selection is combinatorial. The same optimiser is used for every method
-at a given budget, so the comparison never confounds selection rule with search
-effort: exhaustive enumeration where it is affordable (k=4, C(33,4)=40920),
-greedy forward selection otherwise. Both are run at k=4 so the greedy optimality
-gap is measured rather than assumed.
+Subset selection is combinatorial, and the criteria differ enormously in cost:
+scoring one subset is a 4x4 determinant for Bayesian D but a 400x400 Gram for
+the goal-oriented criterion. Enumerating C(33,4)=40920 subsets is therefore
+affordable for some criteria and not for others.
+
+Rather than let the search effort vary by method -- which would confound the
+selection rule with how hard each was optimised -- EVERY method at EVERY budget
+uses greedy forward selection. The optimality gap that choice costs is measured
+rather than assumed: exhaustive_fo_blindspot() enumerates all 40920 subsets at
+k=4 for the FO criterion using a bitset popcount (~0.3 s instead of minutes) and
+reports how far greedy fell short. That diagnostic is reported on its own and is
+never substituted into the comparison.
 """
 
 from __future__ import annotations
@@ -71,6 +78,7 @@ from __future__ import annotations
 import itertools
 import json
 import time
+from math import comb
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -297,6 +305,52 @@ def optimise(n_sensors: int, k: int, score, minimise: bool, allow_exhaustive: bo
     return greedy_forward(n_sensors, k, score, minimise), "greedy_forward"
 
 
+_POPCOUNT = np.array([bin(i).count("1") for i in range(256)], dtype=np.int32)
+
+
+def exhaustive_fo_blindspot(vis: np.ndarray, eligible: np.ndarray, eta: float,
+                            k: int) -> dict:
+    """Exhaustively minimise the FO blind-spot rate B over all C(33, k) subsets.
+
+    A scenario is blind to S when no sensor in S sees it above eta, so B depends
+    only on the boolean matrix seen[z, j] = vis[z, j] > eta. Packing that matrix
+    into bits turns each subset evaluation into a handful of uint8 ORs plus a
+    popcount table lookup, which is what makes full enumeration affordable
+    (~0.3 s for k=4 rather than minutes).
+
+    Ties on B are broken on the 5th percentile of visibility, then the 10th,
+    then the mean -- the protocol's order -- but only among the tied subsets.
+    """
+    vis_e = vis[eligible]
+    seen = vis_e > eta
+    n_elig = seen.shape[0]
+    packed = np.packbits(seen.T, axis=1)  # (n_sensors, ceil(n_elig/8))
+
+    best_blind = None
+    tied: list[tuple[int, ...]] = []
+    for subset in itertools.combinations(range(seen.shape[1]), k):
+        acc = packed[subset[0]].copy()
+        for j in subset[1:]:
+            acc |= packed[j]
+        blind = n_elig - int(_POPCOUNT[acc].sum())
+        if best_blind is None or blind < best_blind:
+            best_blind, tied = blind, [subset]
+        elif blind == best_blind:
+            tied.append(subset)
+
+    def tiebreak(s):
+        d = vis_e[:, list(s)].max(axis=1)
+        return (-np.percentile(d, 5), -np.percentile(d, 10), -d.mean())
+
+    best = min(tied, key=tiebreak)
+    return {
+        "subset": list(best),
+        "B_blind_spot_rate": best_blind / n_elig,
+        "n_subsets_enumerated": comb(seen.shape[1], k),
+        "n_tied_at_optimum": len(tied),
+    }
+
+
 # ---------------------------------------------------------------------------
 # Topological baselines
 # ---------------------------------------------------------------------------
@@ -418,16 +472,20 @@ def select_all(
         res: dict = {}
 
         fo_score = fo_objective(vis, eligible, kappa, eta)
-        subset, how = optimise(n_sensors, k, fo_score, minimise=True,
-                               allow_exhaustive=allow_exhaustive)
-        res["FO"] = {"subset": list(subset), "optimiser": how}
+        subset = greedy_forward(n_sensors, k, fo_score, minimise=True)
+        res["FO"] = {"subset": list(subset), "optimiser": "greedy_forward"}
 
-        if k == min(budgets) and allow_exhaustive:
-            g_subset = greedy_forward(n_sensors, k, fo_score, minimise=True)
-            res["FO"]["greedy_subset_for_gap_check"] = list(g_subset)
-            res["FO"]["greedy_gap"] = {
-                "exhaustive": fo_score(subset)[0],
-                "greedy": fo_score(g_subset)[0],
+        if allow_exhaustive and k == min(budgets):
+            # Diagnostic only: how much does greedy give away? Reported beside
+            # the result, never substituted for it.
+            ex = exhaustive_fo_blindspot(vis, eligible, eta, k)
+            res["FO"]["greedy_gap_diagnostic"] = {
+                "exhaustive_subset": ex["subset"],
+                "exhaustive_B": ex["B_blind_spot_rate"],
+                "greedy_B": fo_score(subset)[0],
+                "absolute_gap": fo_score(subset)[0] - ex["B_blind_spot_rate"],
+                "n_subsets_enumerated": ex["n_subsets_enumerated"],
+                "n_tied_at_optimum": ex["n_tied_at_optimum"],
             }
 
         def wrap(fn):
@@ -445,9 +503,8 @@ def select_all(
             "goal_oriented_oed": lambda s: crit_goal_oriented(Hn[list(s), :], goal_idx),
         }
         for name, fn in methods.items():
-            sub, how = optimise(n_sensors, k, fn, minimise=False,
-                                allow_exhaustive=allow_exhaustive)
-            res[name] = {"subset": list(sub), "optimiser": how}
+            sub = greedy_forward(n_sensors, k, fn, minimise=False)
+            res[name] = {"subset": list(sub), "optimiser": "greedy_forward"}
 
         res["topological_dispersion"] = {
             "subset": list(maxmin_dispersion(D_top, k)),
