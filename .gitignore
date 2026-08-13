@@ -18,3 +18,6 @@ temp.inp
 temp.rpt
 /????????
 .epanet_scratch/
+
+# Chunk checkpoints: regenerable, and large
+data/processed/**/chunks/
