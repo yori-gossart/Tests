@@ -13,6 +13,8 @@ hydraulic simulations.
     1  fetch     official BattLeDIM artefacts (git + Git-LFS), digest-verified
     2  audit     SHA256 / shape / period / missing values -> DATA_MANIFEST.json
     3  simulate  regenerate 2018, the leak-free 2018 control, and 2019
+                 (chunked and resumable; chunking is verified bit-exact
+                  against the single-run reference implementation)
     4  library   leak-sensitivity library on the nominal model
     5  freeze    FROZEN_PROTOCOL.json (+ SHA256), guarded against 2019 reads
     6  track A   leave-one-leak-event-out over the 14 events of 2018
@@ -92,8 +94,9 @@ def stage_3_simulate(force: bool) -> None:
         if not force and (out / "REGENERATION_METADATA.json").exists():
             print(f"    {out_name}: already present, skipping")
             continue
-        print(f"    {out_name}: simulating (this takes ~1.5-2 h)")
-        run([PY, str(SRC / "regenerate_scada.py"), "--config", str(cfg), "--out", str(out)], log)
+        print(f"    {out_name}: simulating in resumable 15-day chunks (~1.5 h)")
+        run([PY, str(SRC / "regenerate_chunked.py"), "--config", str(cfg),
+             "--out", str(out), "--chunk-steps", "4320"], log)
 
 
 def make_noleak_config() -> None:
