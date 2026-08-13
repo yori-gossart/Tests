@@ -9,3 +9,5 @@ emitter/add_leak equivalence check: {
   "max_abs_rel_diff": 4.6090121699443857e-07
 }
   100/782 scenarios  (179s)
+  200/782 scenarios  (354s)
+  300/782 scenarios  (523s)
