@@ -173,23 +173,51 @@ def fo_report(vis: np.ndarray, eligible: np.ndarray, subset, eta: float) -> dict
 # ---------------------------------------------------------------------------
 
 
-def _bayes_posterior_precision(H_S: np.ndarray, sigma: float, tau: float) -> np.ndarray:
-    return H_S.T @ H_S / sigma**2 + np.eye(H_S.shape[1]) / tau**2
+def _gram(H_S: np.ndarray, sigma: float, tau: float) -> np.ndarray:
+    """I_k + (tau^2/sigma^2) H_S H_S^T -- the k x k object every Bayesian
+    criterion below reduces to."""
+    k = H_S.shape[0]
+    return np.eye(k) + (tau**2 / sigma**2) * (H_S @ H_S.T)
 
 
 def crit_bayes_d(H_S, sigma, tau):
-    sign, logdet = np.linalg.slogdet(_bayes_posterior_precision(H_S, sigma, tau))
+    """Bayesian D-optimality, log det of the posterior precision.
+
+    Evaluated through the determinant identity
+        det(H^T H/sigma^2 + I_n/tau^2) = tau^(-2n) det(I_k + tau^2/sigma^2 H H^T)
+    so an n x n determinant with n = 782 becomes a k x k one with k <= 12. The
+    dropped tau^(-2n) factor is constant across subsets and does not affect the
+    ranking. This is exact, not an approximation.
+    """
+    sign, logdet = np.linalg.slogdet(_gram(H_S, sigma, tau))
     return logdet if sign > 0 else -np.inf
 
 
 def crit_bayes_a(H_S, sigma, tau):
-    M = _bayes_posterior_precision(H_S, sigma, tau)
-    return -float(np.trace(np.linalg.inv(M)))
+    """Bayesian A-optimality, minimise trace of the posterior covariance.
+
+    By Woodbury, with M = I_n/tau^2 + H^T H/sigma^2,
+        trace(M^-1) = tau^2 n - (tau^4/sigma^2) trace(G^-1 H H^T)
+    where G = I_k + (tau^2/sigma^2) H H^T. The tau^2 n term is constant across
+    subsets, so only the second term ranks designs. Exact, and k x k.
+    """
+    G = _gram(H_S, sigma, tau)
+    HHt = H_S @ H_S.T
+    return float((tau**4 / sigma**2) * np.trace(np.linalg.solve(G, HHt)))
 
 
 def crit_bayes_e(H_S, sigma, tau):
-    M = _bayes_posterior_precision(H_S, sigma, tau)
-    return float(np.linalg.eigvalsh(M)[0])
+    """E-criterion on the OBSERVABLE subspace: smallest eigenvalue of
+    I_k + (tau^2/sigma^2) H_S H_S^T.
+
+    Deliberately not called Bayesian E-optimal. The literal Bayesian E-optimal
+    criterion is degenerate here: for k < n the Gram H_S^T H_S is rank-deficient,
+    so lambda_min(H_S^T H_S / sigma^2 + I_n / tau^2) = 1/tau^2 for EVERY subset
+    and the criterion ranks all designs identically. What remains informative is
+    the worst-conditioned direction the sensors actually observe, which is what
+    this returns. The degeneracy is reported rather than hidden.
+    """
+    return float(np.linalg.eigvalsh(_gram(H_S, sigma, tau))[0])
 
 
 def crit_infogain(H_S, sigma, tau):
@@ -393,7 +421,8 @@ def select_all(
         methods = {
             "D_optimal_bayesian": lambda s: crit_bayes_d(H[list(s), :], sigma_scalar, tau),
             "A_optimal_bayesian": lambda s: crit_bayes_a(H[list(s), :], sigma_scalar, tau),
-            "E_optimal_bayesian": lambda s: crit_bayes_e(H[list(s), :], sigma_scalar, tau),
+            "E_optimal_observable_subspace":
+                lambda s: crit_bayes_e(H[list(s), :], sigma_scalar, tau),
             "bayesian_information_gain": lambda s: crit_infogain(H[list(s), :], sigma_scalar, tau),
             "D_optimal_rank_reduced": lambda s: crit_classical_d(H_red[list(s), :]),
             "A_optimal_rank_reduced": lambda s: crit_classical_a(H_red[list(s), :]),

@@ -103,14 +103,15 @@ def calibrate_threshold(Z_noleak: np.ndarray, subset: list[int], k: float,
     every method and no budget is advantaged."""
     stat = detector.cusum_statistic(Z_noleak, subset, k)
     hi = float(np.nanmax(stat))
-    grid = np.linspace(hi * 0.02, hi * 1.05, 240)
-    chosen = grid[-1]
+    grid = np.linspace(hi * 0.02, hi * 1.05, 60)
+    chosen = float(grid[-1])
     for h in grid:
-        alarms = detector.cusum_detect(Z_noleak, subset, k, float(h), min_gap)
+        per_sensor = detector.per_sensor_alarms(Z_noleak, k, float(h), min_gap)
+        alarms = detector.subset_alarms(per_sensor, subset, min_gap)
         if len(alarms) <= budget:
             chosen = float(h)
             break
-    return float(chosen)
+    return chosen
 
 
 def main() -> int:
@@ -136,10 +137,14 @@ def main() -> int:
 
     tsN, XN, PN = detector.load_year(dir_noleak, 2018, sensor_ids)
     ZN = nominal.standardised(XN, PN)
-    h = calibrate_threshold(ZN, list(range(len(sensor_ids))), K_CUSUM,
-                            FALSE_ALARM_BUDGET, MIN_GAP_STEPS)
-    n_alarms = len(detector.cusum_detect(ZN, list(range(len(sensor_ids))), K_CUSUM,
-                                         h, MIN_GAP_STEPS))
+    all_sensors = list(range(len(sensor_ids)))
+    h = calibrate_threshold(ZN, all_sensors, K_CUSUM, FALSE_ALARM_BUDGET, MIN_GAP_STEPS)
+    n_alarms = len(
+        detector.subset_alarms(
+            detector.per_sensor_alarms(ZN, K_CUSUM, h, MIN_GAP_STEPS),
+            all_sensors, MIN_GAP_STEPS,
+        )
+    )
     print(f"calibrated h = {h:.3f} -> {n_alarms} alarms on the leak-free 2018 year",
           flush=True)
 

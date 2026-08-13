@@ -24,17 +24,24 @@ PIPELINE
    sigma_j = 1.4826 * MAD(r_j) over the training index (robust to the leaks
    that are present in the training year).
 
-3. Statistic. Two-sided CUSUM per sensor on the standardised residual, which
-   responds to abrupt steps and to the slow ramps of incipient leaks alike:
+3. Statistic. Each sensor runs its OWN two-sided CUSUM chart on its
+   standardised residual, which responds to abrupt steps and to the slow ramps
+   of incipient leaks alike:
 
        C+_j(t) = max(0, C+_j(t-1) + z_j(t) - k)
        C-_j(t) = max(0, C-_j(t-1) - z_j(t) - k)
-       g_S(t)  = max_{j in S} max(C+_j(t), C-_j(t))
 
-4. Alarm and re-baseline. Alarm when g_S(t) > h. Because BattLeDIM leaks
-   persist and overlap, an alarm resets every CUSUM and shifts each sensor's
-   baseline by the residual level it has just reached, so a standing leak does
-   not mask the next one.
+   Sensor j raises an alarm when max(C+_j, C-_j) > h, after which its own chart
+   resets and its baseline shifts to the residual level just reached, so a
+   standing leak does not mask the next one. Because BattLeDIM leaks persist and
+   overlap, that re-baselining is what keeps later events detectable.
+
+4. System alarm. The monitored system alarms when ANY sensor in S alarms;
+   alarms closer together than the refractory period collapse into one. Per-
+   sensor charts are what make the study tractable: the 33 charts are computed
+   once per fold and every candidate subset -- including the 100 random
+   replications at each of five budgets -- reads off the same charts, so no
+   method gets a differently-tuned detector.
 
 5. Localisation. At an alarm, the residual change vector over the preceding
    window is matched by cosine similarity against the leak-sensitivity library
@@ -119,46 +126,57 @@ def fit_nominal(X: np.ndarray, P: np.ndarray, train_mask: np.ndarray,
 # ---------------------------------------------------------------------------
 
 
-def cusum_detect(Z: np.ndarray, subset: list[int], k: float, h: float,
-                 min_gap: int) -> list[dict]:
-    """Two-sided CUSUM over `subset`, with reset + baseline shift on alarm.
+def per_sensor_alarms(Z: np.ndarray, k: float, h: float,
+                      rebaseline_window: int) -> list[list[int]]:
+    """Run one two-sided CUSUM chart per sensor over the whole record.
 
-    Z        : (T, n_sensors) standardised residuals
-    min_gap  : samples that must elapse before a new alarm can fire
-    Returns alarms as {'index', 'sensor', 'sign'}.
+    Computed ONCE per fold; every candidate subset then reads off these charts.
+    Returns, for each sensor, the sorted list of sample indices at which it
+    alarmed. All sensors are advanced together in a single vectorised sweep.
     """
-    T = Z.shape[0]
-    cols = np.asarray(subset, dtype=int)
-    Zs = Z[:, cols]
-    m = len(cols)
+    T, m = Z.shape
     cp = np.zeros(m)
     cn = np.zeros(m)
     base = np.zeros(m)
-    alarms: list[dict] = []
-    last = -min_gap - 1
+    alarms: list[list[int]] = [[] for _ in range(m)]
 
     for t in range(T):
-        z = Zs[t] - base
+        z = Z[t] - base
         cp = np.maximum(0.0, cp + z - k)
         cn = np.maximum(0.0, cn - z - k)
-        stat = np.maximum(cp, cn)
-        j = int(np.argmax(stat))
-        if stat[j] > h and (t - last) > min_gap:
-            alarms.append(
-                {"index": int(t), "sensor": int(cols[j]), "sign": 1 if cp[j] >= cn[j] else -1}
-            )
-            last = t
-            # Re-baseline on the level just reached so a standing leak does not
-            # permanently saturate the statistic and mask later events.
-            lo = max(0, t - min_gap)
-            base = np.median(Zs[lo : t + 1], axis=0)
-            cp[:] = 0.0
-            cn[:] = 0.0
+        fired = np.maximum(cp, cn) > h
+        if fired.any():
+            idx = np.flatnonzero(fired)
+            lo = max(0, t - rebaseline_window)
+            level = np.median(Z[lo : t + 1, idx], axis=0)
+            for pos, j in enumerate(idx):
+                alarms[int(j)].append(t)
+                base[j] = level[pos]
+            cp[idx] = 0.0
+            cn[idx] = 0.0
     return alarms
 
 
+def subset_alarms(per_sensor: list[list[int]], subset: list[int],
+                  min_gap: int) -> list[dict]:
+    """System alarms for one subset: union of its sensors' alarms, with alarms
+    closer together than `min_gap` collapsed into the earliest one."""
+    events: list[tuple[int, int]] = []
+    for j in subset:
+        for t in per_sensor[j]:
+            events.append((t, j))
+    events.sort()
+    out: list[dict] = []
+    last = -min_gap - 1
+    for t, j in events:
+        if t - last > min_gap:
+            out.append({"index": int(t), "sensor": int(j)})
+            last = t
+    return out
+
+
 def cusum_statistic(Z: np.ndarray, subset: list[int], k: float) -> np.ndarray:
-    """Un-thresholded max-CUSUM trace, for threshold-sensitivity analysis."""
+    """Un-thresholded max-CUSUM trace over a subset, for threshold sensitivity."""
     cols = np.asarray(subset, dtype=int)
     Zs = Z[:, cols]
     m = len(cols)
@@ -180,8 +198,15 @@ def cusum_statistic(Z: np.ndarray, subset: list[int], k: float) -> np.ndarray:
 
 @dataclass
 class Localiser:
-    signatures: np.ndarray   # (n_sensors, n_scen), mean pressure drop per scenario
-    scenarios: np.ndarray
+    """Matches a residual change vector against pipe-level leak signatures.
+
+    `signatures` is (n_sensors, n_pipes): the mean pressure drop each sensor
+    sees for a reference leak on each pipe, built by
+    evaluate.pipe_level_signatures from the junction-level library.
+    """
+
+    signatures: np.ndarray
+    names: np.ndarray
 
     def predict(self, resid_change: np.ndarray, subset: list[int]) -> tuple[str, float]:
         A = self.signatures[np.asarray(subset, dtype=int), :]
@@ -191,11 +216,11 @@ class Localiser:
         v = resid_change
         vn = np.linalg.norm(v)
         if vn < 1e-12:
-            return str(self.scenarios[0]), 0.0
+            return str(self.names[0]), 0.0
         sim = U.T @ (v / vn)
         # A leak lowers pressure, so the residual points along -Delta p.
         i = int(np.argmax(-sim))
-        return str(self.scenarios[i]), float(-sim[i])
+        return str(self.names[i]), float(-sim[i])
 
 
 def residual_change(Z: np.ndarray, t: int, window: int) -> np.ndarray:
@@ -214,25 +239,23 @@ def residual_change(Z: np.ndarray, t: int, window: int) -> np.ndarray:
 def run_subset(
     Z: np.ndarray,
     subset: list[int],
-    k: float,
-    h: float,
+    per_sensor: list[list[int]],
     min_gap: int,
     localiser: Localiser,
     window: int,
     timestamps: pd.DatetimeIndex,
 ) -> list[dict]:
-    """Detect and localise with one sensor subset. Returns the report list in
-    BattLeDIM submission shape: {'time', 'index', 'predicted_node', 'score'}."""
-    alarms = cusum_detect(Z, subset, k, h, min_gap)
+    """Detect and localise with one sensor subset, reading the pre-computed
+    per-sensor charts. Returns the report list in BattLeDIM submission shape."""
     out = []
-    for a in alarms:
+    for a in subset_alarms(per_sensor, subset, min_gap):
         t = a["index"]
-        node, score = localiser.predict(residual_change(Z, t, window)[subset], subset)
+        pipe, score = localiser.predict(residual_change(Z, t, window)[subset], subset)
         out.append(
             {
                 "index": t,
                 "time": str(timestamps[t]),
-                "predicted_node": node,
+                "predicted_pipe": pipe,
                 "score": score,
                 "trigger_sensor": int(a["sensor"]),
             }
