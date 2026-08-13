@@ -5,3 +5,12 @@ data/raw/battledim_official/L-TOWN_v2_Real.inp
 data/processed/**/*.csv
 __pycache__/
 *.pyc
+
+# EPANET scratch files written into cwd by wntr's EpanetSimulator
+temp.bin
+temp.inp
+temp.rpt
+temp*.bin
+[A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z]
+!src/**
+!logs/**
