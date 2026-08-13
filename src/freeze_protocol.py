@@ -74,7 +74,7 @@ def install_2019_guard() -> None:
 
     def guarded_open(file, *a, **kw):
         s = str(file)
-        if FORBIDDEN.search(s) and "raw" not in s:
+        if FORBIDDEN.search(s):
             raise PermissionError(
                 f"FROZEN_PROTOCOL freeze attempted to read a 2019 artefact: {s}"
             )

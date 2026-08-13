@@ -347,6 +347,8 @@ def fig_forest(comparison: dict, budget: str, title: str, path: Path) -> None:
         rows.append((b, ff["absolute_difference"], ff["ci95_absolute"],
                      ff["ci_entirely_favourable"]))
     rows.sort(key=lambda r: r[1])
+    if not rows:
+        return
 
     fig, ax = plt.subplots(figsize=(7.6, 0.42 * len(rows) + 2.0), dpi=160)
     _style(ax, title, "FO minus baseline, false-forgetting rate", "")
