@@ -58,9 +58,15 @@ GLOBAL_VERDICTS = (
     "INCONCLUSIVE",
     "NOT_SUPPORTED",
 )
-TRACK_VERDICTS = ("SUPPORTED", "PARTIALLY_SUPPORTED", "NOT_SUPPORTED")
+TRACK_VERDICTS = ("SUPPORTED", "PARTIALLY_SUPPORTED", "NOT_SUPPORTED",
+                  "INSUFFICIENT_EVENTS")
 
 MIN_BUDGETS_FOR_SUPPORT = 2
+# A paired bootstrap over a handful of binary outcomes can return a degenerate
+# interval -- with one event a single disagreement gives CI [-1, -1], which
+# reads as "entirely favourable" while carrying no evidence at all. Below this
+# many events the track reports INSUFFICIENT_EVENTS instead of a verdict.
+MIN_EVENTS_FOR_VERDICT = 5
 
 
 # ---------------------------------------------------------------------------
@@ -153,10 +159,16 @@ def verdict_for(comparison: dict) -> tuple[str, dict]:
     forgetting against every baseline at at least MIN_BUDGETS_FOR_SUPPORT
     budgets, with recall non-inferiority holding there."""
     per_budget = {}
+    n_units = 0
     for k, entry in comparison["budgets"].items():
         decisions = [v["decision"] for v in entry["baselines"].values()]
         if not decisions:
             continue
+        n_units = max(
+            n_units,
+            max(v["false_forgetting"].get("n_units", 0)
+                for v in entry["baselines"].values()),
+        )
         all_fav = all(d["primary_ci_favourable"] for d in decisions)
         any_fav = any(d["primary_ci_favourable"] for d in decisions)
         non_inf = all(d["recall_non_inferior_2pt"] for d in decisions)
@@ -171,6 +183,16 @@ def verdict_for(comparison: dict) -> tuple[str, dict]:
               if v["beats_all_baselines_ci"] and v["recall_non_inferior_vs_all"]]
     partial = [k for k, v in per_budget.items() if v["beats_some_baseline_ci"]]
 
+    if n_units < MIN_EVENTS_FOR_VERDICT:
+        return "INSUFFICIENT_EVENTS", {
+            "per_budget": per_budget,
+            "n_paired_units": n_units,
+            "minimum_required": MIN_EVENTS_FOR_VERDICT,
+            "reason": (
+                f"only {n_units} paired event(s); a bootstrap over so few binary "
+                "outcomes yields degenerate intervals, so no verdict is claimed"
+            ),
+        }
     if len(strong) >= MIN_BUDGETS_FOR_SUPPORT:
         verdict = "SUPPORTED"
     elif partial:
@@ -224,6 +246,12 @@ def robustness_verdict(track_c: dict, ref_ordering_holds: bool) -> tuple[str, di
 
 
 def global_verdict(va: str, vb: str, vc: str) -> tuple[str, str]:
+    if "INSUFFICIENT_EVENTS" in (va, vb, vc):
+        return "INCONCLUSIVE", (
+            f"Track A {va}, Track B {vb}, Track C {vc}. At least one track had too "
+            "few paired events to support any verdict, so the global result is "
+            "inconclusive regardless of the others."
+        )
     order = {"SUPPORTED": 2, "PARTIALLY_SUPPORTED": 1, "NOT_SUPPORTED": 0}
     a, b, cc = order[va], order[vb], order[vc]
     if a == 2 and b == 2 and cc >= 1:
@@ -285,6 +313,17 @@ def _style(ax, title, xlabel, ylabel):
         ax.spines[side].set_linewidth(1.0)
 
 
+def _legend(ax) -> None:
+    """Legend in the plot's own empty upper-right. Direct labels at the line
+    ends collide once the series converge, which they do at the larger budgets,
+    so identity is carried here instead."""
+    leg = ax.legend(loc="upper right", frameon=True, fontsize=8,
+                    facecolor=SURFACE, edgecolor=GRID, framealpha=0.95,
+                    handlelength=1.8, borderpad=0.7, labelspacing=0.5)
+    for text in leg.get_texts():
+        text.set_color(INK_2)
+
+
 def _rank_baselines(vectors: dict) -> list[str]:
     """Baselines ordered by mean miss rate over budgets -- the closest three get
     their own hue, the rest stay muted."""
@@ -307,27 +346,26 @@ def fig_rate_vs_budget(vectors: dict, title: str, path: Path) -> None:
     fig, ax = plt.subplots(figsize=(7.2, 4.4), dpi=160)
     _style(ax, title, "sensor budget k", "false-forgetting rate  (1 - recall)")
 
+    first_grey = True
     for b in ranked[3:]:
         y = [vectors[k][b].mean() for k in budgets]
-        ax.plot(x, y, color=MUTED, linewidth=1.2, alpha=0.55, zorder=1)
+        ax.plot(x, y, color=MUTED, linewidth=1.2, alpha=0.55, zorder=1,
+                label="other baselines" if first_grey else None)
+        first_grey = False
     for i, b in enumerate(ranked[:3]):
         y = [vectors[k][b].mean() for k in budgets]
         ax.plot(x, y, color=HL[i], linewidth=2.0, marker="o", markersize=5,
-                markeredgecolor=SURFACE, markeredgewidth=2, zorder=2)
-        ax.annotate(b.replace("_", " "), (x[-1], y[-1]), xytext=(6, 0),
-                    textcoords="offset points", color=HL[i], fontsize=8,
-                    va="center")
+                markeredgecolor=SURFACE, markeredgewidth=2, zorder=2,
+                label=b.replace("_", " "))
     y = [vectors[k]["FO"].mean() for k in budgets]
     ax.plot(x, y, color=FO_COLOR, linewidth=2.6, marker="o", markersize=7,
-            markeredgecolor=SURFACE, markeredgewidth=2, zorder=3)
-    ax.annotate("FO", (x[-1], y[-1]), xytext=(6, 0), textcoords="offset points",
-                color=FO_COLOR, fontsize=9, fontweight="bold", va="center")
+            markeredgecolor=SURFACE, markeredgewidth=2, zorder=3, label="FO")
 
     ax.set_xticks(x)
     ax.set_ylim(bottom=0)
-    ax.margins(x=0.16)
+    _legend(ax)
     fig.text(0.01, 0.01, f"{len(ranked)} baselines; the three closest to FO are "
-             "labelled, the rest drawn in grey", color=MUTED, fontsize=7)
+             "named, the rest drawn in grey", color=MUTED, fontsize=7)
     fig.tight_layout()
     fig.savefig(path, facecolor=SURFACE)
     plt.close(fig)
@@ -441,21 +479,19 @@ def fig_blind_spot(frozen: dict, path: Path) -> None:
     fig, ax = plt.subplots(figsize=(7.2, 4.4), dpi=160)
     _style(ax, "Model-based blind-spot rate B(kappa,eta) by sensor budget",
            "sensor budget k", "B  =  P[ d_S(z) <= eta | d_ref(z) >= kappa ]")
+    first_grey = True
     for b in ranked[3:]:
-        ax.plot(x, series[b], color=MUTED, linewidth=1.2, alpha=0.55)
+        ax.plot(x, series[b], color=MUTED, linewidth=1.2, alpha=0.55,
+                label="other baselines" if first_grey else None)
+        first_grey = False
     for i, b in enumerate(ranked[:3]):
         ax.plot(x, series[b], color=HL[i], linewidth=2.0, marker="o", markersize=5,
-                markeredgecolor=SURFACE, markeredgewidth=2)
-        ax.annotate(b.replace("_", " "), (x[-1], series[b][-1]), xytext=(6, 0),
-                    textcoords="offset points", color=HL[i], fontsize=8, va="center")
+                markeredgecolor=SURFACE, markeredgewidth=2, label=b.replace("_", " "))
     ax.plot(x, series["FO"], color=FO_COLOR, linewidth=2.6, marker="o", markersize=7,
-            markeredgecolor=SURFACE, markeredgewidth=2)
-    ax.annotate("FO", (x[-1], series["FO"][-1]), xytext=(6, 0),
-                textcoords="offset points", color=FO_COLOR, fontsize=9,
-                fontweight="bold", va="center")
+            markeredgecolor=SURFACE, markeredgewidth=2, label="FO")
     ax.set_xticks(x)
     ax.set_ylim(bottom=0)
-    ax.margins(x=0.16)
+    _legend(ax)
     fig.text(0.01, 0.01, "FO optimises this quantity directly; the baselines do not. "
              "It is a design-time criterion, not an outcome.", color=MUTED, fontsize=7)
     fig.tight_layout()
@@ -862,7 +898,7 @@ def write_report(ctx: dict) -> Path:
         A(f"| `{name}` | `{digest}` |")
     A("")
 
-    path = REPO / REPORT_NAME
+    path = WORK / REPORT_NAME
     path.write_text("\n".join(L) + "\n")
     return path
 
@@ -888,7 +924,7 @@ def main() -> int:
 
     manifest = json.loads((REPO / "DATA_MANIFEST.json").read_text())
     provenance = json.loads((REPO / "data/raw/PROVENANCE.json").read_text())
-    frozen = json.loads((REPO / "FROZEN_PROTOCOL.json").read_text())
+    frozen = json.loads((WORK / "FROZEN_PROTOCOL.json").read_text())
     ta = json.loads((RESULTS / "track_a_event_heldout_2018.json").read_text())
     tb = json.loads((RESULTS / "track_b_reconstructed_2019.json").read_text())
     tc_path = RESULTS / "track_c_robustness.json"
@@ -974,7 +1010,7 @@ def main() -> int:
             "verdict_global": vg, "verdict_global_reason": vg_reason,
             "vc_detail": vc_det, "df_a": df_a, "df_b": df_b,
             "manifest_sha": _sha(REPO / "DATA_MANIFEST.json"),
-            "frozen_sha": _sha(REPO / "FROZEN_PROTOCOL.json"),
+            "frozen_sha": _sha(WORK / "FROZEN_PROTOCOL.json"),
             "result_hashes": result_hashes,
         }
     )
