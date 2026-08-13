@@ -23,6 +23,7 @@ contain the string.
 from __future__ import annotations
 
 import json
+import os
 import sys
 from pathlib import Path
 
@@ -34,8 +35,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import stats  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[1]
-RESULTS = REPO / "results"
-FIGURES = REPO / "figures"
+WORK = Path(os.environ.get("FO_WORK_ROOT", REPO))
+RESULTS = WORK / "results"
+FIGURES = WORK / "figures"
 
 BASELINES = [
     "D_optimal_bayesian",

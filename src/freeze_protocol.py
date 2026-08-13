@@ -33,6 +33,7 @@ from __future__ import annotations
 
 import builtins
 import hashlib
+import os
 import json
 import re
 import sys
@@ -48,9 +49,10 @@ import detector  # noqa: E402
 import selection  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[1]
+WORK = Path(os.environ.get("FO_WORK_ROOT", REPO))
 RAW = REPO / "data" / "raw" / "battledim_official"
-PROC = REPO / "data" / "processed"
-OUT = REPO / "FROZEN_PROTOCOL.json"
+PROC = WORK / "data" / "processed"
+OUT = WORK / "FROZEN_PROTOCOL.json"
 
 FORBIDDEN = re.compile(r"(2019|evaluation)", re.IGNORECASE)
 
@@ -199,7 +201,7 @@ def main() -> int:
     with open(OUT, "w") as fh:
         fh.write(payload)
     digest = hashlib.sha256(payload.encode()).hexdigest()
-    with open(REPO / "FROZEN_PROTOCOL.sha256", "w") as fh:
+    with open(WORK / "FROZEN_PROTOCOL.sha256", "w") as fh:
         fh.write(f"{digest}  FROZEN_PROTOCOL.json\n")
 
     print(f"\nwrote {OUT}")

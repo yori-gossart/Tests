@@ -35,6 +35,7 @@ unfavourable to FO.
 from __future__ import annotations
 
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -50,9 +51,10 @@ import selection  # noqa: E402
 import tracks  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[1]
+WORK = Path(os.environ.get("FO_WORK_ROOT", REPO))
 RAW = REPO / "data" / "raw" / "battledim_official"
-PROC = REPO / "data" / "processed"
-RESULTS = REPO / "results"
+PROC = WORK / "data" / "processed"
+RESULTS = WORK / "results"
 
 NOISE_MULTIPLIERS = (0.0, 1.0, 2.0, 4.0)
 DEMAND_SCALES = (0.0, 0.5, 1.0)
@@ -119,7 +121,7 @@ def evaluate_subsets(ctx: tracks.Context, Z: np.ndarray, ts: pd.DatetimeIndex,
 
 def main() -> int:
     t_start = time.time()
-    frozen = json.loads((REPO / "FROZEN_PROTOCOL.json").read_text())
+    frozen = json.loads((WORK / "FROZEN_PROTOCOL.json").read_text())
     c = frozen["constants"]
     ctx = tracks.Context(PROC / "sensitivity_library.npz", RAW / "L-TOWN_v2_Model.inp")
     sigma = np.array([frozen["sigma_per_sensor_m"][s] for s in ctx.sensor_ids])

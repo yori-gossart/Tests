@@ -26,6 +26,7 @@ TRACK C -- SYNTHETIC_ROBUSTNESS_STUDY
 from __future__ import annotations
 
 import json
+import os
 import sys
 import time
 from pathlib import Path
@@ -40,9 +41,12 @@ import evaluate  # noqa: E402
 import selection  # noqa: E402
 
 REPO = Path(__file__).resolve().parents[1]
+# Outputs may be redirected to a scratch root for a fixture dry run; the raw
+# official artefacts are always read from the repository itself.
+WORK = Path(os.environ.get("FO_WORK_ROOT", REPO))
 RAW = REPO / "data" / "raw" / "battledim_official"
-PROC = REPO / "data" / "processed"
-RESULTS = REPO / "results"
+PROC = WORK / "data" / "processed"
+RESULTS = WORK / "results"
 
 METHOD_NAMES = [
     "FO",
@@ -309,7 +313,7 @@ if __name__ == "__main__":
     ap.add_argument("--track", choices=["a", "b"], required=True)
     ap.add_argument("--library", default=str(PROC / "sensitivity_library.npz"))
     ap.add_argument("--inp", default=str(RAW / "L-TOWN_v2_Model.inp"))
-    ap.add_argument("--frozen", default=str(REPO / "FROZEN_PROTOCOL.json"))
+    ap.add_argument("--frozen", default=str(WORK / "FROZEN_PROTOCOL.json"))
     args = ap.parse_args()
 
     RESULTS.mkdir(parents=True, exist_ok=True)
