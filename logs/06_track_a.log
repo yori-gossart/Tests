@@ -6,3 +6,11 @@ Track A: 14 events, 105120 samples
   fold 5/14 (p673, abrupt) h=361.31 25.4s
   fold 6/14 (p810, incipient) h=310.74 32.4s
   fold 7/14 (p628, incipient) h=395.31 32.4s
+  fold 8/14 (p538, abrupt) h=387.57 25.9s
+  fold 9/14 (p866, abrupt) h=377.89 24.5s
+  fold 10/14 (p31, incipient) h=365.93 25.2s
+  fold 11/14 (p654, incipient) h=333.19 25.8s
+  fold 12/14 (p183, abrupt) h=352.79 26.0s
+  fold 13/14 (p158, abrupt) h=364.44 26.1s
+  fold 14/14 (p369, abrupt) h=367.83 25.7s
+wrote /home/user/Tests/results/track_a_event_heldout_2018.json

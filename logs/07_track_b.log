@@ -1,0 +1,7 @@
+Track B: 23 events, 105120 samples
+  budget k=4 done
+  budget k=6 done
+  budget k=8 done
+  budget k=10 done
+  budget k=12 done
+wrote /home/user/Tests/results/track_b_reconstructed_2019.json
