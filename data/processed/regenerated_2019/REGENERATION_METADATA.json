@@ -1,0 +1,63 @@
+{
+  "generated_utc": "2026-08-13T14:36:26.726862+00:00",
+  "method": "chunked resumable regeneration (exact decomposition)",
+  "chunk_steps": 4320,
+  "n_chunks": 25,
+  "source_generator": "data/raw/battledim_official/dataset_generator.py",
+  "source_generator_sha256": "dc4b8b08e6e37f34841473f5c2d7fffb7e189f4c2edbeed8cfface4701133f0f",
+  "network_inp_sha256": "0570538d93246d452e740316ffec66dabc17526b18c47384a083e76061551023",
+  "config": "data/raw/battledim_official/dataset_configuration_evaluation.yalm",
+  "config_sha256": "8780dda455f3c536e5283b6a2aa91deaad14430e4942976f05ef386e93fe8436",
+  "mode_simulation": "PDD",
+  "n_leaks": 23,
+  "n_timesteps": 105120,
+  "period": [
+    "2019-01-01 00:00:00",
+    "2019-12-31 23:55:00"
+  ],
+  "porting_delta": [
+    "os.getcwd() + Windows '\\\\' path joins  ->  pathlib / os.path.join (I/O only)",
+    "yaml.load(f.read())  ->  yaml.safe_load(...) (identical parse for this document)",
+    "node.nominal_pressure  ->  node.required_pressure (wntr renamed the property; same variable)",
+    "wntr.sim.WNTRSimulator(wn, mode='PDD')  ->  wn.options.hydraulic.demand_model='PDD' (wntr moved the switch)",
+    "pd.ExcelWriter(...).save()  ->  .close() (pandas API rename)",
+    "Timestamp._date_repr/._time_repr  ->  strftime('%Y-%m-%d %H:%M') (identical string)",
+    "xlsx measurement workbook  ->  one CSV per quantity per year (same values, same rounding)"
+  ],
+  "chunking_note": "Chunk boundaries carry only the tank level; all patterns are cyclic and are rotated by the chunk start, so the decomposition is exact. Verified by verify_against_reference().",
+  "deterministic": "no RNG is used anywhere in this pipeline",
+  "wall_clock_s": 7345.1,
+  "versions": {
+    "python": "3.11.15",
+    "wntr": "1.5.0",
+    "numpy": "2.4.6",
+    "pandas": "3.0.5"
+  },
+  "outputs": {
+    "2019_SCADA_Pressures.csv": {
+      "rows": 105120,
+      "cols": 34,
+      "sha256": "72c17f5748bd40e80cd1a17807f2101f62fed92e888286f1035eda67be0d415d"
+    },
+    "2019_SCADA_Levels.csv": {
+      "rows": 105120,
+      "cols": 2,
+      "sha256": "ac86339eba69223990c71c38913d15411c15662a10eb26b83e51b3960e833b24"
+    },
+    "2019_SCADA_Demands.csv": {
+      "rows": 105120,
+      "cols": 83,
+      "sha256": "833f1cd50c01fcab35d5caff7dfa9249cb11317420d8a3ecf2bd712d64f6c218"
+    },
+    "2019_SCADA_Flows.csv": {
+      "rows": 105120,
+      "cols": 4,
+      "sha256": "2ec418ff2500dbbd80d9d8e824f299343d28adb21a194a3b203f5b5d22bbde1f"
+    },
+    "2019_SCADA_Leaks.csv": {
+      "rows": 105120,
+      "cols": 24,
+      "sha256": "404922d3e8fa4213f5bbee6f3195ee5f411b567352dcc06a6314ea1d978002e7"
+    }
+  }
+}
