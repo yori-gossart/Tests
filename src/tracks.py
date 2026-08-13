@@ -69,14 +69,16 @@ METHOD_NAMES = [
 
 
 class Context:
-    def __init__(self, library_path: Path, inp_path: Path):
+    def __init__(self, library_path: Path, inp_path: Path,
+                 sigma: np.ndarray | None = None):
         self.lib = selection.Library.load(library_path)
         self.sensor_ids = [str(s) for s in self.lib.sensors]
         self.topo = evaluate.Topology.build(inp_path)
         sig, pipe_names = evaluate.pipe_level_signatures(
             self.lib.delta, self.lib.scenarios, self.topo
         )
-        self.localiser = detector.Localiser(signatures=sig, names=np.array(pipe_names))
+        self.localiser = detector.Localiser(signatures=sig, names=np.array(pipe_names),
+                                            sigma=sigma)
         self.topology_cache = (
             selection.build_graph_distances(inp_path, self.sensor_ids),
             selection.betweenness_centrality(inp_path, self.sensor_ids),
@@ -134,7 +136,8 @@ def run_year(
         dets = detector.run_subset(Z, subset, per_sensor, min_gap, ctx.localiser,
                                    window, timestamps)
         score = evaluate.scoring_battledim(dets, leaks, ctx.topo)
-        metrics = evaluate.standard_metrics(score, leaks, ctx.topo)
+        timed = evaluate.match_in_time(dets, leaks, ctx.topo)
+        metrics = evaluate.standard_metrics(score, leaks, ctx.topo, timed)
         metrics["compute_time_s"] = round(time.time() - t0, 3)
         metrics["n_detections"] = score["n_detections"]
         out["methods"][name] = {
@@ -142,17 +145,20 @@ def run_year(
             "sensor_ids": [ctx.sensor_ids[i] for i in subset],
             "metrics": metrics,
             "score": score,
+            "timed": timed,
             "detections": dets,
         }
     for rs in random_subsets:
         dets = detector.run_subset(Z, rs, per_sensor, min_gap, ctx.localiser,
                                    window, timestamps)
         score = evaluate.scoring_battledim(dets, leaks, ctx.topo)
+        timed = evaluate.match_in_time(dets, leaks, ctx.topo)
         out["random"].append(
             {
                 "subset": rs,
                 "score": score,
-                "metrics": evaluate.standard_metrics(score, leaks, ctx.topo),
+                "timed": timed,
+                "metrics": evaluate.standard_metrics(score, leaks, ctx.topo, timed),
             }
         )
     return out
@@ -187,6 +193,8 @@ def track_a(
         train[leak.start_idx : leak.end_idx + 1] = False   # hold the event out
 
         nominal = detector.fit_nominal(X, P, train, ctx.sensor_ids)
+        # sigma is fold-specific, so the localiser must be re-whitened with it.
+        ctx.localiser.sigma = nominal.sigma
         Z = nominal.standardised(X, P)
         ZN = nominal.standardised(XN, PN)
         h, n_fa = bisect_threshold(ZN, all_sensors, c["k_cusum"],
@@ -216,7 +224,7 @@ def track_a(
                            c["min_gap_steps"], c["window_steps"])
             entry = {"methods": {}, "random": []}
             for name, r in res["methods"].items():
-                detected, delay, dist = _held_out_detail(r["score"], e)
+                detected, delay, dist = _held_out_detail(r["timed"], leak.link_id)
                 entry["methods"][name] = {
                     "subset": r["subset"],
                     "held_out_detected": detected,
@@ -227,7 +235,7 @@ def track_a(
                     "compute_time_s": r["metrics"]["compute_time_s"],
                 }
             for r in res["random"]:
-                det_r, _, _ = _held_out_detail(r["score"], e)
+                det_r, _, _ = _held_out_detail(r["timed"], leak.link_id)
                 entry["random"].append({"subset": r["subset"], "held_out_detected": det_r})
             fold["budgets"][str(k)] = entry
         fold["wall_clock_s"] = round(time.time() - t0, 1)
@@ -238,17 +246,16 @@ def track_a(
     return {"track": "EVENT_HELDOUT_2018", "n_events": len(leaks), "folds": folds}
 
 
-def _held_out_detail(score: dict, e: int):
-    """(detected, delay_h, localisation_m) for leak index e, read off the
-    official scoring's own matching so Track A and the BattLeDIM score can
-    never disagree about what counts as a detection."""
-    detected_idx = score["detected_leak_indices"]
-    if e not in detected_idx:
+def _held_out_detail(timed: dict, link_id: str):
+    """(detected, delay_h, localisation_m) for the held-out event, read off the
+    time-based matcher. Detection and localisation are deliberately separate:
+    the FO criterion is about whether the sensor set can SEE a scenario, so the
+    held-out outcome must not be gated on the official 300 m rule. Distance is
+    reported alongside so mislocation stays visible."""
+    v = timed["per_event"].get(link_id)
+    if v is None or not v["detected"]:
         return 0, None, None
-    pos = detected_idx.index(e)
-    delay_h = score["delays_steps"][pos] * 5.0 / 60.0
-    dist_m = score["matched"][pos][2]
-    return 1, float(delay_h), float(dist_m)
+    return 1, float(v["delay_steps"]) * 5.0 / 60.0, float(v["distance_m"])
 
 
 # ---------------------------------------------------------------------------
@@ -267,6 +274,7 @@ def track_b(
     ts18, X18, P18 = detector.load_year(dir_2018, 2018, ctx.sensor_ids)
     nominal = detector.fit_nominal(X18, P18, np.ones(len(ts18), dtype=bool), ctx.sensor_ids)
 
+    ctx.localiser.sigma = nominal.sigma
     ts19, X19, P19 = detector.load_year(dir_2019, 2019, ctx.sensor_ids)
     Z19 = nominal.standardised(X19, P19)
     leaks = evaluate.load_ground_truth(
@@ -299,8 +307,10 @@ def track_b(
         for r in res["methods"].values():
             r.pop("detections", None)
             r.pop("score", None)
+            r.pop("timed", None)
         for r in res["random"]:
             r.pop("score", None)
+            r.pop("timed", None)
         out["budgets"][str(k)] = res
         print(f"  budget k={k} done", flush=True)
     return out

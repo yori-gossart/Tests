@@ -241,18 +241,76 @@ def scoring_battledim(detections: list[dict], leaks: list[LeakEvent],
 # ---------------------------------------------------------------------------
 
 
+def match_in_time(detections: list[dict], leaks: list[LeakEvent],
+                  topo: Topology) -> dict:
+    """Match alarms to events on TIMING ALONE, ignoring the 300 m rule.
+
+    Why this exists, separately from scoring_battledim(): the official score
+    counts a detection only if the reported pipe is within xmax = 300 m of the
+    true one, so it fuses two different failures -- not seeing a leak, and
+    seeing it but mislocating it. The FO criterion is defined on visibility
+    d_S(z), i.e. on whether the sensor set can SEE the scenario at all, so the
+    false-forgetting endpoint must be measured on detection. Localisation
+    quality is reported alongside it as its own metric, and the official
+    economic score is reported unchanged.
+
+    Each event is claimed by the earliest unclaimed alarm inside its window;
+    each alarm claims at most one event.
+    """
+    dets = sorted(detections, key=lambda d: d["index"])
+    claimed: set[int] = set()
+    per_event: dict[str, dict] = {}
+    for j, leak in enumerate(leaks):
+        hit = None
+        for i, d in enumerate(dets):
+            if i in claimed:
+                continue
+            if leak.start_idx <= d["index"] <= leak.end_idx:
+                hit = (i, d)
+                break
+        if hit is None:
+            per_event[leak.link_id] = {"detected": 0, "delay_steps": None,
+                                       "distance_m": None}
+        else:
+            i, d = hit
+            claimed.add(i)
+            per_event[leak.link_id] = {
+                "detected": 1,
+                "delay_steps": d["index"] - leak.start_idx,
+                "distance_m": topo.pipe_distance(leak.link_id, d["predicted_pipe"]),
+                "predicted_pipe": d["predicted_pipe"],
+            }
+    tp = sum(v["detected"] for v in per_event.values())
+    return {
+        "per_event": per_event,
+        "TP": int(tp),
+        "FN": int(len(leaks) - tp),
+        "FP": int(len(dets) - len(claimed)),
+        "n_detections": len(dets),
+    }
+
+
 def standard_metrics(score: dict, leaks: list[LeakEvent], topo: Topology,
-                     step_minutes: int = 5) -> dict:
-    TP, FP, FN = score["TP"], score["FP"], score["FN"]
+                     timed: dict, step_minutes: int = 5) -> dict:
+    """Primary endpoints come from `timed` (detection); the official 300 m-gated
+    scoring is reported alongside under battledim_* so the two failure modes --
+    not seeing a leak, and mislocating one -- never get fused into one number."""
+    TP, FP, FN = timed["TP"], timed["FP"], timed["FN"]
     recall = TP / len(leaks) if leaks else float("nan")
     precision = TP / (TP + FP) if (TP + FP) else float("nan")
     f1 = 2 * precision * recall / (precision + recall) if (precision + recall) else 0.0
-    delays_h = np.array(score["delays_steps"], dtype=float) * step_minutes / 60.0
-    dists = np.array([m[2] for m in score["matched"]], dtype=float)
 
-    per_leak = {}
-    for j, leak in enumerate(leaks):
-        per_leak[leak.link_id] = 1 if j in score["detected_leak_indices"] else 0
+    ev = timed["per_event"]
+    delays_h = np.array(
+        [v["delay_steps"] for v in ev.values() if v["delay_steps"] is not None],
+        dtype=float,
+    ) * step_minutes / 60.0
+    dists = np.array(
+        [v["distance_m"] for v in ev.values() if v["distance_m"] is not None],
+        dtype=float,
+    )
+    per_leak = {k: v["detected"] for k, v in ev.items()}
+    within = float(np.mean(dists <= XMAX)) if len(dists) else float("nan")
 
     return {
         "false_forgetting_rate": 1.0 - recall,   # empirical analogue of B
@@ -266,7 +324,11 @@ def standard_metrics(score: dict, leaks: list[LeakEvent], topo: Topology,
         "detection_delay_median_h": float(np.median(delays_h)) if len(delays_h) else float("nan"),
         "localisation_distance_mean_m": float(np.mean(dists)) if len(dists) else float("nan"),
         "localisation_distance_median_m": float(np.median(dists)) if len(dists) else float("nan"),
+        "localisation_within_xmax_frac": within,
         "battledim_score_eur": score["total_score_eur"],
+        "battledim_TP": score["TP"],
+        "battledim_FP": score["FP"],
+        "battledim_FN": score["FN"],
         "per_leak_detected": per_leak,
         "worst_per_leak_recall": float(min(per_leak.values())) if per_leak else float("nan"),
     }

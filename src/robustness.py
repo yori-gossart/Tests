@@ -110,7 +110,8 @@ def evaluate_subsets(ctx: tracks.Context, Z: np.ndarray, ts: pd.DatetimeIndex,
         dets = detector.run_subset(Z, subset, per_sensor, c["min_gap_steps"],
                                    ctx.localiser, c["window_steps"], ts)
         score = evaluate.scoring_battledim(dets, leaks, ctx.topo)
-        out[name] = evaluate.standard_metrics(score, leaks, ctx.topo)
+        timed = evaluate.match_in_time(dets, leaks, ctx.topo)
+        out[name] = evaluate.standard_metrics(score, leaks, ctx.topo, timed)
     return out
 
 
@@ -125,6 +126,7 @@ def main() -> int:
     c = frozen["constants"]
     ctx = tracks.Context(PROC / "sensitivity_library.npz", RAW / "L-TOWN_v2_Model.inp")
     sigma = np.array([frozen["sigma_per_sensor_m"][s] for s in ctx.sensor_ids])
+    ctx.localiser.sigma = sigma
 
     dir18, dir19 = PROC / "regenerated_2018", PROC / "regenerated_2019"
     dirNL = PROC / "regenerated_2018_noleak"
@@ -258,7 +260,8 @@ def main() -> int:
                 dets = detector.run_subset(Z19, red, ps19, c["min_gap_steps"],
                                            ctx.localiser, c["window_steps"], ts19)
                 sc = evaluate.scoring_battledim(dets, leaks19, ctx.topo)
-                drops.append(evaluate.standard_metrics(sc, leaks19, ctx.topo)["false_forgetting_rate"])
+                tm = evaluate.match_in_time(dets, leaks19, ctx.topo)
+                drops.append(evaluate.standard_metrics(sc, leaks19, ctx.topo, tm)["false_forgetting_rate"])
             fail[str(k)][n] = {
                 "per_sensor_false_forgetting": drops,
                 "worst": float(np.max(drops)), "mean": float(np.mean(drops)),
@@ -269,10 +272,11 @@ def main() -> int:
                 dets = detector.run_subset(Z19, cur, ps19, c["min_gap_steps"],
                                            ctx.localiser, c["window_steps"], ts19)
                 sc = evaluate.scoring_battledim(dets, leaks19, ctx.topo)
+                tm = evaluate.match_in_time(dets, leaks19, ctx.topo)
                 curve.append(
                     {"size": len(cur),
                      "false_forgetting_rate":
-                         evaluate.standard_metrics(sc, leaks19, ctx.topo)["false_forgetting_rate"]}
+                         evaluate.standard_metrics(sc, leaks19, ctx.topo, tm)["false_forgetting_rate"]}
                 )
             succ[str(k)][n] = curve
     out["controls"]["C5_single_sensor_failure"] = fail
@@ -292,7 +296,8 @@ def main() -> int:
             dets = detector.run_subset(Z19, s, ps19, c["min_gap_steps"],
                                        ctx.localiser, c["window_steps"], ts19)
             sc = evaluate.scoring_battledim(dets, in_block, ctx.topo)
-            vals.append(evaluate.standard_metrics(sc, in_block, ctx.topo)["false_forgetting_rate"])
+            tm = evaluate.match_in_time(dets, in_block, ctx.topo)
+            vals.append(evaluate.standard_metrics(sc, in_block, ctx.topo, tm)["false_forgetting_rate"])
         per_block[n] = vals
     out["controls"]["C8_bootstrap_by_period"] = {
         "n_blocks": N_PERIOD_BLOCKS, "budget": 8,

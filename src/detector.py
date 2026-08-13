@@ -207,9 +207,16 @@ class Localiser:
 
     signatures: np.ndarray
     names: np.ndarray
+    sigma: np.ndarray | None = None
 
     def predict(self, resid_change: np.ndarray, subset: list[int]) -> tuple[str, float]:
-        A = self.signatures[np.asarray(subset, dtype=int), :]
+        idx = np.asarray(subset, dtype=int)
+        A = self.signatures[idx, :]
+        if self.sigma is not None:
+            # resid_change arrives standardised (divided by sigma), so the
+            # signatures must be divided by the same sigma or the cosine match
+            # is systematically pulled toward the quietest sensors.
+            A = A / self.sigma[idx][:, None]
         nrm = np.linalg.norm(A, axis=0)
         nrm = np.where(nrm > 1e-12, nrm, 1.0)
         U = A / nrm[None, :]
