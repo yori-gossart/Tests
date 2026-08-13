@@ -203,10 +203,18 @@ def main() -> int:
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--out", default=str(PROC / "sensitivity_library.npz"))
     ap.add_argument("--verify-only", action="store_true")
+    ap.add_argument("--all-junctions", action="store_true",
+                    help="record Delta p at EVERY junction, not only the 33 "
+                         "pre-installed BattLeDIM sensors, so selection over the "
+                         "full candidate set can be studied")
     args = ap.parse_args()
 
     cfg = load_config(Path(args.config))
     sensors = [str(s) for s in cfg["pressure_sensors"]]
+    if args.all_junctions:
+        import wntr as _w
+        sensors = list(_w.network.WaterNetworkModel(str(args.inp)).junction_name_list)
+        print(f"ALL-JUNCTIONS mode: {len(sensors)} candidate sensor locations", flush=True)
     leaks_2018 = leak_table(cfg)
     diameters = np.array([r["diameter_m"] for r in leaks_2018])
     d_ref = float(np.median(diameters))
