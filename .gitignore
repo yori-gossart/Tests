@@ -1,16 +1,19 @@
 # Raw payload too large for git (177 MB, exceeds GitHub's 100 MB blob limit).
 # Retrieval is fully specified in data/raw/PROVENANCE.json and its SHA256 is
-# pinned in DATA_MANIFEST.json; src/fetch_data.sh re-downloads it verbatim.
+# pinned in DATA_MANIFEST.json.
 data/raw/battledim_official/L-TOWN_v2_Real.inp
+
+# Regenerated SCADA: large, and reproducible from src/regenerate_scada.py.
+# Per-file SHA256 is recorded in REGENERATION_METADATA.json, which IS tracked.
 data/processed/**/*.csv
+data/processed/*.npz
+
 __pycache__/
 *.pyc
 
-# EPANET scratch files written into cwd by wntr's EpanetSimulator
+# Scratch files that wntr's EpanetSimulator writes into the working directory:
+# a fixed "temp.*" set plus randomly named 8-character extensionless files.
 temp.bin
 temp.inp
 temp.rpt
-temp*.bin
-[A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z][A-Za-z]
-!src/**
-!logs/**
+/????????

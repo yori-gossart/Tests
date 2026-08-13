@@ -8,3 +8,4 @@ emitter/add_leak equivalence check: {
   "mean_leak_flow_epanet_cmh": 17.216014862060547,
   "max_abs_rel_diff": 4.6090121699443857e-07
 }
+  100/782 scenarios  (179s)
