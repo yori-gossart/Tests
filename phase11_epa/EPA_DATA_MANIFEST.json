@@ -1,61 +1,106 @@
 {
-  "phase": "11 -- EPA source-inversion reproduction",
-  "status": "BLOCKED_R0_ZIP_ABSENT",
-  "checked_utc": "2026-08-14T09:15:00Z",
-  "zip_expected": "Dataset_A-pg4z_TestSourceInversion_Haxton_20160728.zip",
-  "present_in_session_uploads": false,
-  "session_uploads_contents": [
-    "d678be32-PROMPT_CLAUDE_CODE_PHASE10.md",
-    "d74eb418-PROMPT_CLAUDE_CODE_PHASE11.md",
-    "f3b58a5a-PROMPT_CLAUDE_CODE_PHASE11.md"
-  ],
-  "note_on_uploads": "The Phase 11 prompt arrived twice, byte-identical. The ZIP accompanied neither copy.",
-  "filesystem_search": {
-    "dirs": [
-      "/root/.claude/uploads",
-      "/home/user",
-      "/tmp/claude-0",
-      "repo",
-      "phase10_reset/data/epa_source_inversion"
-    ],
-    "matches_for_pg4z_or_SourceInversion_or_Haxton": 0
-  },
-  "download_retry_2026_08_14": [
-    {
-      "url": "https://pasteur.epa.gov/uploads/149/Dataset_A-pg4z_TestSourceInversion_Haxton_20160728.zip",
-      "exact_error": "curl: (56) CONNECT tunnel failed, response 403",
-      "http_code": "000"
-    },
-    {
-      "url": "https://catalog.data.gov/api/3/action/package_show?id=A-pg4z-149",
-      "exact_error": "curl: (56) CONNECT tunnel failed, response 403",
-      "http_code": "000"
-    }
-  ],
-  "paper": {
-    "doi": "10.1061/(ASCE)WR.1943-5452.0000619",
-    "accessible": false,
-    "exact_error": "doi.org -> curl: (56) CONNECT tunnel failed, response 403"
-  },
-  "second_missing_artefact": {
-    "file": "REPRODUCTION_GATE_PROTOCOL.md",
-    "declared_mandatory_by_prompt": true,
-    "supplied": false,
-    "consequence": "Gate pass criteria unknown; R0-R6 definitions in run_phase11.py are reconstructed from the prompt and are not authoritative."
+  "phase": "11B -- EPA / Seth 2016 source inversion",
+  "official_zip_status": "NOT_RECEIVED",
+  "official_zip_detail": "Dataset_A-pg4z_TestSourceInversion_Haxton_20160728.zip was never delivered to this environment. Session uploads contain only three .md prompt files (checked 2026-08-14 09:08 and again now). All EPA hosts remain denied: curl (56) CONNECT tunnel failed, response 403 on pasteur.epa.gov, catalog.data.gov, sciencehub.epa.gov, edg.epa.gov, and doi.org for the paper.",
+  "substitution_policy": "The three NETWORKS were obtained from the official USEPA Water Security Toolkit repository instead of the ZIP, and their node counts match the brief's stated expectations exactly, which identifies them positively. The XLSX of published results has NO substitute; the comparison targets used here are the values TRANSCRIBED IN THE MISSION BRIEF, not read from the official workbook.",
+  "network_identification": {
+    "Net3": "97 total nodes -- brief expects ~97 -- MATCH",
+    "Network2": "identified as EPANET Net6: 3358 total nodes -- brief expects ~3358 -- MATCH",
+    "BWSN_Network_2": "12527 total nodes -- brief expects ~12527 -- MATCH"
   },
   "wst": {
-    "acquired": true,
     "repository": "https://github.com/USEPA/Water-Security-Toolkit",
     "commit": "07f997ccb13d3721de50f1a1aa1bfa89d328b5f7",
-    "built": false,
-    "detail": "see WST_MANIFEST.json"
+    "usable_as_is": false,
+    "why": "pywst is Python 2 (print statements) and only marshals files; the three algorithms live in compiled C/C++ (inversionsim, csarun, Merlion) and the optimization method additionally needs a MIP solver via Pyomo/AMPL. Building that chain was not attempted. Falling back to WNTR/EPANET per the brief's rule 3."
   },
-  "deliverables_emitted_empty_by_design": [
-    "REPRODUCTION_SCORECARD.csv",
-    "EVENT_LEVEL_SOURCE_INVERSION.csv",
-    "FO_DIAGNOSTIC_EXTERNAL.csv"
-  ],
-  "no_ad_hoc_simulation_substituted": true,
-  "fo_phase_opened": false,
-  "fo_v2_created": false
+  "files": [
+    {
+      "name": "BWSN_Network_2.inp",
+      "bytes": 2307252,
+      "sha256": "7e43c0ee08e89abe816eda9491a20cce74cc12d27e86ab44527047df895cf75e",
+      "type": "epanet_inp",
+      "counts": {
+        "junctions": 12523,
+        "reservoirs": 2,
+        "tanks": 2,
+        "total_nodes": 12527,
+        "pipes": 14822,
+        "pumps": 4,
+        "valves": 5
+      }
+    },
+    {
+      "name": "Net2.inp",
+      "bytes": 15502,
+      "sha256": "140bdc83413c86a031274758859ee73cad1ab0673f83ab5c6f386ecf6bc09782",
+      "type": "epanet_inp",
+      "counts": {
+        "junctions": 35,
+        "reservoirs": 0,
+        "tanks": 1,
+        "total_nodes": 36,
+        "pipes": 40,
+        "pumps": 0,
+        "valves": 0
+      }
+    },
+    {
+      "name": "Net3.inp",
+      "bytes": 30456,
+      "sha256": "d4119d5efb942058e1f71dbfb72a7230e12031601aab66eae7f65356ce7a8f65",
+      "type": "epanet_inp",
+      "counts": {
+        "junctions": 92,
+        "reservoirs": 2,
+        "tanks": 3,
+        "total_nodes": 97,
+        "pipes": 117,
+        "pumps": 2,
+        "valves": 0
+      }
+    },
+    {
+      "name": "Net3_wntr_official.inp",
+      "bytes": 31249,
+      "sha256": "ea3e825c4fef0b5cba47fb06301bc85253f18b6364dc96c44d9fb492c40faa52",
+      "type": "epanet_inp",
+      "counts": {
+        "junctions": 92,
+        "reservoirs": 2,
+        "tanks": 3,
+        "total_nodes": 97,
+        "pipes": 117,
+        "pumps": 2,
+        "valves": 0
+      }
+    },
+    {
+      "name": "Net6.inp",
+      "bytes": 438895,
+      "sha256": "86ae477e3c9661d5b4496a3f1c51242d194b745c75bb1cd4a831b7fbbbfe073b",
+      "type": "epanet_inp",
+      "counts": {
+        "junctions": 3323,
+        "reservoirs": 1,
+        "tanks": 34,
+        "total_nodes": 3358,
+        "pipes": 3829,
+        "pumps": 61,
+        "valves": 2
+      }
+    },
+    {
+      "name": "inversion_config.yml",
+      "bytes": 2171,
+      "sha256": "808657f11df0e45db97cae244532b9c9a32f462deedb384e5fa1291a87e27f84",
+      "type": "wst_config_yaml"
+    },
+    {
+      "name": "inversion_ex1.yml",
+      "bytes": 586,
+      "sha256": "d0f44c1decbc38a9d9193098b33da2d961a38e4accddb02184d4ff10e28fc76c",
+      "type": "wst_config_yaml"
+    }
+  ]
 }

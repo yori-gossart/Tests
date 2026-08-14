@@ -1,0 +1,13 @@
+reference leak diameter = median of the 14 2018 events = 0.018735 m (range 0.008774-0.022916)
+emitter/add_leak equivalence check: {
+  "node": "n1",
+  "diameter_m": 0.0187355,
+  "emitter_coefficient_si": 0.0009158637183351659,
+  "n_compared_steps": 72,
+  "mean_leak_flow_wntr_cmh": 17.216009358950217,
+  "mean_leak_flow_epanet_cmh": 17.216014862060547,
+  "max_abs_rel_diff": 4.6090121699443857e-07
+}
+  100/782 scenarios  (179s)
+  200/782 scenarios  (354s)
+  300/782 scenarios  (523s)

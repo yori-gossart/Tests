@@ -1,0 +1,1 @@
+scenario_id,network,FO_score,B_fixed_support,rank_true_source,reciprocal_rank,nll_true_source,network_distance,posterior_true_source,top1,top5,spearman,ci95_lo,ci95_hi

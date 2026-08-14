@@ -1,1 +1,1 @@
-case_id,predictor,score,failure,auroc,auprc,brier,spearman_vs_nll,spearman_vs_rank,decile
+scenario_id,network,true_source,horizon_h,sensor_design,FO_score,B_fixed_support,failure_top1,failure_top5,failure_rank,failure_distance,auroc,auprc,brier,spearman_vs_rank,spearman_vs_nll,decile

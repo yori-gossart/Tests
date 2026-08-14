@@ -1,1 +1,13 @@
-experiment,metric,official_value,reproduced_value,abs_diff,rel_diff,tolerance,gate,status
+experiment,condition,method,metric,published_value,reproduced_value,absolute_error,relative_error,passed_gate,notes
+time_horizon,1h,probability_based(bayesian),specificity_pct,35,5.15,-29.85,-0.8527,False,specificity definition recovered and verified on 3 networks
+time_horizon,1h,probability_based(bayesian),accuracy_pct_HYPOTHESISED,1,100.0,99.0,99.0,False,UNRESOLVED definition; hypothesis = true source inside candidate set
+time_horizon,2h,probability_based(bayesian),specificity_pct,52,5.15,-46.85,-0.9009,False,specificity definition recovered and verified on 3 networks
+time_horizon,2h,probability_based(bayesian),accuracy_pct_HYPOTHESISED,1,100.0,99.0,99.0,False,UNRESOLVED definition; hypothesis = true source inside candidate set
+time_horizon,4h,probability_based(bayesian),specificity_pct,72,40.74,-31.26,-0.4341,False,specificity definition recovered and verified on 3 networks
+time_horizon,4h,probability_based(bayesian),accuracy_pct_HYPOTHESISED,44,100.0,56.0,1.2727,False,UNRESOLVED definition; hypothesis = true source inside candidate set
+time_horizon,8h,probability_based(bayesian),specificity_pct,90,46.34,-43.66,-0.4852,False,specificity definition recovered and verified on 3 networks
+time_horizon,8h,probability_based(bayesian),accuracy_pct_HYPOTHESISED,100,100.0,0.0,0.0,True,UNRESOLVED definition; hypothesis = true source inside candidate set
+time_horizon,16h,probability_based(bayesian),specificity_pct,90,81.23,-8.77,-0.0974,False,specificity definition recovered and verified on 3 networks
+time_horizon,16h,probability_based(bayesian),accuracy_pct_HYPOTHESISED,100,60.87,-39.13,-0.3913,False,UNRESOLVED definition; hypothesis = true source inside candidate set
+time_horizon,24h,probability_based(bayesian),specificity_pct,90,81.24,-8.76,-0.0973,False,specificity definition recovered and verified on 3 networks
+time_horizon,24h,probability_based(bayesian),accuracy_pct_HYPOTHESISED,100,56.52,-43.48,-0.4348,False,UNRESOLVED definition; hypothesis = true source inside candidate set
