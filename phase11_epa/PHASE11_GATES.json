@@ -1,0 +1,98 @@
+{
+  "gates": [
+    {
+      "gate": "R0_ingest",
+      "status": "FAILED",
+      "reason": "official ZIP not present and not downloadable",
+      "zip_name": "Dataset_A-pg4z_TestSourceInversion_Haxton_20160728.zip",
+      "searched": [
+        "/home/user/Tests/phase11_epa",
+        "/home/user/Tests/phase10_reset/data/epa_source_inversion",
+        "/home/user/Tests",
+        "/root/.claude/uploads",
+        "/home/user",
+        "/tmp"
+      ],
+      "download_failures": [
+        {
+          "url": "https://pasteur.epa.gov/uploads/149/Dataset_A-pg4z_TestSourceInversion_Haxton_20160728.zip",
+          "curl_exit": 22,
+          "stderr": "curl: (22) The requested URL returned error: 403"
+        },
+        {
+          "url": "https://catalog.data.gov/api/3/action/package_show?id=A-pg4z-149",
+          "curl_exit": 22,
+          "stderr": "curl: (22) The requested URL returned error: 403"
+        },
+        {
+          "url": "https://sciencehub.epa.gov/sciencehub/datasets",
+          "curl_exit": 22,
+          "stderr": "curl: (22) The requested URL returned error: 403"
+        },
+        {
+          "url": "https://edg.epa.gov/metadata/rest/document?id=A-pg4z-149",
+          "curl_exit": 22,
+          "stderr": "curl: (22) The requested URL returned error: 403"
+        }
+      ],
+      "consequence": "R1-R6 and the FO phase do not run; no results are produced"
+    },
+    {
+      "gate": "R1_network_size",
+      "status": "NOT_RUN",
+      "reason": "Implementation is gated on artefacts that are absent: the ZIP's internal layout, the Seth et al. 2016 experimental parameters, and REPRODUCTION_GATE_PROTOCOL.md which defines the pass criteria. Coding against an imagined layout would run and mean nothing.",
+      "unresolved_parameters": [
+        "UNRESOLVED_PARAMETER: all -- specification unavailable"
+      ]
+    },
+    {
+      "gate": "R2_time_horizon",
+      "status": "NOT_RUN",
+      "reason": "Implementation is gated on artefacts that are absent: the ZIP's internal layout, the Seth et al. 2016 experimental parameters, and REPRODUCTION_GATE_PROTOCOL.md which defines the pass criteria. Coding against an imagined layout would run and mean nothing.",
+      "unresolved_parameters": [
+        "UNRESOLVED_PARAMETER: all -- specification unavailable"
+      ]
+    },
+    {
+      "gate": "R3_measurement_error",
+      "status": "NOT_RUN",
+      "reason": "Implementation is gated on artefacts that are absent: the ZIP's internal layout, the Seth et al. 2016 experimental parameters, and REPRODUCTION_GATE_PROTOCOL.md which defines the pass criteria. Coding against an imagined layout would run and mean nothing.",
+      "unresolved_parameters": [
+        "UNRESOLVED_PARAMETER: all -- specification unavailable"
+      ]
+    },
+    {
+      "gate": "R4_modeling_error",
+      "status": "NOT_RUN",
+      "reason": "Implementation is gated on artefacts that are absent: the ZIP's internal layout, the Seth et al. 2016 experimental parameters, and REPRODUCTION_GATE_PROTOCOL.md which defines the pass criteria. Coding against an imagined layout would run and mean nothing.",
+      "unresolved_parameters": [
+        "UNRESOLVED_PARAMETER: all -- specification unavailable"
+      ]
+    },
+    {
+      "gate": "R5_sensor_placement",
+      "status": "NOT_RUN",
+      "reason": "Implementation is gated on artefacts that are absent: the ZIP's internal layout, the Seth et al. 2016 experimental parameters, and REPRODUCTION_GATE_PROTOCOL.md which defines the pass criteria. Coding against an imagined layout would run and mean nothing.",
+      "unresolved_parameters": [
+        "UNRESOLVED_PARAMETER: all -- specification unavailable"
+      ]
+    },
+    {
+      "gate": "R6_scorecard",
+      "status": "NOT_RUN",
+      "reason": "no reproduction results to score"
+    },
+    {
+      "gate": "FO_phase",
+      "status": "NOT_OPENED",
+      "reason": "R1-R5 did not pass; the brief forbids opening the FO phase before they do"
+    }
+  ],
+  "verdicts": {
+    "EPA_REPRODUCTION": "EPA_REPRODUCTION_FAILED",
+    "EPA_REPRODUCTION_note": "FAILED here means NOT ATTEMPTED for lack of the dataset, not attempted-and-mismatched. No experiment was run, so nothing was compared to the official XLSX.",
+    "FO_DIAGNOSTIC_EXTERNAL": "NOT_EVALUATED",
+    "FO_RECONSTRUCTIBILITY_EXTERNAL": "NOT_EVALUATED",
+    "fo_v2_created": false
+  }
+}

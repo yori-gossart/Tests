@@ -1,0 +1,61 @@
+{
+  "phase": "11 -- EPA source-inversion reproduction",
+  "status": "BLOCKED_R0_ZIP_ABSENT",
+  "checked_utc": "2026-08-14T09:15:00Z",
+  "zip_expected": "Dataset_A-pg4z_TestSourceInversion_Haxton_20160728.zip",
+  "present_in_session_uploads": false,
+  "session_uploads_contents": [
+    "d678be32-PROMPT_CLAUDE_CODE_PHASE10.md",
+    "d74eb418-PROMPT_CLAUDE_CODE_PHASE11.md",
+    "f3b58a5a-PROMPT_CLAUDE_CODE_PHASE11.md"
+  ],
+  "note_on_uploads": "The Phase 11 prompt arrived twice, byte-identical. The ZIP accompanied neither copy.",
+  "filesystem_search": {
+    "dirs": [
+      "/root/.claude/uploads",
+      "/home/user",
+      "/tmp/claude-0",
+      "repo",
+      "phase10_reset/data/epa_source_inversion"
+    ],
+    "matches_for_pg4z_or_SourceInversion_or_Haxton": 0
+  },
+  "download_retry_2026_08_14": [
+    {
+      "url": "https://pasteur.epa.gov/uploads/149/Dataset_A-pg4z_TestSourceInversion_Haxton_20160728.zip",
+      "exact_error": "curl: (56) CONNECT tunnel failed, response 403",
+      "http_code": "000"
+    },
+    {
+      "url": "https://catalog.data.gov/api/3/action/package_show?id=A-pg4z-149",
+      "exact_error": "curl: (56) CONNECT tunnel failed, response 403",
+      "http_code": "000"
+    }
+  ],
+  "paper": {
+    "doi": "10.1061/(ASCE)WR.1943-5452.0000619",
+    "accessible": false,
+    "exact_error": "doi.org -> curl: (56) CONNECT tunnel failed, response 403"
+  },
+  "second_missing_artefact": {
+    "file": "REPRODUCTION_GATE_PROTOCOL.md",
+    "declared_mandatory_by_prompt": true,
+    "supplied": false,
+    "consequence": "Gate pass criteria unknown; R0-R6 definitions in run_phase11.py are reconstructed from the prompt and are not authoritative."
+  },
+  "wst": {
+    "acquired": true,
+    "repository": "https://github.com/USEPA/Water-Security-Toolkit",
+    "commit": "07f997ccb13d3721de50f1a1aa1bfa89d328b5f7",
+    "built": false,
+    "detail": "see WST_MANIFEST.json"
+  },
+  "deliverables_emitted_empty_by_design": [
+    "REPRODUCTION_SCORECARD.csv",
+    "EVENT_LEVEL_SOURCE_INVERSION.csv",
+    "FO_DIAGNOSTIC_EXTERNAL.csv"
+  ],
+  "no_ad_hoc_simulation_substituted": true,
+  "fo_phase_opened": false,
+  "fo_v2_created": false
+}

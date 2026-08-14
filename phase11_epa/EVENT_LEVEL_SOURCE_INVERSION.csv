@@ -1,0 +1,1 @@
+network,case_id,true_source,candidate_set_size,rank_true_source,reciprocal_rank,posterior_true_source,nll_true_source,network_distance_true_to_map,top1,top5,sensors,n_sensors,time_horizon_h,measurement_error,modeling_error,conditions
