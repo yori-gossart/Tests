@@ -1,0 +1,114 @@
+{
+  "n_scenarios": 10,
+  "n_leak_free": 4,
+  "n_leaky": 6,
+  "n_leak_events": 8,
+  "n_junctions": 31,
+  "independent_unit": "scenario",
+  "wilson_ci_95": {
+    "n=8,k=4": {
+      "p": 0.5,
+      "ci": [
+        0.215,
+        0.785
+      ],
+      "half_width": 0.285
+    },
+    "n=8,k=6": {
+      "p": 0.75,
+      "ci": [
+        0.409,
+        0.929
+      ],
+      "half_width": 0.26
+    },
+    "n=10,k=5": {
+      "p": 0.5,
+      "ci": [
+        0.237,
+        0.763
+      ],
+      "half_width": 0.263
+    },
+    "n=10,k=8": {
+      "p": 0.8,
+      "ci": [
+        0.49,
+        0.943
+      ],
+      "half_width": 0.227
+    }
+  },
+  "b_star_granularity": {
+    "support_size_max": 8,
+    "distinct_attainable_values": [
+      0.0,
+      0.125,
+      0.25,
+      0.375,
+      0.5,
+      0.625,
+      0.75,
+      0.875,
+      1.0
+    ],
+    "smallest_resolvable_difference": 0.125,
+    "note": "B* is a proportion over the frozen support E*; with |E*| <= 8 two sensor designs cannot differ by less than 12.5 points."
+  },
+  "auroc_ci_95": {
+    "n_pos=4,n_neg=4,auc=0.75": {
+      "se": 0.184,
+      "ci": [
+        0.39,
+        1.0
+      ]
+    },
+    "n_pos=4,n_neg=4,auc=0.9": {
+      "se": 0.123,
+      "ci": [
+        0.659,
+        1.0
+      ]
+    },
+    "n_pos=6,n_neg=2,auc=0.75": {
+      "se": 0.195,
+      "ci": [
+        0.368,
+        1.0
+      ]
+    },
+    "n_pos=6,n_neg=2,auc=0.9": {
+      "se": 0.12,
+      "ci": [
+        0.664,
+        1.0
+      ]
+    },
+    "n_pos=8,n_neg=2,auc=0.75": {
+      "se": 0.182,
+      "ci": [
+        0.393,
+        1.0
+      ]
+    },
+    "n_pos=8,n_neg=2,auc=0.9": {
+      "se": 0.109,
+      "ci": [
+        0.686,
+        1.0
+      ]
+    }
+  },
+  "scenarios_required": {
+    "half_width_0.1": 93,
+    "half_width_0.05": 381
+  },
+  "held_out_split": {
+    "split": "50/50 over scenarios -> 3 leaky train / 3 leaky test",
+    "test_ci_at_k2_n3": [
+      0.208,
+      0.939
+    ],
+    "ci_width": 0.731
+  }
+}

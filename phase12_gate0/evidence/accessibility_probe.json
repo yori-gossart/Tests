@@ -1,0 +1,55 @@
+{
+  "git_remotes": [
+    {
+      "url": "https://github.com/KIOS-Research/LeakDB",
+      "reachable": true,
+      "head_commit": "131144ba423a82639f881adab0d493ab50e3b2fb",
+      "stderr": ""
+    },
+    {
+      "url": "https://github.com/gasiepgodoy/WDN-Models-and-Data-Sets",
+      "reachable": true,
+      "head_commit": "d07cde232510698c39ac2c27eee014b2951ef07e",
+      "stderr": ""
+    }
+  ],
+  "http_endpoints": [
+    {
+      "url": "https://zenodo.org/api/records/13985057",
+      "http_code": "000",
+      "reachable": false,
+      "stderr": "curl: (56) CONNECT tunnel failed, response 403"
+    },
+    {
+      "url": "https://zenodo.org/record/1313116",
+      "http_code": "000",
+      "reachable": false,
+      "stderr": "curl: (56) CONNECT tunnel failed, response 403"
+    },
+    {
+      "url": "https://doi.org/10.5281/zenodo.1313116",
+      "http_code": "000",
+      "reachable": false,
+      "stderr": "curl: (56) CONNECT tunnel failed, response 403"
+    },
+    {
+      "url": "https://drive.google.com/drive/folders/1Q_JQO2OZhejQEd0BMdx0UGcRaDo85ENC",
+      "http_code": "000",
+      "reachable": false,
+      "stderr": "curl: (56) CONNECT tunnel failed, response 403"
+    },
+    {
+      "url": "https://www.sba.org.br/cba2024/papers/paper_7042.pdf",
+      "http_code": "000",
+      "reachable": false,
+      "stderr": "curl: (56) CONNECT tunnel failed, response 403"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/KIOS-Research/LeakDB/master/README.md",
+      "http_code": "200",
+      "reachable": true,
+      "stderr": ""
+    }
+  ],
+  "note": "http_code 000 = the agent egress proxy refused the CONNECT tunnel (403), not a dead host. git over https to github.com is allowed; zenodo.org, drive.google.com and sba.org.br are not."
+}

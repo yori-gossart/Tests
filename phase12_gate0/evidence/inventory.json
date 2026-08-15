@@ -1,0 +1,110 @@
+{
+  "recorded_on": "2026-08-15",
+  "note": "Every field below was produced by a real command in this session: git clone, unzip -l, unrar, wntr EPANET simulation, or GNU Octave running the benchmark's own scoring code. Nothing is quoted from documentation without being checked against the files.",
+
+  "leakdb": {
+    "repository": "https://github.com/KIOS-Research/LeakDB",
+    "head_commit": "131144ba423a82639f881adab0d493ab50e3b2fb",
+    "clone_size": "160 MB",
+    "bundled_benchmark": {
+      "archive": "CCWI-WDSA2018/Benchmarks/Hanoi_CMH.zip",
+      "compressed_bytes": 79395636,
+      "uncompressed_bytes": 529137080,
+      "files": 1078,
+      "network": "Hanoi_CMH",
+      "scenarios": 10,
+      "leak_free_scenarios": [1, 2, 4, 9],
+      "leaky_scenarios": [3, 5, 6, 7, 8, 10],
+      "leak_events_total": 8,
+      "duration_hours": 8760,
+      "time_step_minutes": 30,
+      "timesteps_per_scenario": 17520
+    },
+    "per_scenario_contents": {
+      "Demands": "32 node CSVs",
+      "Pressures": "32 node CSVs",
+      "Flows": "34 link CSVs",
+      "Leaks": "Leak_<node>_info.csv + Leak_<node>_demand.csv, present only when a leak exists",
+      "Labels.csv": "17520 rows, binary per-timestep leak label",
+      "Scenario-N_info.csv": "network name, duration, timestep, topology/length/diameter/roughness uncertainty",
+      "topology": "Hanoi_CMH_Scenario-N.inp, one EPANET model per scenario (31 junctions, 1 reservoir, 34 pipes)"
+    },
+    "ground_truth_fields": ["Leak Node", "Leak Area", "Leak Diameter", "Leak Type (abrupt|incipient)", "Leak Start", "Leak End", "Peak Time"],
+    "official_scoring": {
+      "file": "CCWI-WDSA2018/Scoring Function/scoring_algorithm.m",
+      "language": "MATLAB",
+      "ran_under": "GNU Octave 8.4.0, unmodified source",
+      "metrics": ["F1", "MCC", "STPR", "STNR", "SED (early detection)"],
+      "results_on_official_baselines": {
+        "MNF":  {"F1": 55.9188, "STPR": 38.8579, "STNR": 99.9777, "SED": 30.8309},
+        "RAND": {"F1": 23.6526, "STPR": 50.2418, "STNR": 49.7742, "SED": 0.0},
+        "NULL": {"F1": 0.0, "STPR": 0.0, "STNR": 100.0, "SED": 0.0}
+      },
+      "comparison_to_paper_table_1": "NOT ATTEMPTED as a numeric match: the paper scores a larger scenario set (it speaks of e.g. 500 scenarios) while the repository bundles 10, so the two are not the same population. What is established is that the official code runs unmodified and separates the three official baselines in the expected order."
+    },
+    "counterfactual_check": {
+      "question": "can the leak-free baseline needed by FO/B* be obtained without inventing data?",
+      "method": "ran EPANET (wntr 1.5.0) on the shipped Hanoi_CMH_Scenario-3.inp and compared node 19 pressure against the shipped Pressures/Node_19.csv",
+      "leak_demand_is_separate_from_node_demand": true,
+      "mean_abs_diff_outside_leak_window_m": 0.016969,
+      "max_abs_diff_outside_leak_window_m": 0.175420,
+      "mean_pressure_drop_inside_leak_window_m": 0.264757,
+      "conclusion": "the shipped .inp IS the leak-free counterfactual. delta = observed - simulated is computable per sensor per timestep from official artefacts only, and the residual outside the leak window gives an empirical noise floor for sigma."
+    },
+    "blocked": {
+      "full_dataset": "https://zenodo.org/records/13985057 -- CONNECT 403 via curl AND WebFetch",
+      "doi": "https://doi.org/10.5281/zenodo.1313116 -- CONNECT 403"
+    }
+  },
+
+  "graphleak": {
+    "repository": "https://github.com/gasiepgodoy/WDN-Models-and-Data-Sets",
+    "head_commit": "d07cde232510698c39ac2c27eee014b2951ef07e",
+    "clone_size": "6.6 GB",
+    "networks": {
+      "Case Study 1": {"inp": "rede-sub-a-alt.inp", "junctions": 44, "reservoirs": 1, "pipes": 59, "monitored_nodes": 8, "leak_nodes": 5},
+      "Case Study 2": {"inp": "rede-condominio-4-v2.inp", "junctions": 68, "reservoirs": 1, "pipes": 83, "csv_columns": 137, "csv_rows": 93100}
+    },
+    "corpus_scale_case1": {
+      "files_in_Case1_archive": 420,
+      "seeds": ["11", "28", "135", "248", "505", "998", "1050", "1334", "2210", "3151"],
+      "leak_size_factors": ["x1", "x5", "x10", "x25", "x50", "x100", "x200"],
+      "sampling_intervals_min": [10, 30, 60, 180, 360, 720],
+      "days_per_file": 600,
+      "extracted_size": "2.4 GB"
+    },
+    "column_schema": {
+      "source": "documented in the GraphSAGE publication readme AND verified empirically against csv-cena1-dist-x1-seed11-600d-180min.csv",
+      "1": "time (s)",
+      "2-9": "flow at monitored nodes N2-N9",
+      "10-17": "pressure at monitored nodes N2-N9",
+      "18-25": "volume at monitored nodes N2-N9",
+      "26-49": "x/y/z coordinates of monitored nodes",
+      "50-54": "binary leak label for nodes N10-N14",
+      "55-57": "x-y-z coordinates of the active leak (zeros if none)",
+      "58": "weekday (reserved)",
+      "empirical_check": "cols 50-54 take values {0,1} only; cols 26-49 and 55-57 take coordinate-like values; matches the documented schema exactly"
+    },
+    "archive_extraction": {
+      "p7zip_16.02": "FAILS -- 'Unsupported Method' on RAR5, produces 0-byte files",
+      "unrar_free": "insufficient",
+      "unrar_nonfree_7.00": "SUCCEEDS -- installed from the distribution archive, all volumes extract"
+    },
+    "official_scoring": {
+      "standalone_scoring_function": null,
+      "searched_for": ["f1_score", "classification_report", "confusion_matrix", "precision_recall"],
+      "matches_repo_wide": 0,
+      "what_exists_instead": "top-1 accuracy computed inline inside the K-fold training loop of main-cena1-aum-600d.py",
+      "readme_claims": ["accuracy", "precision", "recall", "F1-score", "MAPE"],
+      "assessment": "the claimed metrics are not implemented anywhere in the repository; there is no frozen evaluation protocol (no fixed split, no aggregation rule across seeds, no definition of a correct localisation)"
+    },
+    "counterfactual_check": {
+      "paired_leak_free_baseline_available": false,
+      "reason": "per-day demand profiles are drawn randomly inside the MATLAB generator and are NOT exported to the CSVs (the released columns are flow, pressure, volume, coordinates, labels, leak coordinates, weekday). A leak-day therefore has no matching leak-free twin in the released data, and reconstructing one would require re-running the generator, i.e. regeneration rather than the released dataset."
+    },
+    "blocked": {
+      "raw_data_drive": "https://drive.google.com/drive/folders/1Q_JQO2OZhejQEd0BMdx0UGcRaDo85ENC -- CONNECT 403",
+      "papers": "https://www.sba.org.br/cba2024/papers/paper_7042.pdf and paper_2949.pdf -- CONNECT 403"
+    }
+  }
+}

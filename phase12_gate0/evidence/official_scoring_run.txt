@@ -1,0 +1,15 @@
+===== official scoring_algorithm.m on MNF (GNU Octave 8.4.0) =====
+Score F1: 55.9188
+Score STPR: 38.8579
+Score STNR: 99.9777
+Score SED: 30.8309
+===== official scoring_algorithm.m on RAND (GNU Octave 8.4.0) =====
+Score F1: 23.6526
+Score STPR: 50.2418
+Score STNR: 49.7742
+Score SED: 0
+===== official scoring_algorithm.m on NULL (GNU Octave 8.4.0) =====
+Score F1: 0
+Score STPR: 0
+Score STNR: 100
+Score SED: 0
