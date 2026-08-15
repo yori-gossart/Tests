@@ -1,0 +1,93 @@
+{
+  "phase": "12A_final_acquisition_attempt",
+  "target_minimum_scenarios": 93,
+  "target_preferred_scenarios": 381,
+  "route_1_sharepoint": {
+    "url": "https://ucy-my.sharepoint.com/:f:/g/personal/mkiria01_ucy_ac_cy/Eiyah0-TL4dGqt9K4Ln5TN0BRlroASbX35p53bS7or4j5A",
+    "confirmed_as_download_url_in_registry": true,
+    "registry_path": "water_benchmark_hub/database.json -> resources/kios-leakdb/download_url",
+    "probes": [
+      {
+        "url": "https://ucy-my.sharepoint.com/:f:/g/personal/mkiria01_ucy_ac_cy/Eiyah0-TL4dGqt9K4Ln5TN0BRlroASbX35p53bS7or4j5A",
+        "http_code": "000",
+        "reachable": false,
+        "stderr": "curl: (56) CONNECT tunnel failed, response 403"
+      },
+      {
+        "url": "https://ucy-my.sharepoint.com/:f:/g/personal/mkiria01_ucy_ac_cy/Eiyah0-TL4dGqt9K4Ln5TN0BRlroASbX35p53bS7or4j5A&download=1",
+        "http_code": "000",
+        "reachable": false,
+        "stderr": "curl: (56) CONNECT tunnel failed, response 403"
+      },
+      {
+        "url": "https://ucy-my.sharepoint.com/",
+        "http_code": "000",
+        "reachable": false,
+        "stderr": "curl: (56) CONNECT tunnel failed, response 403"
+      }
+    ],
+    "webfetch": "EGRESS_BLOCKED (ucy-my.sharepoint.com)"
+  },
+  "route_2_package": {
+    "package": "water-benchmark-hub",
+    "installed": true,
+    "install_source": "pypi.org (on the proxy allowlist)",
+    "api_call": "load(\"KIOS-LeakDB\").load_data(scenarios_id=[1], use_net1=False)",
+    "actual_data_host": "filedn.com",
+    "result": {
+      "ok": false,
+      "exception": "SystemError",
+      "message": "failed downloading from https://filedn.com/lumBFq2P9S74PNoLPWtzxG4/EPyT-Flow/LeakDB-Original/Hanoi_CMH/Scenario-1.zip"
+    },
+    "probes": [
+      {
+        "url": "https://filedn.com/lumBFq2P9S74PNoLPWtzxG4/EPyT-Flow/LeakDB-Original/Hanoi_CMH/",
+        "http_code": "000",
+        "reachable": false,
+        "stderr": "curl: (56) CONNECT tunnel failed, response 403"
+      },
+      {
+        "url": "https://filedn.com/lumBFq2P9S74PNoLPWtzxG4/EPyT-Flow/LeakDB-Original/Hanoi_CMH/Scenario-1.zip",
+        "http_code": "000",
+        "reachable": false,
+        "stderr": "curl: (56) CONNECT tunnel failed, response 403"
+      },
+      {
+        "url": "https://filedn.com/",
+        "http_code": "000",
+        "reachable": false,
+        "stderr": "curl: (56) CONNECT tunnel failed, response 403"
+      }
+    ]
+  },
+  "route_3_subset_feasibility": {
+    "per_scenario_download_supported": true,
+    "url_pattern": "https://filedn.com/lumBFq2P9S74PNoLPWtzxG4/EPyT-Flow/LeakDB-Original/Hanoi_CMH/Scenario-{id}.zip",
+    "total_scenarios_offered": 1000,
+    "networks_separable": [
+      "Hanoi_CMH",
+      "Net1_CMH"
+    ],
+    "full_archive_size": "approx. 25 GB Hanoi, 8 GB Net1",
+    "verdict": "the architecture WOULD allow pulling Hanoi only, or an arbitrary subset of N scenarios, without the full archive. It is not the granularity that blocks acquisition -- it is the host."
+  },
+  "route_4_scenarios_acquired": {
+    "new_scenarios_acquired_this_phase": 0,
+    "locally_available_total": {
+      "source": "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/gate0/LeakDB/CCWI-WDSA2018/Benchmarks/Hanoi_CMH.zip",
+      "available": true,
+      "n_scenarios": 10,
+      "n_leak_events": 8
+    },
+    "meets_minimum_93": false,
+    "meets_preferred_381": false
+  },
+  "not_attempted_on_purpose": {
+    "regenerate_with_official_generator": "The repository ships Dataset_Generator_Py3, and epyt-flow can synthesise LeakDB-like scenarios. Regenerating would produce scenarios that are not the published benchmark, which is a synthetic replacement of a missing element. The standing rule forbids it and the brief did not list it.",
+    "other_mirrors": "The brief restricted this phase to the SharePoint source and the water-benchmark-hub package. No further mirror hunt was run."
+  },
+  "verdict": {
+    "LEAKDB_GATE0": "FAIL_FINAL_ACCESS",
+    "FO_TEST_AUTHORIZED": "NO"
+  }
+}
