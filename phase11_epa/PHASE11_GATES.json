@@ -33,15 +33,79 @@
   ],
   "verdicts": {
     "EPA_REPRODUCTION": "FAILED",
-    "FO_DIAGNOSTIC": "NOT_EVALUATED_REPRODUCTION_FAILED",
-    "FO_RECONSTRUCTIBILITY": "NOT_EVALUATED_REPRODUCTION_FAILED",
+    "FO_DIAGNOSTIC": "NOT_EVALUATED",
+    "FO_RECONSTRUCTIBILITY": "NOT_EVALUATED",
     "FO_APPLICATION_BRANCH": "UNDECIDED",
     "stop_rule_note": "Step 11 requires BOTH FO verdicts to be NOT_SUPPORTED. Both are NOT_EVALUATED, so APPLICATION_BRANCH_STOP_RECOMMENDED is deliberately NOT written.",
-    "fo_v2_created": false
+    "fo_v2_created": false,
+    "EPA_DATASET_RECOVERED": "NO",
+    "PAPER_PROTOCOL_RECOVERED": "PARTIAL",
+    "EPA_REPRODUCTION_primary_cause": "FAILED_IMPLEMENTATION",
+    "EPA_REPRODUCTION_blocking_cause": "INSUFFICIENT_INFORMATION"
   },
   "recovered_not_guessed": {
     "specificity_definition": "1 - rank_true_source / n_total_nodes, verified on 3 networks with zero disagreement",
     "Network2_identity": "EPANET Net6 (3358 nodes)",
     "algorithm_parameters": "positive/negative thresholds, measurement failure, num injections, feasible nodes -- from official WST configs"
+  },
+  "phase11C": {
+    "url_retest_2026_08_14": [
+      {
+        "resource": "paper (OSTI)",
+        "url": "https://www.osti.gov/servlets/purl/1341749",
+        "result": "curl: (56) CONNECT tunnel failed, response 403",
+        "note": "never tested before this phase; most promising lead; blocked"
+      },
+      {
+        "resource": "dataset ZIP",
+        "url": "https://pasteur.epa.gov/uploads/149/Dataset_A-pg4z_TestSourceInversion_Haxton_20160728.zip",
+        "result": "CONNECT 403"
+      },
+      {
+        "resource": "data.gov catalogue",
+        "url": "https://catalog.data.gov/dataset/dataset-for-testing-contamination-source-identification-methods-for-water-distribution-net",
+        "result": "CONNECT 403"
+      },
+      {
+        "resource": "DOI",
+        "url": "https://doi.org/10.1061/(ASCE)WR.1943-5452.0000619",
+        "result": "CONNECT 403"
+      }
+    ],
+    "webfetch_retest": "{\"error_type\":\"EGRESS_BLOCKED\",\"domain\":\"www.osti.gov\"}",
+    "attainability_sweep": {
+      "n_parameterisations": 135,
+      "dimensions": "injection start {0,1,2}h x duration {1,2,6}h x strength {100,1000,10000} x sensors {5,10,20,40,92}",
+      "best_rmse": 8.72,
+      "gate": 5.0,
+      "n_passing": 0,
+      "best_spearman": 0.94,
+      "best_bias": -4.48,
+      "best_maxerr": 17.61,
+      "best_curve": [
+        36.5,
+        58.3,
+        64.2,
+        72.4,
+        85.3,
+        85.4
+      ],
+      "published_curve": [
+        35.0,
+        52.0,
+        72.0,
+        90.0,
+        90.0,
+        90.0
+      ],
+      "interpretation": "Every published point is individually inside the envelope (5.2-99.0 at every horizon); what fails is the JOINT fit. No single parameterisation reproduces all six points. The gap is a shape constraint, concentrated on the 4h->8h rise, not a level offset."
+    },
+    "failure_classification": {
+      "FAILED_IMPLEMENTATION": "PRIMARY -- the reimplemented Bernoulli likelihood has a structurally different horizon response from WST/Merlion",
+      "INSUFFICIENT_INFORMATION": "BLOCKING -- fixing it needs the paper's formulation or a compiled WST; neither is reachable",
+      "FAILED_DATA_MATCH": "NOT_APPLICABLE -- no official result file was ever confronted",
+      "FAILED_PUBLISHED_REPRODUCTION": "NOT_ESTABLISHED -- shown only that THIS reimplementation fails, not that the published results are irreproducible"
+    },
+    "first_divergence": "the 4h->8h slope: published 72->90, best achievable 64->72"
   }
 }
