@@ -1,0 +1,53 @@
+{
+  "recovered_nominal_sensor_density": {
+    "contaminant_status": {
+      "nominal_specificity": 69.0,
+      "nearest_density_pct": 4.0,
+      "nearest_density_specificity": 69.0,
+      "implied_n_sensors_net3": 3.9
+    },
+    "optimization": {
+      "nominal_specificity": 89.5,
+      "nearest_density_pct": 4.0,
+      "nearest_density_specificity": 94.0,
+      "implied_n_sensors_net3": 3.9
+    },
+    "probability_based": {
+      "nominal_specificity": 89.5,
+      "nearest_density_pct": 10.0,
+      "nearest_density_specificity": 89.0,
+      "implied_n_sensors_net3": 9.7
+    }
+  },
+  "net3_configuration_disagreement_between_sheets": {
+    "probability_based": {
+      "time_horizon_plateau_specificity": 90.0,
+      "network_size_net3_specificity": 69.07,
+      "gap_points": 20.93,
+      "n_ge_time_horizon": 9.7,
+      "n_ge_network_size": 30.0
+    },
+    "contaminant_status": {
+      "time_horizon_plateau_specificity": 77.67,
+      "network_size_net3_specificity": 64.95,
+      "gap_points": 12.72,
+      "n_ge_time_horizon": 21.7,
+      "n_ge_network_size": 34.0
+    },
+    "optimization": {
+      "time_horizon_plateau_specificity": 90.0,
+      "network_size_net3_specificity": 69.07,
+      "gap_points": 20.93,
+      "n_ge_time_horizon": 9.7,
+      "n_ge_network_size": 30.0
+    }
+  },
+  "accuracy_definition_remains_underdetermined": {
+    "csa_1h_accuracy": 20.0,
+    "csa_1h_specificity": 15.0,
+    "csa_1h_n_ge_implied": 82.5,
+    "csa_network_size_accuracy": 100.0,
+    "csa_network_size_n_ge_implied": 34.0,
+    "why_underdetermined": "A consistency-based CSA on noise-free observations always retains the true source, so accuracy would be 100% at every horizon; the workbook reports 20% at 1h. A noisy CSA that can drop the true source at 1h would drop it more often at 24h as readings accumulate, yet the workbook reports 100% at 24h. No set-membership rule over a monotonically growing observation set produces both. The workbook rules out unique-top-1 (Network Size: accuracy 100% while 30 nodes are as-or-more likely) but does not identify the replacement."
+  }
+}

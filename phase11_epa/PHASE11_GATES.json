@@ -29,6 +29,11 @@
       "gate": "FO_phase",
       "status": "NOT_OPENED",
       "detail": "reproduction gate not passed; brief forbids an external FO verdict in that case"
+    },
+    {
+      "gate": "R2_time_horizon_Net3_OFFICIAL",
+      "status": "FAILED",
+      "detail": "against the official XLSX: specificity RMSE 31.95 (PB) / 20.06 (CSA) at the frozen 11B parameters, best attainable 8.72 over 135 parameterisations, gate <=5. The accuracy and three-method conditions are not evaluable from the supplied artefacts."
     }
   ],
   "verdicts": {
@@ -38,10 +43,12 @@
     "FO_APPLICATION_BRANCH": "UNDECIDED",
     "stop_rule_note": "Step 11 requires BOTH FO verdicts to be NOT_SUPPORTED. Both are NOT_EVALUATED, so APPLICATION_BRANCH_STOP_RECOMMENDED is deliberately NOT written.",
     "fo_v2_created": false,
-    "EPA_DATASET_RECOVERED": "NO",
+    "EPA_DATASET_RECOVERED": "PARTIAL (XLSX + 3 networks; no event-level data)",
     "PAPER_PROTOCOL_RECOVERED": "PARTIAL",
     "EPA_REPRODUCTION_primary_cause": "FAILED_IMPLEMENTATION",
-    "EPA_REPRODUCTION_blocking_cause": "INSUFFICIENT_INFORMATION"
+    "EPA_REPRODUCTION_blocking_cause": "INSUFFICIENT_INFORMATION",
+    "EPA_REPRODUCTION_official_data": "FAILED",
+    "R2_official": "FAILED"
   },
   "recovered_not_guessed": {
     "specificity_definition": "1 - rank_true_source / n_total_nodes, verified on 3 networks with zero disagreement",
@@ -107,5 +114,112 @@
       "FAILED_PUBLISHED_REPRODUCTION": "NOT_ESTABLISHED -- shown only that THIS reimplementation fails, not that the published results are irreproducible"
     },
     "first_divergence": "the 4h->8h slope: published 72->90, best achievable 64->72"
+  },
+  "phase11D": {
+    "artefacts_received": {
+      "xlsx": {
+        "path": "phase11_epa/official/Data_A-pg4z_TestSourceInversion_Haxton_20160728.xlsx",
+        "sha256": "3790e6b26c2400c26bd47071d33f77d190c3b6f5ea0d1a114f361490f53b38a6",
+        "role": "official reference truth, Seth et al. 2016 raw data"
+      },
+      "protocol": {
+        "path": "phase11_epa/official/REPRODUCTION_GATE_PROTOCOL.md",
+        "sha256": "0caf2e4386e205ec29419afe861afb5093b20a51d105dff9324bc65593a99162",
+        "role": "pre-registered reproduction gates R0-R6"
+      }
+    },
+    "R0_integrity": {
+      "status": "PASSED",
+      "node_counts_reparsed": {
+        "Net3": 97,
+        "Net6": 3358,
+        "BWSN_Network_2": 12527
+      },
+      "correction_to_earlier_phases": "the paper's BWSN2 denominator is 12523 (junctions only), not 12527 (all nodes). 1 - 45/12523 = 99.64066118342251 reproduces the published value exactly; 1 - 45/12527 does not. Net3 (97) and Network2 (3358) use all nodes. Net3 is unaffected, so R2 is unaffected.",
+      "specificity_definition_reverified": "exact on 9/9 Network Size cells, 3 methods x 3 networks"
+    },
+    "targets_confirmation": {
+      "finding": "the Time Horizon values transcribed from the mission brief in Phase 11B are IDENTICAL to the official workbook for the Probability Based method (accuracy 1,1,44,100,100,100; specificity 35,52,72,90,90,90).",
+      "consequence": "the 11B/11C failure was not caused by wrong targets, and the 11C attainability bound transfers to the official data unchanged."
+    },
+    "R2_time_horizon": {
+      "gate": "R2_TIME_HORIZON",
+      "protocol_sha256": "0caf2e4386e205ec29419afe861afb5093b20a51d105dff9324bc65593a99162",
+      "methods_required": [
+        "probability_based",
+        "contaminant_status",
+        "optimization"
+      ],
+      "methods_evaluated": [
+        "probability_based",
+        "contaminant_status"
+      ],
+      "per_method": {
+        "probability_based": {
+          "status": "EVALUATED",
+          "rmse_specificity": 31.95,
+          "rmse_specificity_gate": 5.0,
+          "rmse_specificity_pass": false,
+          "rmse_accuracy_H1": 73.29,
+          "rmse_accuracy_H2": 66.03,
+          "rmse_accuracy_gate": 5.0,
+          "rmse_accuracy_pass_best_hypothesis": false,
+          "accuracy_plateau_100_from_8h_H1": false,
+          "accuracy_plateau_100_from_8h_H2": false
+        },
+        "contaminant_status": {
+          "status": "EVALUATED",
+          "rmse_specificity": 20.06,
+          "rmse_specificity_gate": 5.0,
+          "rmse_specificity_pass": false,
+          "rmse_accuracy_H1": 41.63,
+          "rmse_accuracy_H2": 41.63,
+          "rmse_accuracy_gate": 5.0,
+          "rmse_accuracy_pass_best_hypothesis": false,
+          "accuracy_plateau_100_from_8h_H1": true,
+          "accuracy_plateau_100_from_8h_H2": true
+        },
+        "optimization": {
+          "status": "NOT_IMPLEMENTED",
+          "reason": "WST optimization method requires a compiled MIP solver (Merlion/Pyomo); unavailable in this environment"
+        }
+      },
+      "conditions": {
+        "plateau_accuracy_100_from_8h_all_three_methods": false,
+        "rmse_accuracy_le_5": false,
+        "rmse_specificity_le_5": false
+      },
+      "verdict": "FAILED"
+    },
+    "R2_failure_is_structural": {
+      "frozen_run_specificity_rmse": {
+        "probability_based": 31.95,
+        "contaminant_status": 20.06
+      },
+      "frozen_run_caveat": "the 11B freeze puts injection start at 2h, so the 1h and 2h horizons contain zero observations by construction and are degenerate. This inflates the frozen RMSE and is reported, not hidden.",
+      "attainability_bound_11C": {
+        "n_parameterisations": 135,
+        "covers_injection_start_0h": true,
+        "best_specificity_rmse": 8.72,
+        "gate": 5.0,
+        "passing": 0
+      },
+      "recovered_nominal_density_probability_based": {
+        "value_pct": 10.0,
+        "method": "triangulated across Measurement Error (FPR=FNR=0), Modeling Error (0%), Time Horizon plateau and Sensor Placement; not fitted to the target",
+        "best_sweep_rmse_at_10_sensors": 13.86
+      },
+      "conclusion": "no parameterisation in the swept space reaches the gate, including at the independently recovered nominal sensor density."
+    },
+    "R2_conditions_unsatisfiable_from_supplied_artefacts": {
+      "accuracy_definition": "UNDETERMINED. The workbook rules out unique-top-1 but no set-membership rule over a monotonically growing observation set yields CSA accuracy 20% at 1h and 100% at 24h simultaneously. The accuracy RMSE and accuracy-plateau conditions of R2 therefore cannot be evaluated, independently of implementation quality.",
+      "third_method": "the Optimization method requires a compiled MIP solver (Merlion/Pyomo); R2 demands the plateau for all three methods, so that condition cannot be evaluated either.",
+      "net3_configuration_not_pinned": "Network Size reports Net3 specificity 69.07 while Time Horizon reports 90.0 at plateau for the same method and network -- a 20.93-point gap. The workbook does not state the per-experiment sensor design."
+    },
+    "verdict": "GATE_R2_FAILED -- branch stopped per instruction, no rescue attempt",
+    "fo_status": "NOT_TESTED. The protocol's stop rule (R1-R5 must pass) and the instruction 'FO ne doit etre teste que si les Gates requis sont franchis' both bind.",
+    "fo_modified": false,
+    "fo_v2_created": false,
+    "parameters_tuned_onto_targets": false
   }
 }

@@ -1,0 +1,19 @@
+sheet,condition,method,accuracy,specificity,n_ge_implied
+Measurement Error,"FPR=0, FNR=0",probability_based,100.0,90.0,9.7
+Measurement Error,"FPR=0, FNR=0",contaminant_status,100.0,64.0,34.92
+Measurement Error,"FPR=0, FNR=0",optimization,100.0,90.0,9.7
+Modeling Error,demand error 0%,probability_based,100.0,89.0,10.67
+Modeling Error,demand error 0%,contaminant_status,100.0,74.0,25.22
+Modeling Error,demand error 0%,optimization,100.0,89.0,10.67
+Time Horizon,8h (plateau),probability_based,100.0,90.0,9.7
+Time Horizon,16h (plateau),probability_based,100.0,90.0,9.7
+Time Horizon,24h (plateau),probability_based,100.0,90.0,9.7
+Time Horizon,8h (plateau),contaminant_status,100.0,75.0,24.25
+Time Horizon,16h (plateau),contaminant_status,100.0,78.0,21.34
+Time Horizon,24h (plateau),contaminant_status,100.0,80.0,19.4
+Time Horizon,8h (plateau),optimization,100.0,90.0,9.7
+Time Horizon,16h (plateau),optimization,100.0,90.0,9.7
+Time Horizon,24h (plateau),optimization,100.0,90.0,9.7
+Network Size,Net3,probability_based,100.0,69.0721649484536,30.0
+Network Size,Net3,contaminant_status,100.0,64.94845360824742,34.0
+Network Size,Net3,optimization,100.0,69.0721649484536,30.0

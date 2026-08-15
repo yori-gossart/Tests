@@ -1,0 +1,13 @@
+method,horizon_h,specificity_published,specificity_reproduced,specificity_error,accuracy_published,accuracy_H1_tied_argmax,accuracy_H1_error,accuracy_H2_candidate_set,accuracy_H2_error,mean_n_ge,top1_pct
+probability_based,1,35.0,5.15,-29.85,1.0,100.0,99.0,100.0,99.0,92.0,1.09
+probability_based,2,52.0,5.15,-46.85,1.0,100.0,99.0,100.0,99.0,92.0,1.09
+probability_based,4,72.0,40.74,-31.26,44.0,16.3,-27.7,100.0,56.0,57.48,14.13
+probability_based,8,90.0,46.34,-43.66,100.0,22.83,-77.17,100.0,0.0,52.05,21.74
+probability_based,16,90.0,81.23,-8.77,100.0,45.65,-54.35,60.87,-39.13,18.21,41.3
+probability_based,24,90.0,81.24,-8.76,100.0,45.65,-54.35,56.52,-43.48,18.2,41.3
+contaminant_status,1,15.0,5.15,-9.85,20.0,100.0,80.0,100.0,80.0,92.0,1.09
+contaminant_status,2,30.0,5.15,-24.85,40.0,100.0,60.0,100.0,60.0,92.0,1.09
+contaminant_status,4,64.0,38.23,-25.77,80.0,100.0,20.0,100.0,20.0,59.91,13.04
+contaminant_status,8,75.0,43.19,-31.81,100.0,100.0,0.0,100.0,0.0,55.11,19.57
+contaminant_status,16,78.0,75.77,-2.23,100.0,100.0,0.0,100.0,0.0,23.5,27.17
+contaminant_status,24,80.0,75.77,-4.23,100.0,100.0,0.0,100.0,0.0,23.5,27.17

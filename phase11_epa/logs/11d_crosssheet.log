@@ -1,0 +1,93 @@
+Every zero-perturbation Net3 case in the workbook:
+
+            sheet       condition             method  accuracy  specificity  n_ge_implied
+Measurement Error    FPR=0, FNR=0  probability_based     100.0    90.000000          9.70
+Measurement Error    FPR=0, FNR=0 contaminant_status     100.0    64.000000         34.92
+Measurement Error    FPR=0, FNR=0       optimization     100.0    90.000000          9.70
+   Modeling Error demand error 0%  probability_based     100.0    89.000000         10.67
+   Modeling Error demand error 0% contaminant_status     100.0    74.000000         25.22
+   Modeling Error demand error 0%       optimization     100.0    89.000000         10.67
+     Time Horizon    8h (plateau)  probability_based     100.0    90.000000          9.70
+     Time Horizon   16h (plateau)  probability_based     100.0    90.000000          9.70
+     Time Horizon   24h (plateau)  probability_based     100.0    90.000000          9.70
+     Time Horizon    8h (plateau) contaminant_status     100.0    75.000000         24.25
+     Time Horizon   16h (plateau) contaminant_status     100.0    78.000000         21.34
+     Time Horizon   24h (plateau) contaminant_status     100.0    80.000000         19.40
+     Time Horizon    8h (plateau)       optimization     100.0    90.000000          9.70
+     Time Horizon   16h (plateau)       optimization     100.0    90.000000          9.70
+     Time Horizon   24h (plateau)       optimization     100.0    90.000000          9.70
+     Network Size            Net3  probability_based     100.0    69.072165         30.00
+     Network Size            Net3 contaminant_status     100.0    64.948454         34.00
+     Network Size            Net3       optimization     100.0    69.072165         30.00
+
+
+Sensor Placement sheet, specificity by density:
+
+method                                contaminant_status  optimization  probability_based
+placement density_pct n_sensors_net3                                                     
+optimal   2.0         1.9                           48.0          75.0               58.0
+          4.0         3.9                           69.0          94.0               76.0
+          6.0         5.8                           74.0          96.0               88.0
+          10.0        9.7                           78.0          96.0               89.0
+          20.0        19.4                          87.0          96.0               95.0
+random    2.0         1.9                           64.0          88.0               65.0
+          4.0         3.9                           70.0          90.0               87.0
+          6.0         5.8                           71.0          90.0               88.0
+          10.0        9.7                           73.0          91.0               90.0
+          20.0        19.4                          81.0          91.0               91.0
+
+
+========================================================================
+{
+  "recovered_nominal_sensor_density": {
+    "contaminant_status": {
+      "nominal_specificity": 69.0,
+      "nearest_density_pct": 4.0,
+      "nearest_density_specificity": 69.0,
+      "implied_n_sensors_net3": 3.9
+    },
+    "optimization": {
+      "nominal_specificity": 89.5,
+      "nearest_density_pct": 4.0,
+      "nearest_density_specificity": 94.0,
+      "implied_n_sensors_net3": 3.9
+    },
+    "probability_based": {
+      "nominal_specificity": 89.5,
+      "nearest_density_pct": 10.0,
+      "nearest_density_specificity": 89.0,
+      "implied_n_sensors_net3": 9.7
+    }
+  },
+  "net3_configuration_disagreement_between_sheets": {
+    "probability_based": {
+      "time_horizon_plateau_specificity": 90.0,
+      "network_size_net3_specificity": 69.07,
+      "gap_points": 20.93,
+      "n_ge_time_horizon": 9.7,
+      "n_ge_network_size": 30.0
+    },
+    "contaminant_status": {
+      "time_horizon_plateau_specificity": 77.67,
+      "network_size_net3_specificity": 64.95,
+      "gap_points": 12.72,
+      "n_ge_time_horizon": 21.7,
+      "n_ge_network_size": 34.0
+    },
+    "optimization": {
+      "time_horizon_plateau_specificity": 90.0,
+      "network_size_net3_specificity": 69.07,
+      "gap_points": 20.93,
+      "n_ge_time_horizon": 9.7,
+      "n_ge_network_size": 30.0
+    }
+  },
+  "accuracy_definition_remains_underdetermined": {
+    "csa_1h_accuracy": 20.0,
+    "csa_1h_specificity": 15.0,
+    "csa_1h_n_ge_implied": 82.5,
+    "csa_network_size_accuracy": 100.0,
+    "csa_network_size_n_ge_implied": 34.0,
+    "why_underdetermined": "A consistency-based CSA on noise-free observations always retains the true source, so accuracy would be 100% at every horizon; the workbook reports 20% at 1h. A noisy CSA that can drop the true source at 1h would drop it more often at 24h as readings accumulate, yet the workbook reports 100% at 24h. No set-membership rule over a monotonically growing observation set produces both. The workbook rules out unique-top-1 (Network Size: accuracy 100% while 30 nodes are as-or-more likely) but does not identify the replacement."
+  }
+}

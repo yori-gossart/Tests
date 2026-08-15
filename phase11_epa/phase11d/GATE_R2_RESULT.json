@@ -1,0 +1,49 @@
+{
+  "gate": "R2_TIME_HORIZON",
+  "protocol_sha256": "0caf2e4386e205ec29419afe861afb5093b20a51d105dff9324bc65593a99162",
+  "methods_required": [
+    "probability_based",
+    "contaminant_status",
+    "optimization"
+  ],
+  "methods_evaluated": [
+    "probability_based",
+    "contaminant_status"
+  ],
+  "per_method": {
+    "probability_based": {
+      "status": "EVALUATED",
+      "rmse_specificity": 31.95,
+      "rmse_specificity_gate": 5.0,
+      "rmse_specificity_pass": false,
+      "rmse_accuracy_H1": 73.29,
+      "rmse_accuracy_H2": 66.03,
+      "rmse_accuracy_gate": 5.0,
+      "rmse_accuracy_pass_best_hypothesis": false,
+      "accuracy_plateau_100_from_8h_H1": false,
+      "accuracy_plateau_100_from_8h_H2": false
+    },
+    "contaminant_status": {
+      "status": "EVALUATED",
+      "rmse_specificity": 20.06,
+      "rmse_specificity_gate": 5.0,
+      "rmse_specificity_pass": false,
+      "rmse_accuracy_H1": 41.63,
+      "rmse_accuracy_H2": 41.63,
+      "rmse_accuracy_gate": 5.0,
+      "rmse_accuracy_pass_best_hypothesis": false,
+      "accuracy_plateau_100_from_8h_H1": true,
+      "accuracy_plateau_100_from_8h_H2": true
+    },
+    "optimization": {
+      "status": "NOT_IMPLEMENTED",
+      "reason": "WST optimization method requires a compiled MIP solver (Merlion/Pyomo); unavailable in this environment"
+    }
+  },
+  "conditions": {
+    "plateau_accuracy_100_from_8h_all_three_methods": false,
+    "rmse_accuracy_le_5": false,
+    "rmse_specificity_le_5": false
+  },
+  "verdict": "FAILED"
+}
