@@ -1,0 +1,67 @@
+{
+  "M0_SNR": {
+    "mean_abs": -1.8273
+  },
+  "M1_FO": {
+    "fo_d_S": -1.7722
+  },
+  "M2_BSTAR": {
+    "b_star": 0.3904
+  },
+  "M3_FO_BSTAR": {
+    "fo_d_S": -1.7975,
+    "b_star": -0.0611
+  },
+  "M4_SNR_FO": {
+    "mean_abs": 0.4448,
+    "fo_d_S": -2.1318
+  },
+  "M5_SNR_FO_BSTAR": {
+    "mean_abs": 0.5709,
+    "fo_d_S": -2.2876,
+    "b_star": -0.1208
+  },
+  "M6_SNR_FO_BSTAR_INT": {
+    "mean_abs": 0.579,
+    "fo_d_S": -2.2359,
+    "b_star": 0.0218,
+    "fo_x_bstar": -0.1804
+  },
+  "M7_SNR_MAHA_ISO": {
+    "mean_abs": -1.8442,
+    "mahalanobis": 6.8666,
+    "iso_d_nearest": -7.4091
+  },
+  "M8_KL_ISO": {
+    "kl_gauss": -0.3336,
+    "kl_undefined": 0.5277,
+    "iso_kl_nearest": -1.6534
+  },
+  "M9_STANDARD_FULL": {
+    "mean_abs": 0.1772,
+    "rms": -0.5833,
+    "l2_channels": -1.4569,
+    "mahalanobis": 2.948,
+    "kl_gauss": 0.1861,
+    "kl_undefined": -0.1266,
+    "iso_d_nearest": -2.298,
+    "iso_d_mean_others": 0.611,
+    "iso_margin_ratio": -15.8909,
+    "design_size": -0.8801
+  },
+  "M10_STANDARD_PLUS_FO_BSTAR": {
+    "mean_abs": 0.452,
+    "rms": -0.9174,
+    "l2_channels": -1.1251,
+    "mahalanobis": 3.5004,
+    "kl_gauss": 0.0119,
+    "kl_undefined": -0.1362,
+    "iso_d_nearest": -2.4301,
+    "iso_d_mean_others": 0.1514,
+    "iso_margin_ratio": -13.8332,
+    "design_size": -0.7523,
+    "fo_d_S": -0.3147,
+    "b_star": -0.1297,
+    "fo_x_bstar": -0.3046
+  }
+}

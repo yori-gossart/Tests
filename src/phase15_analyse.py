@@ -52,13 +52,13 @@ MODELS = {
     "M5_SNR_FO_BSTAR": ["mean_abs", "fo_d_S", "b_star"],
     "M6_SNR_FO_BSTAR_INT": ["mean_abs", "fo_d_S", "b_star", "fo_x_bstar"],
     "M7_SNR_MAHA_ISO": ["mean_abs", "mahalanobis", "iso_d_nearest"],
-    "M8_KL_ISO": ["kl_gauss", "iso_kl_nearest"],
+    "M8_KL_ISO": ["kl_gauss", "kl_undefined", "iso_kl_nearest"],
     "M9_STANDARD_FULL": ["mean_abs", "rms", "l2_channels", "mahalanobis", "kl_gauss",
-                         "iso_d_nearest", "iso_d_mean_others", "iso_margin_ratio",
-                         "design_size"],
+                         "kl_undefined", "iso_d_nearest", "iso_d_mean_others",
+                         "iso_margin_ratio", "design_size"],
     "M10_STANDARD_PLUS_FO_BSTAR": ["mean_abs", "rms", "l2_channels", "mahalanobis",
-                                   "kl_gauss", "iso_d_nearest", "iso_d_mean_others",
-                                   "iso_margin_ratio", "design_size",
+                                   "kl_gauss", "kl_undefined", "iso_d_nearest",
+                                   "iso_d_mean_others", "iso_margin_ratio", "design_size",
                                    "fo_d_S", "b_star", "fo_x_bstar"],
 }
 
@@ -67,12 +67,33 @@ def slog(x):
     return np.sign(x) * np.log1p(np.abs(x))
 
 
-def prep(ev: pd.DataFrame) -> pd.DataFrame:
+def prep(ev: pd.DataFrame, kl_impute: float | None = None) -> tuple[pd.DataFrame, float]:
+    """Transform features and handle the one metric that is genuinely undefined.
+
+    The Gaussian KL needs a non-degenerate Sigma_f. IDV 21 produces a deviation
+    of zero to machine precision on every seed, so its covariance is singular and
+    the divergence is +inf -- not a large value, an undefined one. The mission
+    anticipates this ("lorsque mathematiquement definissable").
+
+    Treatment is the standard missing-indicator one: a binary kl_undefined flag
+    carries the information, and kl_gauss itself is imputed at the TRAIN median
+    of its finite values. The median is deliberately neutral. Mapping +inf to a
+    large KL would assert that these realisations are highly detectable, which is
+    backwards -- the infinity comes from -ln det Sigma_f blowing up on a point
+    mass, not from any signal. IDV 21 is never dropped.
+    """
     d = ev.copy()
+    kl = np.array(d["kl_gauss"], dtype=float, copy=True)
+    undef = ~np.isfinite(kl)
+    if kl_impute is None:
+        kl_impute = float(np.median(kl[np.isfinite(kl)]))
+    kl[undef] = kl_impute
+    d["kl_gauss"] = kl
+    d["kl_undefined"] = undef.astype(float)
     for c in SCALE_FEATURES:
         d[c] = slog(d[c].to_numpy(float))
     d["fo_x_bstar"] = d["fo_d_S"] * d["b_star"]
-    return d
+    return d, kl_impute
 
 
 def design_level_bstar(ev: pd.DataFrame, support: np.ndarray) -> pd.DataFrame:
@@ -139,8 +160,20 @@ def main() -> int:
     bs = design_level_bstar(ev, support)
     ev = ev.merge(bs[["design_id", "b_star_equiv"]].rename(
         columns={"b_star_equiv": "b_star"}), on="design_id", how="left")
-    d = prep(ev)
+    d_tr_raw = ev[ev.split == "train"]
+    kl_impute = float(np.median(d_tr_raw.kl_gauss[np.isfinite(d_tr_raw.kl_gauss)]))
+    d, _ = prep(ev, kl_impute)
     tr, va, te = (d[d.split == s].copy() for s in ("train", "val", "test"))
+    out["A_kl_domain"] = {
+        "rows_undefined": int((~np.isfinite(ev.kl_gauss)).sum()),
+        "realisations_undefined": int(ev[~np.isfinite(ev.kl_gauss)][["fault", "seed_idx"]]
+                                      .drop_duplicates().shape[0]),
+        "faults_affected": sorted(ev[~np.isfinite(ev.kl_gauss)].fault.unique().tolist()),
+        "train_median_imputation": kl_impute,
+        "note": "IDV 21 has zero deviation to machine precision on every seed, so "
+                "Sigma_f is singular and the Gaussian KL is undefined, not large. "
+                "Missing-indicator treatment; the fault is never dropped.",
+    }
 
     vis_family = ["fo_d_S", "mean_abs", "rms", "l2_channels", "mahalanobis", "kl_gauss"]
     rows = []
@@ -148,11 +181,15 @@ def main() -> int:
         y = dd.failure.to_numpy(int)
         for m in vis_family + ["iso_d_nearest", "iso_margin_ratio", "rf_entropy", "rf_margin"]:
             x = dd[m].to_numpy(float)
-            sign = -1 if m not in ("rf_entropy",) else +1
-            rows.append({"split": split, "metric": m,
-                         "auroc": roc_auc_score(y, sign * x),
-                         "auprc": average_precision_score(y, sign * x),
-                         "spearman_logloss": float(stats.spearmanr(x, dd.log_loss)[0])})
+            sign = +1 if m == "rf_entropy" else -1
+            # kl_gauss is scored only where it is defined; the coverage is reported
+            keep = (dd.kl_undefined.to_numpy() == 0) if m == "kl_gauss" else np.ones(len(dd), bool)
+            yy = y[keep]
+            rows.append({"split": split, "metric": m, "n_scored": int(keep.sum()),
+                         "coverage": float(keep.mean()),
+                         "auroc": roc_auc_score(yy, sign * x[keep]),
+                         "auprc": average_precision_score(yy, sign * x[keep]),
+                         "spearman_logloss": float(stats.spearmanr(x[keep], dd.log_loss[keep])[0])})
     out["A_visibility_family"] = rows
 
     corr = {}

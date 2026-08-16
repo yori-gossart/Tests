@@ -11,3 +11,9 @@ E* = 409/525
   60/120 designs  (767s)
   70/120 designs  (871s)
   80/120 designs  (977s)
+  90/120 designs  (1081s)
+  100/120 designs  (1185s)
+  110/120 designs  (1288s)
+  120/120 designs  (1392s)
+wrote 126000 rows in 1399s
+CHECK  max |fo_d_S - max_abs| = 0.000e+00  (they are the same statistic by definition)

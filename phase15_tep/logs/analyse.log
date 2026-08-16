@@ -1,0 +1,69 @@
+features: 126000 rows, 120 designs
+{
+  "A_identity_check": {
+    "max_abs_diff_fo_vs_max_abs": 0.0,
+    "note": "FO's per-scenario score d_S IS max_{j in S, t} |delta|/sigma_j. Not an approximation -- the same statistic under another name."
+  },
+  "A_fo_vs_snr_association": {
+    "fo_d_S": {
+      "spearman_vs_fo": 1.0,
+      "pearson_vs_fo": 1.0
+    },
+    "mean_abs": {
+      "spearman_vs_fo": 0.9348745369552981,
+      "pearson_vs_fo": 0.8922613774569156
+    },
+    "rms": {
+      "spearman_vs_fo": 0.9688842599994006,
+      "pearson_vs_fo": 0.9526576396775226
+    },
+    "l2_channels": {
+      "spearman_vs_fo": 0.992472452652249,
+      "pearson_vs_fo": 0.9952497895052819
+    },
+    "mahalanobis": {
+      "spearman_vs_fo": 0.8464174948632416,
+      "pearson_vs_fo": 0.6295455574400763
+    },
+    "kl_gauss": {
+      "spearman_vs_fo": 0.5450569397232725,
+      "pearson_vs_fo": 0.4714054391431059
+    },
+    "mutual_information_bits": {
+      "fo_d_S": 0.48028069644385407,
+      "mean_abs": 0.32202727409649223
+    }
+  },
+  "C_bstar_calibration": {
+    "mean_b_star": 0.028137734311328447,
+    "mean_val_failure_rate": 0.23908730158730157,
+    "brier_design_level": 0.05760927462529578,
+    "underestimation_factor": 8.497034585014308
+  }
+}
+
+--- model ladder (VALID) ---
+                     model  auroc  auprc  brier  log_loss
+                    M0_SNR 0.8787 0.7002 0.1186    0.3728
+                     M1_FO 0.8975 0.7312 0.1054    0.3358
+                  M2_BSTAR 0.6094 0.3169 0.1753    0.5329
+               M3_FO_BSTAR 0.8978 0.7262 0.1049    0.3352
+                 M4_SNR_FO 0.8980 0.7313 0.1057    0.3369
+           M5_SNR_FO_BSTAR 0.8991 0.7277 0.1047    0.3360
+       M6_SNR_FO_BSTAR_INT 0.8986 0.7434 0.1044    0.3355
+           M7_SNR_MAHA_ISO 0.9005 0.7158 0.1089    0.3420
+                 M8_KL_ISO 0.8177 0.5622 0.1422    0.4282
+          M9_STANDARD_FULL 0.9237 0.8065 0.0909    0.2927
+M10_STANDARD_PLUS_FO_BSTAR 0.9252 0.8143 0.0891    0.2883
+
+--- paired comparisons (VALID, seed-level bootstrap) ---
+                   model_a          model_b                  question  delta_auroc   ci_lo  ci_hi  ci_excludes_zero
+                 M4_SNR_FO           M0_SNR          H2 FO beyond SNR       0.0193  0.0112 0.0263              True
+M10_STANDARD_PLUS_FO_BSTAR M9_STANDARD_FULL      H8 project increment       0.0014  0.0005 0.0022              True
+                     M1_FO           M0_SNR     FO alone vs SNR alone       0.0188  0.0126 0.0242              True
+           M5_SNR_FO_BSTAR        M4_SNR_FO       B* on top of SNR+FO       0.0011  0.0003 0.0019              True
+               M3_FO_BSTAR            M1_FO H6 synergy: B* adds to FO       0.0003 -0.0005 0.0010             False
+               M3_FO_BSTAR         M2_BSTAR H6 synergy: FO adds to B*       0.2884  0.2671 0.3106              True
+       M6_SNR_FO_BSTAR_INT  M5_SNR_FO_BSTAR          interaction term      -0.0005 -0.0013 0.0004             False
+M10_STANDARD_PLUS_FO_BSTAR  M7_SNR_MAHA_ISO       vs compact standard       0.0246  0.0176 0.0309              True
+          M9_STANDARD_FULL           M0_SNR  standard ensemble vs SNR       0.0450  0.0337 0.0549              True
