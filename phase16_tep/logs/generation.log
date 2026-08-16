@@ -4,3 +4,31 @@ nominal: 1100 runs
   [nominal] 100/1100 46s eta 458s
   [nominal] 200/1100 87s eta 393s
   [nominal] 300/1100 131s eta 348s
+  [nominal] 400/1100 174s eta 304s
+  [nominal] 500/1100 216s eta 259s
+  [nominal] 600/1100 257s eta 214s
+  [nominal] 700/1100 300s eta 172s
+  [nominal] 800/1100 342s eta 128s
+  [nominal] 900/1100 384s eta 85s
+  [nominal] 1000/1100 425s eta 43s
+  [nominal] 1100/1100 467s eta 0s
+  [nominal] 1100 runs in 467s
+noise x2.0: 440 runs
+  [noise2.0] 100/440 43s eta 145s
+  [noise2.0] 200/440 84s eta 101s
+  [noise2.0] 300/440 126s eta 59s
+  [noise2.0] 400/440 167s eta 17s
+  [noise2.0] 440 runs in 183s
+noise x4.0: 440 runs
+  [noise4.0] 100/440 37s eta 125s
+  [noise4.0] 200/440 72s eta 86s
+  [noise4.0] 300/440 107s eta 50s
+  [noise4.0] 400/440 141s eta 14s
+  [noise4.0] 440 runs in 154s
+noise x8.0: 440 runs
+  [noise8.0] 100/440 27s eta 93s
+  [noise8.0] 200/440 54s eta 65s
+  [noise8.0] 300/440 82s eta 38s
+  [noise8.0] 400/440 109s eta 11s
+  [noise8.0] 440 runs in 120s
+GENERATION COMPLETE
