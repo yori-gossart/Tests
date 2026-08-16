@@ -1,0 +1,260 @@
+{
+  "phase": "13A_transposability_gate",
+  "seed": 20260816,
+  "check_1_2_load": {
+    "loaded_from": "sklearn.datasets.load_digits (bundled with the package, no network)",
+    "data_shape": [
+      1797,
+      64
+    ],
+    "target_shape": [
+      1797
+    ],
+    "images_shape": [
+      1797,
+      8,
+      8
+    ],
+    "n_observations": 1797,
+    "n_features": 64,
+    "classes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "value_range": [
+      0.0,
+      16.0
+    ],
+    "n_expected_1797": true,
+    "labels_available": true,
+    "any_nan": false
+  },
+  "check_3_4_channels": {
+    "channels_are_columns_of_X": true,
+    "n_channels": 64,
+    "subset_indexing_works": true,
+    "example_designs": {
+      "k=64": {
+        "n_sensors": 64,
+        "first_5": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "k=48": {
+        "n_sensors": 48,
+        "first_5": [
+          0,
+          1,
+          2,
+          3,
+          4
+        ]
+      },
+      "k=32": {
+        "n_sensors": 32,
+        "first_5": [
+          1,
+          2,
+          3,
+          6,
+          7
+        ]
+      },
+      "k=16": {
+        "n_sensors": 16,
+        "first_5": [
+          0,
+          5,
+          10,
+          20,
+          21
+        ]
+      },
+      "k=8": {
+        "n_sensors": 8,
+        "first_5": [
+          19,
+          27,
+          36,
+          38,
+          43
+        ]
+      },
+      "k=4": {
+        "n_sensors": 4,
+        "first_5": [
+          6,
+          12,
+          24,
+          58
+        ]
+      }
+    },
+    "channels_dead_over_whole_dataset": [
+      0,
+      32,
+      39
+    ],
+    "n_dead_channels": 3,
+    "note": "a dead channel carries no signal at all; any design containing one spends a sensor slot for nothing, and sigma is undefined there."
+  },
+  "check_5_ground_truth": {
+    "n_unique_feature_vectors": 1797,
+    "n_duplicate_groups": 0,
+    "n_duplicate_groups_with_conflicting_labels": 0,
+    "label_dtype": "int64",
+    "classes_balanced": {
+      "0": 178,
+      "1": 182,
+      "2": 177,
+      "3": 183,
+      "4": 181,
+      "5": 182,
+      "6": 181,
+      "7": 179,
+      "8": 174,
+      "9": 180
+    },
+    "unambiguous": true
+  },
+  "check_9_frozen_splits": {
+    "seed": 20260816,
+    "n_train": 1005,
+    "n_val": 252,
+    "n_test": 540,
+    "disjoint": true,
+    "stratified": true,
+    "frozen_before_any_result": true,
+    "split_indices_sha_like": {
+      "train_sum": 904715,
+      "val_sum": 223292,
+      "test_sum": 485699
+    }
+  },
+  "check_6_inferrer": {
+    "inferrer": "LogisticRegression(max_iter=5000), trained on TRAIN only",
+    "evaluated_on": "VALIDATION only -- the test split is never touched in this gate",
+    "emits": {
+      "predicted_class": true,
+      "posterior_probabilities": true,
+      "rank_of_true_class": {
+        "min": 1,
+        "max": 6
+      },
+      "top1_top2_margin": {
+        "min": 0.1148,
+        "max": 1.0
+      },
+      "entropy": {
+        "min": 0.0,
+        "max": 1.1293
+      },
+      "reconstruction_success_flag": {
+        "n_success": 243,
+        "n_total": 252
+      }
+    },
+    "all_six_available": true,
+    "note": "validation accuracy is reported only to show the inferrer is functional; it is NOT related to any FO quantity anywhere in this phase.",
+    "validation_accuracy": 0.9643
+  },
+  "check_7_8_10_fo": {
+    "fo_metrics_imported_unmodified": true,
+    "time_axis_handling": "digits has no time axis -> T=1; max over t is a max over a singleton, i.e. the formula unchanged",
+    "free_choices_not_fixed_by_FO": [
+      "delta baseline",
+      "sigma",
+      "kappa",
+      "eta"
+    ],
+    "kappa": 3.0,
+    "eta": 3.0,
+    "runs_without_error": true,
+    "variants": {
+      "blank_background|train_pixel_std": {
+        "d_R_min": 2.6958,
+        "d_R_median": 3.8504,
+        "d_R_max": 1000000000.0,
+        "d_R_coefficient_of_variation": 42.3789,
+        "support_size_E_star": 1782,
+        "support_fraction": 0.9917,
+        "support_is_degenerate": false,
+        "B_star": 0.4057239057239057,
+        "B_dynamic": 0.4057239057239057
+      },
+      "blank_background|unit": {
+        "d_R_min": 14.0,
+        "d_R_median": 16.0,
+        "d_R_max": 16.0,
+        "d_R_coefficient_of_variation": 0.009,
+        "support_size_E_star": 1797,
+        "support_fraction": 1.0,
+        "support_is_degenerate": true,
+        "B_star": 0.0005564830272676684,
+        "B_dynamic": 0.0005564830272676684
+      },
+      "train_mean_image|train_pixel_std": {
+        "d_R_min": 1.2114,
+        "d_R_median": 2.309,
+        "d_R_max": 1000000000.0,
+        "d_R_coefficient_of_variation": 42.379,
+        "support_size_E_star": 469,
+        "support_fraction": 0.261,
+        "support_is_degenerate": false,
+        "B_star": 0.835820895522388,
+        "B_dynamic": 0.835820895522388
+      },
+      "train_mean_image|unit": {
+        "d_R_min": 7.005,
+        "d_R_median": 10.3343,
+        "d_R_max": 15.6398,
+        "d_R_coefficient_of_variation": 0.1469,
+        "support_size_E_star": 1797,
+        "support_fraction": 1.0,
+        "support_is_degenerate": true,
+        "B_star": 0.02615470228158041,
+        "B_dynamic": 0.02615470228158041
+      }
+    },
+    "mask_levels": {
+      "k=64": {
+        "n_sensors_kept": 64,
+        "labels_modified": false
+      },
+      "k=48": {
+        "n_sensors_kept": 48,
+        "labels_modified": false
+      },
+      "k=32": {
+        "n_sensors_kept": 32,
+        "labels_modified": false
+      },
+      "k=16": {
+        "n_sensors_kept": 16,
+        "labels_modified": false
+      },
+      "k=8": {
+        "n_sensors_kept": 8,
+        "labels_modified": false
+      },
+      "k=4": {
+        "n_sensors_kept": 4,
+        "labels_modified": false
+      }
+    },
+    "labels_untouched_by_masking": true,
+    "parameters_needing_test_labels": []
+  }
+}
