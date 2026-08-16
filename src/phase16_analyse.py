@@ -125,7 +125,18 @@ def featurise(bank, seed_idx, sigma, Sn, centroids, dsg, rf_by_design, b_star_by
 
 
 def prep(ev):
+    """Apply the transforms and the KL rule EXACTLY as frozen.
+
+    FROZEN_MODELS.json carries kl_imputation_value, computed on Phase 14
+    TRAIN+VALID before Phase 16 existed. It is applied here verbatim: nothing is
+    re-derived from the confirmatory data.
+    """
     d = ev.copy()
+    kl = np.array(d["kl_gauss"], dtype=float, copy=True)
+    undef = ~np.isfinite(kl)
+    kl[undef] = FROZEN["kl_imputation_value"]
+    d["kl_gauss"] = kl
+    d["kl_undefined"] = undef.astype(float)
     for c in SCALE_FEATURES:
         d[c] = slog(d[c].to_numpy(float))
     d["fo_x_bstar"] = d["fo_d_S"] * d["b_star"]
@@ -174,30 +185,37 @@ def main() -> int:
     centroids = TM.fault_centroids(TM.mean_profile(TM.whiten(d14, sigma)), y14, FAULTS)
     support = fo_metrics.freeze_support(d14, sigma, KAPPA)
 
-    rf_by_design, b_star_by_design = {}, {}
-    for dd in dsg:
-        ch = dd["channels"]
-        rf = RandomForestClassifier(n_estimators=500, random_state=DESIGN_SEED, n_jobs=-1)
-        rf.fit(rf_features(o14, ch), y14)
-        rf_by_design[dd["design_id"]] = rf
-        d_S14 = fo_metrics.visibility(d14, sigma)[:, ch].max(axis=1)
-        b_star_by_design[dd["design_id"]] = float(np.mean(d_S14[support.mask] <= ETA))
-    print(f"frozen structures rebuilt from Phase 14 TRAIN ({time.time()-t0:.0f}s)", flush=True)
-
     cohorts = {"nominal": load_bank(GEN16 / "nominal.npz")}
     for lv in FROZEN["noise_levels"]:
         p = GEN16 / f"noise_{lv}.npz"
         if p.exists():
             cohorts[f"noise_x{lv:g}"] = load_bank(p)
 
-    frames = []
-    for tag, bank in cohorts.items():
-        seeds = sorted({si for (_, si) in bank})
-        frames.append(featurise(bank, seeds, sigma, Sn, centroids, dsg,
-                                rf_by_design, b_star_by_design, tag))
-        print(f"cohort {tag}: {len(frames[-1])} rows ({time.time()-t0:.0f}s)", flush=True)
-    ev = pd.concat(frames, ignore_index=True)
-    ev.to_csv(P16 / "CONFIRMATORY_FEATURES.csv.gz", index=False, compression="gzip")
+    cache = P16 / "CONFIRMATORY_FEATURES.csv.gz"
+    if cache.exists():
+        # The featurisation is deterministic given the frozen structures, so a
+        # completed run is reused rather than recomputed. Nothing about it
+        # depends on results.
+        ev = pd.read_csv(cache)
+        print(f"reusing cached features: {len(ev)} rows ({time.time()-t0:.0f}s)", flush=True)
+    else:
+        rf_by_design, b_star_by_design = {}, {}
+        for dd in dsg:
+            ch = dd["channels"]
+            rf = RandomForestClassifier(n_estimators=500, random_state=DESIGN_SEED, n_jobs=-1)
+            rf.fit(rf_features(o14, ch), y14)
+            rf_by_design[dd["design_id"]] = rf
+            d_S14 = fo_metrics.visibility(d14, sigma)[:, ch].max(axis=1)
+            b_star_by_design[dd["design_id"]] = float(np.mean(d_S14[support.mask] <= ETA))
+        print(f"frozen structures rebuilt from Phase 14 TRAIN ({time.time()-t0:.0f}s)", flush=True)
+        frames = []
+        for tag, bank in cohorts.items():
+            seeds = sorted({si for (_, si) in bank})
+            frames.append(featurise(bank, seeds, sigma, Sn, centroids, dsg,
+                                    rf_by_design, b_star_by_design, tag))
+            print(f"cohort {tag}: {len(frames[-1])} rows ({time.time()-t0:.0f}s)", flush=True)
+        ev = pd.concat(frames, ignore_index=True)
+        ev.to_csv(cache, index=False, compression="gzip")
 
     d = prep(ev)
     nom = d[d.cohort == "nominal"].copy()
