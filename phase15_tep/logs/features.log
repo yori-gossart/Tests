@@ -1,0 +1,13 @@
+train: 525 realisations  (14s)
+val: 210 realisations  (16s)
+test: 315 realisations  (18s)
+Sigma_n estimated on 25 TRAIN normal runs, cond=2966.0
+E* = 409/525
+  10/120 designs  (171s)
+  20/120 designs  (320s)
+  30/120 designs  (439s)
+  40/120 designs  (554s)
+  50/120 designs  (660s)
+  60/120 designs  (767s)
+  70/120 designs  (871s)
+  80/120 designs  (977s)
