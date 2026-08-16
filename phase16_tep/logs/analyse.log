@@ -1,1 +1,75 @@
 reusing cached features: 277200 rows (8s)
+{
+  "H2_FO_BEYOND_SNR": {
+    "model_a": "M4_SNR_FO",
+    "model_b": "M0_SNR",
+    "delta_auroc": 0.020263405097423526,
+    "ci_lo": 0.01737930887567594,
+    "ci_hi": 0.02316300093568408,
+    "ci_excludes_zero": true,
+    "meets_practical_threshold": true,
+    "verdict": "YES"
+  },
+  "H3_FO_BEYOND_STANDARD_DETECTABILITY": {
+    "model_a": "MD_DET_STD_FO",
+    "model_b": "MD_DET_STD",
+    "delta_auroc": 0.012196602200470918,
+    "ci_lo": 0.009369438384512827,
+    "ci_hi": 0.015126595058089094,
+    "ci_excludes_zero": true,
+    "meets_practical_threshold": false,
+    "verdict": "WEAK"
+  },
+  "H6_FO_BSTAR_SYNERGY": {
+    "model_a": "M3_FO_BSTAR",
+    "model_b": "M1_FO",
+    "delta_auroc": 0.00044699642060885836,
+    "ci_lo": 0.00019786898294614497,
+    "ci_hi": 0.0006759122478995544,
+    "ci_excludes_zero": true,
+    "meets_practical_threshold": false,
+    "verdict": "WEAK"
+  },
+  "H7_ISOLABILITY_COMPLEMENT": {
+    "model_a": "MI_VIS_ISO",
+    "model_b": "MI_VIS_ONLY",
+    "delta_auroc": 0.019451449540414778,
+    "ci_lo": 0.015691822693334464,
+    "ci_hi": 0.024233724863059726,
+    "ci_excludes_zero": true,
+    "meets_practical_threshold": false,
+    "verdict": "WEAK"
+  },
+  "H8_PROJECT_INCREMENT": {
+    "model_a": "M10_STANDARD_PLUS_FO_BSTAR",
+    "model_b": "M9_STANDARD_FULL",
+    "delta_auroc": 0.0011869056555169344,
+    "ci_lo": 0.0007892419650671306,
+    "ci_hi": 0.001621641311195712,
+    "ci_excludes_zero": true,
+    "meets_practical_threshold": false,
+    "verdict": "WEAK"
+  },
+  "H1_FO_SIGNAL": {
+    "auroc": 0.8865138373210277,
+    "ci_lo": 0.8748719538807751,
+    "ci_hi": 0.8973419244365567,
+    "verdict": "YES"
+  }
+}
+                     model  cohort      n  auroc  auprc  brier  log_loss  calib_slope
+                    M0_SNR nominal 126000 0.8669 0.6736 0.1206    0.3818       1.0662
+                     M1_FO nominal 126000 0.8865 0.7084 0.1073    0.3446       1.0055
+                  M2_BSTAR nominal 126000 0.6137 0.3155 0.1726    0.5267       0.9750
+               M3_FO_BSTAR nominal 126000 0.8870 0.7033 0.1069    0.3442       1.0082
+                 M4_SNR_FO nominal 126000 0.8872 0.7089 0.1073    0.3446       0.9986
+           M5_SNR_FO_BSTAR nominal 126000 0.8882 0.7049 0.1065    0.3441       1.0014
+       M6_SNR_FO_BSTAR_INT nominal 126000 0.8881 0.7224 0.1063    0.3433       0.9990
+           M7_SNR_MAHA_ISO nominal 126000 0.8885 0.6996 0.1123    0.3580       1.0224
+                 M8_KL_ISO nominal 126000 0.8179 0.5613 0.1409    0.4293       1.0548
+          M9_STANDARD_FULL nominal 126000 0.9151 0.7946 0.0928    0.3027       1.0191
+M10_STANDARD_PLUS_FO_BSTAR nominal 126000 0.9162 0.8022 0.0910    0.2984       1.0141
+                MD_DET_STD nominal 126000 0.8820 0.6952 0.1109    0.3594       1.0741
+             MD_DET_STD_FO nominal 126000 0.8942 0.7370 0.1047    0.3364       1.0128
+               MI_VIS_ONLY nominal 126000 0.8872 0.7089 0.1073    0.3446       0.9986
+                MI_VIS_ISO nominal 126000 0.9066 0.7549 0.0997    0.3211       1.0256

@@ -34,7 +34,7 @@ def fig1_hypotheses(res):
     h = {k: v for k, v in res["hypotheses"].items() if "delta_auroc" in v}
     d = pd.DataFrame([{"h": k.split("_", 1)[0], "label": k.split("_", 1)[1].replace("_", " "),
                        **v} for k, v in h.items()]).sort_values("delta_auroc")
-    fig, ax = plt.subplots(figsize=(9.0, 4.4))
+    fig, ax = plt.subplots(figsize=(9.6, 4.8))
     y = np.arange(len(d))
     for i, (_, r) in enumerate(d.iterrows()):
         c = S3 if r.verdict == "YES" else (S1 if r.verdict == "WEAK" else MUTED)
@@ -44,10 +44,10 @@ def fig1_hypotheses(res):
                 va="center", fontsize=9, color=INK2)
     ax.axvline(0, color=INK2, lw=1)
     ax.axvline(THRESH, color=S2, lw=1.6, ls=(0, (4, 3)))
-    ax.text(THRESH, len(d) - 0.35, " seuil 0,02", fontsize=8.5, color=S2, va="center")
+    ax.text(THRESH, -0.62, " seuil 0,02", fontsize=8.5, color=S2, va="center")
     ax.set_yticks(y, [f"{r.h}  {r.label}" for _, r in d.iterrows()], fontsize=9)
     ax.set_xlabel("Δ AUROC hors échantillon (IC 95 % apparié, bootstrap par graine)")
-    ax.set_title("Hypothèses confirmatoires — aucune n'atteint le seuil de pertinence",
+    ax.set_title("Seule H2 atteint le seuil de pertinence\nH8, l'hypothèse technologique décisive, en est 17 fois éloignée",
                  loc="left")
     recessive(ax, xgrid=True); fig.tight_layout()
     fig.savefig(FIG / "fig1_hypotheses.png", dpi=170); plt.close(fig)
@@ -80,6 +80,7 @@ def fig3_loo(res):
     ax.set_ylabel("Δ AUROC  M10 − M9")
     ax.set_title("Leave-one-fault-out sur H8 : le signe ne dépend d'aucune panne unique,\n"
                  "et le seuil n'est jamais atteint", loc="left")
+    ax.set_ylim(0, max(THRESH * 1.25, d.delta_auroc.max() * 1.3))
     recessive(ax); fig.tight_layout()
     fig.savefig(FIG / "fig3_leave_one_fault_out.png", dpi=170); plt.close(fig)
 

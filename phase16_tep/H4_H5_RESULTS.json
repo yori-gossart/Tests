@@ -1,0 +1,104 @@
+{
+  "H4": {
+    "verdict": "YES",
+    "support_constant": true,
+    "bdyn_support_moves": true,
+    "bstar_monotone": true,
+    "bdyn_monotone": false,
+    "support_size": 325,
+    "population": 420,
+    "n_designs": 120,
+    "table": [
+      {
+        "noise_scale": 1.0,
+        "B_star_support": 325.0,
+        "B_dyn_support": 325.0,
+        "mean_B_star": 0.028230769230769233,
+        "mean_B_dyn": 0.028230769230769233,
+        "frac_differ": 0.0
+      },
+      {
+        "noise_scale": 2.0,
+        "B_star_support": 325.0,
+        "B_dyn_support": 298.0,
+        "mean_B_star": 0.050435897435897444,
+        "mean_B_dyn": 0.04200223713646533,
+        "frac_differ": 0.35833333333333334
+      },
+      {
+        "noise_scale": 4.0,
+        "B_star_support": 325.0,
+        "B_dyn_support": 292.0,
+        "mean_B_star": 0.06458974358974359,
+        "mean_B_dyn": 0.014726027397260274,
+        "frac_differ": 1.0
+      },
+      {
+        "noise_scale": 8.0,
+        "B_star_support": 325.0,
+        "B_dyn_support": 12.0,
+        "mean_B_star": 0.7438461538461538,
+        "mean_B_dyn": 0.6166666666666667,
+        "frac_differ": 0.9916666666666667
+      }
+    ],
+    "note": "support frozen ONCE at nominal on the blind cohort, then evaluated at each physical noise level -- this is what the protocol specifies"
+  },
+  "H5": {
+    "verdict": "WEAK",
+    "table": [
+      {
+        "statistic": "minimum",
+        "spearman": -0.9361120322749107,
+        "abs_spearman": 0.9361120322749107,
+        "p_value": 2.197179931693933e-55
+      },
+      {
+        "statistic": "q05",
+        "spearman": -0.9357412203044101,
+        "abs_spearman": 0.9357412203044101,
+        "p_value": 3.0578564649663002e-55
+      },
+      {
+        "statistic": "cvar10",
+        "spearman": -0.9342634743546028,
+        "abs_spearman": 0.9342634743546028,
+        "p_value": 1.1197065214149852e-54
+      },
+      {
+        "statistic": "cvar05",
+        "spearman": -0.9323600447740464,
+        "abs_spearman": 0.9323600447740464,
+        "p_value": 5.703521311226071e-54
+      },
+      {
+        "statistic": "q10",
+        "spearman": -0.9129601931631922,
+        "abs_spearman": 0.9129601931631922,
+        "p_value": 9.287830844328944e-48
+      },
+      {
+        "statistic": "design_size",
+        "spearman": -0.8460346896209425,
+        "abs_spearman": 0.8460346896209425,
+        "p_value": 5.039260234062457e-34
+      },
+      {
+        "statistic": "mean",
+        "spearman": -0.8269721877274401,
+        "abs_spearman": 0.8269721877274401,
+        "p_value": 2.7349788782181787e-31
+      },
+      {
+        "statistic": "b_star_equiv",
+        "spearman": 0.6493718142119762,
+        "abs_spearman": 0.6493718142119762,
+        "p_value": 1.0363639505189248e-15
+      }
+    ],
+    "best_rival": "minimum",
+    "best_rival_abs_rho": 0.9361120322749107,
+    "bstar_abs_rho": 0.6493718142119762,
+    "underestimation_factor": 8.327799041412367
+  }
+}
