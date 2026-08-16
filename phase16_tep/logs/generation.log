@@ -1,0 +1,6 @@
+protocol SHA256 39d81b9e4ed3ff5e64bf516a7f2da7efc85e1ed1a223a9f2b13cd61dd04db27c
+seed disjointness verified: 0 of 50 overlap Phase 14
+nominal: 1100 runs
+  [nominal] 100/1100 46s eta 458s
+  [nominal] 200/1100 87s eta 393s
+  [nominal] 300/1100 131s eta 348s
