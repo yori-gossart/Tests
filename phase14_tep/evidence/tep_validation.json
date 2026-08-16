@@ -1,0 +1,204 @@
+{
+  "repository": "https://github.com/camaramm/tennessee-eastman-profBraatz",
+  "commit": "0643318858ce7c87292bd59820b459e12a13d009",
+  "data_files": {
+    "d00.dat": "(52, 500) transposed",
+    "d01-d21.dat": "(480, 52)",
+    "d00_te-d21_te.dat": "(960, 52)",
+    "total_files": 44
+  },
+  "variables": {
+    "XMEAS": 41,
+    "XMV_declared_in_source": 12,
+    "XMV_in_dataset": 11,
+    "total": 52,
+    "note": "COMMON/PV/XMEAS(41),XMV(12); XMV(12) agitator speed held constant, absent from the 52"
+  },
+  "compilation": {
+    "compiler": "gfortran 13.3.0",
+    "flags": "-std=legacy -O2",
+    "returncode": 0,
+    "seconds_per_run": 1.55
+  },
+  "reproduction_vs_published": {
+    "IDV1_mean_ratio_first10": [
+      0.9994,
+      1.0015,
+      0.9991,
+      0.9995,
+      1.0001,
+      1.0,
+      0.9991,
+      0.9999,
+      1.0,
+      1.002
+    ],
+    "IDV0_mean_ratio_first12": [
+      1.0001,
+      1.0012,
+      0.9995,
+      1.0002,
+      0.9999,
+      1.0002,
+      0.9996,
+      0.9997,
+      1.0,
+      1.0017,
+      1.0004,
+      1.0032
+    ]
+  },
+  "replication": {
+    "same_seed_bit_identical": true,
+    "max_abs_diff_same_seed": 0.0,
+    "different_seeds_max_abs_diff": [
+      172.1,
+      184.8,
+      181.3,
+      222.9,
+      179.7,
+      201.8
+    ],
+    "seconds_per_run": 1.55
+  },
+  "paired_counterfactual": {
+    "fault_sample_index": 160,
+    "pre_fault_bit_identical": {
+      "IDV1": true,
+      "IDV2": true,
+      "IDV4": true,
+      "IDV6": true,
+      "IDV13": true
+    },
+    "post_fault_max_abs_diff": {
+      "IDV1": 215.3,
+      "IDV2": 195.2,
+      "IDV4": 5.831,
+      "IDV6": 411.9,
+      "IDV13": 253.1
+    }
+  },
+  "sigma": {
+    "source": "teprob.f:1256-1296 XNS(1..41)",
+    "declared_values": [
+      0.0012,
+      18.0,
+      22.0,
+      0.05,
+      0.2,
+      0.21,
+      0.3,
+      0.5,
+      0.01,
+      0.0017,
+      0.01,
+      1.0,
+      0.3,
+      0.125,
+      1.0,
+      0.3,
+      0.115,
+      0.01,
+      1.15,
+      0.2,
+      0.01,
+      0.01,
+      0.25,
+      0.1,
+      0.25,
+      0.1,
+      0.25,
+      0.025,
+      0.25,
+      0.1,
+      0.25,
+      0.1,
+      0.25,
+      0.025,
+      0.05,
+      0.05,
+      0.01,
+      0.01,
+      0.01,
+      0.5,
+      0.5
+    ],
+    "count": 41,
+    "zero_valued": 0,
+    "min": 0.0012,
+    "estimated": false,
+    "floored": false,
+    "empirical_over_declared_median_ratio": 1.03
+  },
+  "E_star_selectivity": {
+    "pilot": "21 faults x 3 seeds = 63 scenarios",
+    "d_R": {
+      "min": 0.0,
+      "p10": 11.333,
+      "median": 286.5,
+      "max": 1453
+    },
+    "fraction_by_kappa": {
+      "1": 0.952,
+      "3": 0.952,
+      "10": 0.905,
+      "30": 0.794,
+      "100": 0.667,
+      "300": 0.492,
+      "1000": 0.159
+    }
+  },
+  "b_star_exercises_difference": {
+    "design": "6 XMEAS channels",
+    "kappa": 3.0,
+    "eta": 3.0,
+    "levels": [
+      {
+        "scale": 1.0,
+        "B_star_support": 16,
+        "B_dyn_support": 16,
+        "differ": false
+      },
+      {
+        "scale": 2.0,
+        "B_star_support": 16,
+        "B_dyn_support": 16,
+        "differ": false
+      },
+      {
+        "scale": 4.0,
+        "B_star_support": 16,
+        "B_dyn_support": 16,
+        "differ": false
+      },
+      {
+        "scale": 8.0,
+        "B_star_support": 16,
+        "B_dyn_support": 4,
+        "differ": true
+      }
+    ],
+    "B_star_denominator_invariant": true,
+    "B_dynamic_denominator_moves": true
+  },
+  "generation_budget": {
+    "seconds_per_run": 1.55,
+    "21x10": "11 min",
+    "21x30": "32 min",
+    "21x50": "54 min"
+  },
+  "statistical_power": {
+    "design": "21 faults x 50 seeds = 1050, split by seed 25/10/15",
+    "wilson_half_width_p05": {
+      "train_525": 0.043,
+      "val_210": 0.067,
+      "test_315": 0.055
+    },
+    "auroc_ci_width_test_315": {
+      "n_fail50_auc0.70": 0.172,
+      "n_fail120_auc0.80": 0.106
+    }
+  },
+  "no_fo_result_computed": true,
+  "fo_metrics_modified": false
+}

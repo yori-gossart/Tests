@@ -1,0 +1,145 @@
+{
+  "protocol_id": "FO-TEP-14",
+  "status": "PRE-REGISTERED AND FROZEN",
+  "frozen_on": "2026-08-16",
+  "rule": "This file is written BEFORE any FO result exists. Nothing in it may be changed after an FO number has been computed. If a defect is found later, it is recorded as an amendment with its date and reason, never as a silent edit.",
+
+  "source": {
+    "repository": "https://github.com/camaramm/tennessee-eastman-profBraatz",
+    "commit": "0643318858ce7c87292bd59820b459e12a13d009",
+    "simulator": ["temain_mod.f", "teprob.f"],
+    "compiler": "gfortran 13.3.0, -std=legacy -O2",
+    "documented_edits_only": {
+      "temain_mod.f:220": "NPTS = 172800 (48 h at 1 s)",
+      "temain_mod.f:226": "SSPTS = 28800 (fault armed at 8 h)",
+      "temain_mod.f:367": "IDV(k)=1, k the armed disturbance",
+      "temain_mod.f:346-360": "output paths (the header sanctions this edit)",
+      "teprob.f:1187": "G = seed",
+      "teprob.f:1256-1296": "XNS scaled by noise_scale for the noise-level axis only"
+    },
+    "not_touched": "physics, controllers, disturbance definitions, noise model structure"
+  },
+
+  "disturbances": {
+    "count": 21,
+    "ids": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
+    "normal_operation": "IDV=0, generated once per seed as the PAIRED baseline",
+    "rationale": "all 21 are used, including the near-undetectable 3, 9 and 15. Dropping the hard faults would remove exactly the regime FO claims to diagnose."
+  },
+
+  "seeds": {
+    "n_per_disturbance": 50,
+    "total_realisations": 1050,
+    "generation": "seed = 1000000000 + 7919 * i, i = 0..49, frozen list below",
+    "list": [1000000000,1000007919,1000015838,1000023757,1000031676,1000039595,1000047514,1000055433,1000063352,1000071271,1000079190,1000087109,1000095028,1000102947,1000110866,1000118785,1000126704,1000134623,1000142542,1000150461,1000158380,1000166299,1000174218,1000182137,1000190056,1000197975,1000205894,1000213813,1000221732,1000229651,1000237570,1000245489,1000253408,1000261327,1000269246,1000277165,1000285084,1000293003,1000300922,1000308841,1000316760,1000324679,1000332598,1000340517,1000348436,1000356355,1000364274,1000372193,1000380112,1000388031],
+    "budget": "2100 simulator runs at 1.55 s/run, measured -> approx. 54 minutes",
+    "independence_unit": "one (disturbance, seed) realisation. A TIME STEP IS NOT AN EXPERIMENT: the 800 post-fault samples of a realisation share one seed, one fault and one trajectory, and are treated as within-unit repeated measures only."
+  },
+
+  "splits": {
+    "split_by": "SEED, never by scenario -- splitting by scenario would put the same noise realisation on both sides",
+    "train_seed_indices": "0..24",
+    "validation_seed_indices": "25..34",
+    "test_seed_indices": "35..49",
+    "n_train_scenarios": 525,
+    "n_validation_scenarios": 210,
+    "n_test_scenarios": 315,
+    "test_is_touched": "once, at the very end, after every threshold is frozen"
+  },
+
+  "fo_inputs": {
+    "channels": {
+      "used": "XMEAS(1..41) only",
+      "excluded": "XMV(1..11)",
+      "reason": "XNS declares a measurement-noise standard deviation for the 41 XMEAS and for nothing else. XMV are controller outputs with no declared measurement noise, so including them would require an invented sigma -- which the brief forbids."
+    },
+    "delta": {
+      "definition": "delta[z, j, t] = XMEAS_fault[z, t, j] - XMEAS_normal[z, t, j], same seed, post-fault samples 160..959",
+      "why_this_is_not_invented": "at equal seed the normal and faulted runs are BIT-IDENTICAL before the fault time (verified, max|diff| = 0.000e+00) and diverge only after. This is a true paired counterfactual, exactly FO's 'deviation caused by the event'.",
+      "shape": "(n_scenarios, 41, 800)"
+    },
+    "sigma": {
+      "definition": "XNS(1..41), the process's own declared per-channel measurement standard deviation, read from teprob.f:1256-1296",
+      "estimated": false,
+      "floored": false,
+      "smallest_declared_value": 0.0012,
+      "zero_valued_channels": 0,
+      "cross_check": "the empirical lag-1 noise on normal operation agrees with the declared values to a median ratio of 1.03; the declared array is used, the empirical estimate is only a sanity check"
+    },
+    "kappa": 30.0,
+    "eta": 3.0,
+    "kappa_rationale": "chosen on the 21x3 pilot BEFORE any diagnosis outcome existed, to put |E*| near 0.79 of the scenarios -- selective at both ends. Measured selectivity: kappa 1 -> 0.952, 10 -> 0.905, 30 -> 0.794, 100 -> 0.667, 300 -> 0.492, 1000 -> 0.159.",
+    "support_frozen_from": "TRAIN seeds only, at nominal noise (noise_scale = 1.0)"
+  },
+
+  "sensor_designs": {
+    "reference_R": "all 41 XMEAS channels",
+    "design_sizes": [41, 24, 16, 10, 6, 3],
+    "designs_per_size": 20,
+    "selection": "uniform without replacement under seed 20260816, drawn BEFORE any FO or classifier result",
+    "note": "designs are frozen as an explicit list before the run, not resampled per analysis"
+  },
+
+  "noise_axis": {
+    "levels": [1.0, 2.0, 4.0, 8.0],
+    "meaning": "XNS scaled by the factor; data REGENERATED at that physical noise level, and sigma_eval scaled to match",
+    "verified": "at scale 8 the B_dynamic support collapsed 16 -> 4 while the B* support stayed at 16, so B* exercises its distinguishing property on this benchmark"
+  },
+
+  "inferrer": {
+    "role": "independent observer; it never sees FO, and FO never sees it",
+    "task": "21-class disturbance identification from the channels in design S, post-fault window only",
+    "model": "RandomForestClassifier(n_estimators=500, random_state=20260816)",
+    "features": "per-channel mean, std, min, max, and last value over the post-fault window, computed on S only",
+    "trained_on": "TRAIN seeds only",
+    "hyperparameters_frozen": true,
+    "tuning_on_test": "forbidden",
+    "emits": ["predicted_class", "posterior_probabilities", "rank_of_true_class", "reciprocal_rank", "top1_top2_margin", "entropy", "log_loss", "top1_correct", "top5_correct"]
+  },
+
+  "endpoints": {
+    "primary_reconstruction_outcome": "top1_correct == 0, i.e. reconstruction failure",
+    "secondary": ["rank_of_true_class", "reciprocal_rank", "log_loss", "posterior_of_true_class", "top5_correct"],
+    "fo_diagnostic_endpoints": [
+      "AUROC of d_S(z) for predicting top-1 failure, with 95% CI",
+      "AUPRC of d_S(z) for the same",
+      "Spearman of d_S(z) with log_loss, with rank_of_true_class, and with reciprocal_rank",
+      "calibration of B*(S) against the observed failure rate on E*",
+      "failure rate per decile of d_S(z)"
+    ],
+    "aggregation": "per (disturbance, seed) realisation; never per time step"
+  },
+
+  "simple_baselines_fo_must_beat": [
+    "posterior entropy of the inferrer",
+    "top1-top2 margin of the inferrer",
+    "mean |delta| / sigma over S (plain SNR, no max, no threshold)",
+    "count of channels in S exceeding 3 sigma",
+    "smallest singular value of the standardised delta matrix restricted to S",
+    "number of channels in S (a pure design-size control)"
+  ],
+
+  "success_criteria": {
+    "FO_SUPPORTED": "on TEST, the AUROC of d_S(z) for top-1 failure has a 95% CI whose lower bound exceeds 0.5, AND its point estimate exceeds every simple baseline above, AND the CI lower bound exceeds the point estimate of the best simple baseline",
+    "FO_NOT_SUPPORTED": "any of the three fails",
+    "FO_INCONCLUSIVE": "the TEST set yields fewer than 30 reconstruction failures or fewer than 30 successes, making the AUROC CI uninformative",
+    "B_star_specific": "B*(S) must be compared to B_dynamic(S) across the four noise levels; the claim that B* is the repaired metric is upheld only if B*'s denominator stays fixed while B_dynamic's moves, on the real regenerated data"
+  },
+
+  "stopping_rules": [
+    "The test split is opened exactly once. No threshold, no kappa, no eta, no design list and no hyperparameter may change afterwards.",
+    "If the inferrer's TRAIN accuracy is below 0.30 on the full 41-channel design, the inferrer is declared unfit and the phase stops before FO is computed -- a diagnostic of failure is meaningless when the observer fails everywhere.",
+    "If |E*| on TRAIN is 0 or equals the full train set, the support is degenerate, kappa was misjudged, and the phase stops rather than being re-tuned.",
+    "If FO_INCONCLUSIVE triggers, the verdict is INCONCLUSIVE and no favourable reading is reported.",
+    "No FO variant, no FO-v2, no formula change is permitted at any point. If FO fails, it is reported as failing."
+  ],
+
+  "explicitly_forbidden": [
+    "treating a time step as an independent experiment",
+    "estimating or flooring sigma",
+    "inventing a baseline",
+    "modifying any FO formula",
+    "selecting kappa, eta or a design after seeing diagnosis outcomes",
+    "reporting a subset of disturbances chosen after the fact"
+  ]
+}
