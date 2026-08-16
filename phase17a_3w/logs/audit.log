@@ -1,0 +1,58 @@
+class 0: 594 files (594 real) audited
+class 1: 128 files (4 real) audited
+class 2: 38 files (22 real) audited
+class 3: 106 files (32 real) audited
+class 4: 343 files (343 real) audited
+class 5: 450 files (11 real) audited
+class 6: 221 files (6 real) audited
+class 7: 46 files (36 real) audited
+class 8: 95 files (14 real) audited
+class 9: 207 files (57 real) audited
+
+{
+  "repository": "https://github.com/petrobras/3W",
+  "commit": "93793db1dbd8b672f87f9259bedc913eb8c13683",
+  "dataset_version": "2.0.0",
+  "clone_size": "5.3 GB",
+  "totals": {
+    "instances": 2228,
+    "REAL": 1119,
+    "SIMULATED": 1089,
+    "HAND_DRAWN": 20,
+    "REAL_normal_class0": 594,
+    "REAL_anomalous": 525,
+    "distinct_real_wells": 39
+  },
+  "folds_directory_present": false,
+  "transient_offset": 100
+}
+
+--- per event type (REAL, anomalous) ---
+ event_type  n_real  n_wells  median_obs  median_step_s  median_leading_unlabelled  median_pre_event_total  median_pre_event_labelled_normal  frac_with_transient  frac_no_onset  median_vars_all_nan
+          1       4        3     59746.0            1.0                     3600.0                 47172.5                           43572.5             1.000000       0.000000                  9.0
+          2      22        7     10546.0            1.0                     3600.0                  7145.5                            3545.5             1.000000       0.000000                 22.0
+          3      32        2     21527.0            1.0                     3600.0                  3600.0                               0.0             0.000000       0.000000                 13.0
+          4     343        7     10759.0            1.0                     3600.0                  3600.0                               0.0             0.000000       0.000000                 21.0
+          5      11        3     31441.0            1.0                     3600.0                 11108.0                            7508.0             1.000000       0.000000                  9.0
+          6       6        2     11132.0            1.0                     3600.0                  7722.5                            4122.5             1.000000       0.000000                 16.5
+          7      36        6    165977.5            1.0                     3600.0                 26870.5                           23270.5             1.000000       0.000000                 16.0
+          8      14        9    284704.0            1.0                     3600.0                 53692.0                           50092.0             1.000000       0.000000                  9.0
+          9      57       15     32135.0            1.0                     3600.0                 21783.0                               0.0             0.245614       0.754386                 13.0
+
+--- channel availability (entirely missing) ---
+   variable  frac_instances_entirely_missing
+        QBS                         1.000000
+P-MON-SDV-P                         1.000000
+   P-JUS-BS                         1.000000
+       PT-P                         1.000000
+ P-MON-CKGL                         0.996190
+  P-JUS-CKP                         0.980952
+  T-MON-CKP                         0.973333
+ESTADO-DHSV                         0.678095
+  ABER-CKGL                         0.636190
+  ESTADO-M1                         0.620952
+  ESTADO-M2                         0.615238
+   ABER-CKP                         0.613333
+ ESTADO-PXO                         0.611429
+  ESTADO-XO                         0.609524
+  ESTADO-W2                         0.609524

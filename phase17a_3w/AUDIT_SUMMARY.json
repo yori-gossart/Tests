@@ -1,0 +1,17 @@
+{
+  "repository": "https://github.com/petrobras/3W",
+  "commit": "93793db1dbd8b672f87f9259bedc913eb8c13683",
+  "dataset_version": "2.0.0",
+  "clone_size": "5.3 GB",
+  "totals": {
+    "instances": 2228,
+    "REAL": 1119,
+    "SIMULATED": 1089,
+    "HAND_DRAWN": 20,
+    "REAL_normal_class0": 594,
+    "REAL_anomalous": 525,
+    "distinct_real_wells": 39
+  },
+  "folds_directory_present": false,
+  "transient_offset": 100
+}
