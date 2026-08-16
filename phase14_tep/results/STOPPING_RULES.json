@@ -1,0 +1,7 @@
+{
+  "support_size": 409,
+  "n_train": 525,
+  "support_non_degenerate": true,
+  "inferrer_train_accuracy_full_design": 1.0,
+  "inferrer_fit_gate_pass": true
+}

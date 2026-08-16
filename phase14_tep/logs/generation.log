@@ -1,0 +1,67 @@
+nominal grid: 1100 simulator runs
+  [nominal] 100/1100  46s  eta 457s
+  [nominal] 200/1100  87s  eta 393s
+  [nominal] 300/1100  128s  eta 343s
+  [nominal] 400/1100  171s  eta 299s
+  [nominal] 500/1100  213s  eta 256s
+  [nominal] 600/1100  255s  eta 212s
+  [nominal] 700/1100  295s  eta 169s
+  [nominal] 800/1100  336s  eta 126s
+  [nominal] 900/1100  377s  eta 84s
+  [nominal] 1000/1100  418s  eta 42s
+  [nominal] 1100/1100  459s  eta 0s
+  [nominal] done 1100 runs in 459s
+saved nominal.npz
+noise x2.0: 550 simulator runs
+  [noise2.0] 100/550  54s  eta 243s
+  [noise2.0] 200/550  123s  eta 215s
+  [noise2.0] 300/550  191s  eta 159s
+  [noise2.0] 400/550  260s  eta 97s
+  [noise2.0] 500/550  326s  eta 33s
+  [noise2.0] done 550 runs in 360s
+saved noise_2.0.npz
+noise x4.0: 550 simulator runs
+/home/user/Tests/src/phase14_tep_harness.py:101: UserWarning: loadtxt: input contained no data: "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/tep/gen/work_0/TE_data_me01.dat"
+  me = [np.loadtxt(workdir / f, ndmin=2) for f in ME_FILES]
+/home/user/Tests/src/phase14_tep_harness.py:101: UserWarning: loadtxt: input contained no data: "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/tep/gen/work_0/TE_data_me02.dat"
+  me = [np.loadtxt(workdir / f, ndmin=2) for f in ME_FILES]
+/home/user/Tests/src/phase14_tep_harness.py:101: UserWarning: loadtxt: input contained no data: "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/tep/gen/work_0/TE_data_me03.dat"
+  me = [np.loadtxt(workdir / f, ndmin=2) for f in ME_FILES]
+/home/user/Tests/src/phase14_tep_harness.py:101: UserWarning: loadtxt: input contained no data: "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/tep/gen/work_0/TE_data_me04.dat"
+  me = [np.loadtxt(workdir / f, ndmin=2) for f in ME_FILES]
+/home/user/Tests/src/phase14_tep_harness.py:101: UserWarning: loadtxt: input contained no data: "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/tep/gen/work_0/TE_data_me05.dat"
+  me = [np.loadtxt(workdir / f, ndmin=2) for f in ME_FILES]
+/home/user/Tests/src/phase14_tep_harness.py:101: UserWarning: loadtxt: input contained no data: "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/tep/gen/work_0/TE_data_me06.dat"
+  me = [np.loadtxt(workdir / f, ndmin=2) for f in ME_FILES]
+/home/user/Tests/src/phase14_tep_harness.py:101: UserWarning: loadtxt: input contained no data: "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/tep/gen/work_0/TE_data_me07.dat"
+  me = [np.loadtxt(workdir / f, ndmin=2) for f in ME_FILES]
+/home/user/Tests/src/phase14_tep_harness.py:101: UserWarning: loadtxt: input contained no data: "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/tep/gen/work_0/TE_data_me08.dat"
+  me = [np.loadtxt(workdir / f, ndmin=2) for f in ME_FILES]
+/home/user/Tests/src/phase14_tep_harness.py:101: UserWarning: loadtxt: input contained no data: "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/tep/gen/work_0/TE_data_me09.dat"
+  me = [np.loadtxt(workdir / f, ndmin=2) for f in ME_FILES]
+/home/user/Tests/src/phase14_tep_harness.py:101: UserWarning: loadtxt: input contained no data: "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/tep/gen/work_0/TE_data_me10.dat"
+  me = [np.loadtxt(workdir / f, ndmin=2) for f in ME_FILES]
+/home/user/Tests/src/phase14_tep_harness.py:101: UserWarning: loadtxt: input contained no data: "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/tep/gen/work_0/TE_data_me11.dat"
+  me = [np.loadtxt(workdir / f, ndmin=2) for f in ME_FILES]
+/home/user/Tests/src/phase14_tep_harness.py:102: UserWarning: loadtxt: input contained no data: "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/tep/gen/work_0/TE_data_mv1.dat"
+  mv = [np.loadtxt(workdir / f, ndmin=2) for f in MV_FILES]
+/home/user/Tests/src/phase14_tep_harness.py:102: UserWarning: loadtxt: input contained no data: "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/tep/gen/work_0/TE_data_mv2.dat"
+  mv = [np.loadtxt(workdir / f, ndmin=2) for f in MV_FILES]
+/home/user/Tests/src/phase14_tep_harness.py:102: UserWarning: loadtxt: input contained no data: "/tmp/claude-0/-home-user-Tests/6cb7a48c-87d9-5b87-a56a-413674448e9d/scratchpad/tep/gen/work_0/TE_data_mv3.dat"
+  mv = [np.loadtxt(workdir / f, ndmin=2) for f in MV_FILES]
+  [noise4.0] 100/550  59s  eta 263s
+  [noise4.0] 200/550  115s  eta 201s
+  [noise4.0] 300/550  165s  eta 138s
+  [noise4.0] 400/550  217s  eta 81s
+  [noise4.0] 500/550  270s  eta 27s
+  [noise4.0] done 550 runs in 294s
+saved noise_4.0.npz
+noise x8.0: 550 simulator runs
+  [noise8.0] 100/550  27s  eta 120s
+  [noise8.0] 200/550  54s  eta 94s
+  [noise8.0] 300/550  79s  eta 66s
+  [noise8.0] 400/550  105s  eta 39s
+  [noise8.0] 500/550  132s  eta 13s
+  [noise8.0] done 550 runs in 145s
+saved noise_8.0.npz
+GENERATION COMPLETE

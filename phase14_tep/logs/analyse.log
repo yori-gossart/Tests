@@ -1,0 +1,12 @@
+loaded 1100 runs, 120 frozen designs
+scenarios: train 525  val 210  test 315
+E* frozen on TRAIN: 409/525  non-degenerate=True
+  stopping-rule check: RF train accuracy on 41-channel design = 1.0000
+  20/120 designs  (214s)
+  40/120 designs  (337s)
+  60/120 designs  (431s)
+  80/120 designs  (498s)
+  100/120 designs  (559s)
+  120/120 designs  (618s)
+event rows: 63000  (620s)
+phase 1 complete

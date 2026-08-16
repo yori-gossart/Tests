@@ -1,0 +1,27 @@
+events 63000  designs 120
+primary AUROC done
+B* comparison done
+{
+  "fo_mean_auroc": 0.8530460514310972,
+  "fo_ci": [
+    0.8120692324599065,
+    0.8897725015853651
+  ],
+  "baselines": {
+    "entropy": 0.9074334551360469,
+    "top1_top2_margin": 0.9231465513145347,
+    "snr_mean": 0.8480530448511849,
+    "count_above_3sigma": 0.820257159127619,
+    "smallest_singular_value": 0.8170121263396563,
+    "design_size": 0.5
+  },
+  "best_baseline": "top1_top2_margin",
+  "best_baseline_point": 0.9231465513145347,
+  "c1_ci_lower_above_0.5": true,
+  "c2_point_above_every_baseline": false,
+  "c3_ci_lower_above_best_baseline_point": false,
+  "inconclusive_gate": false,
+  "n_test_failures": 9571,
+  "n_test_successes": 28229,
+  "FO_SUPPORTED": false
+}
