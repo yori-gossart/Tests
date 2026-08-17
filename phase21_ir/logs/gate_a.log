@@ -1,0 +1,31 @@
+
+===== APS =====
+  nipunmanral/Classification-APS-Failure-at-Scania-Trucks           conformes=['test']
+  Sunita778/Scania-Truck-Failures-Detection                         conformes=[]
+  Nisarg9795/Anomaly-Detection-APS-failures-in-Scania-trucks        conformes=[]
+  tianxiny/APS-Failure-at-Scania-Trucks                             conformes=[]
+  mrunal46/APS-Failure-at-Scania-Trucks                             conformes=[]
+  chaitra31595/Machine-Learning---APS-Failure-at-Scania-Trucks-Data-Set conformes=['test']
+  --> APS: NOT_EXECUTABLE (manquant: ['train'])
+
+===== SECOM =====
+  hnrosa/uci-secom-fault-detection                                  conformes=['data', 'labels']
+  --> SECOM: EXECUTABLE
+
+===== STEEL =====
+  Sanikommus/Steel_Plates_Faults_Dataset                            conformes=[]
+  tmbuthia/Steel-Plates-Faults-Prediction-Using-Neural-Networks     conformes=['data']
+  --> STEEL: EXECUTABLE
+
+===== HAR =====
+  KLEdlerILSTU/UCI-HAR-Dataset                                      conformes=[]
+  ahmedtadde/UCI-HAR-Dataset                                        conformes=[]
+  Cheukting/UCI_HAR_Dataset                                         conformes=['X_train', 'y_train', 's_train', 'X_test', 'y_test', 's_test']
+  --> HAR: EXECUTABLE
+
+=== GATE A ===
+dataset         status missing  candidates_probed
+    APS NOT_EXECUTABLE   train                  6
+  SECOM     EXECUTABLE                          1
+  STEEL     EXECUTABLE                          2
+    HAR     EXECUTABLE                          3

@@ -1,0 +1,22 @@
+{"verbatim": true, "sha256_function": "492c42dbee0b88c6e45867374da1c146a0d4d4df6fb6adf634b65931d57d6318", "source_file": "src/phase20_dr_run.py", "sha256_source_file": "b66cb9de732a62743677acddd3be4e1ab5eb6e6655ec64b1ecdd5b9f0558e89b"}
+
+== SECOM == X(1567, 590) -> Z(1567, 526) {'n_features_kept': 474, 'n_missing_indicators': 52, 'n_features_final': 526} split={'train': 940, 'test': 314, 'calib': 313}
+  SECOM/M1_logreg: acc=0.8631 err=43 ISO_FIT=0.666 best=B1_max_prob(0.759) (6s)
+/usr/local/lib/python3.11/dist-packages/sklearn/svm/_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+  warnings.warn(
+  SECOM/M2_rbf_svm: acc=0.9331 err=21 ISO_FIT=0.714 best=B1_max_prob(0.730) (5s)
+  SECOM/M3_random_forest: acc=0.9331 err=21 ISO_FIT=0.667 best=B1_max_prob(0.710) (7s)
+  SECOM/M4_hist_gradient_boosting: acc=0.9331 err=21 ISO_FIT=0.666 best=B1_max_prob(0.731) (6s)
+
+== STEEL == X(1941, 27) -> Z(1941, 27) {'n_features_kept': 27, 'n_missing_indicators': 0, 'n_features_final': 27} split={'train': 1165, 'test': 388, 'calib': 388}
+  STEEL/M1_logreg: acc=0.7371 err=102 ISO_FIT=0.727 best=B1_max_prob(0.768) (2s)
+/usr/local/lib/python3.11/dist-packages/sklearn/svm/_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+  warnings.warn(
+  STEEL/M2_rbf_svm: acc=0.7758 err=87 ISO_FIT=0.752 best=B2_entropy(0.743) (3s)
+  STEEL/M3_random_forest: acc=0.7784 err=86 ISO_FIT=0.733 best=B1_max_prob(0.836) (4s)
+  STEEL/M4_hist_gradient_boosting: acc=0.7964 err=79 ISO_FIT=0.728 best=B2_entropy(0.805) (4s)
+
+== HAR == X(10299, 561) -> Z(10299, 561) {'n_features_kept': 561, 'n_missing_indicators': 0, 'n_features_final': 561} split={'train': 5280, 'test': 2947, 'calib': 2072}
+  HAR/M1_logreg: acc=0.9416 err=172 ISO_FIT=0.813 best=B3_margin(0.901) (63s)
+/usr/local/lib/python3.11/dist-packages/sklearn/svm/_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+  warnings.warn(

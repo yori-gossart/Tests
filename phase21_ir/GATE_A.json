@@ -1,0 +1,253 @@
+{
+  "APS": {
+    "status": "NOT_EXECUTABLE",
+    "missing": [
+      "train"
+    ],
+    "accepted": {
+      "test": {
+        "repo": "nipunmanral/Classification-APS-Failure-at-Scania-Trucks",
+        "commit": "fb90499521b47676dc133c4dbc91c24b66123cd1",
+        "path": "Code/Dataset/aps_failure_test_set.csv"
+      }
+    },
+    "candidates_probed": 6,
+    "trail": [
+      {
+        "repo": "nipunmanral/Classification-APS-Failure-at-Scania-Trucks",
+        "commit": "fb90499521b47676dc133c4dbc91c24b66123cd1",
+        "conformes": [
+          "test"
+        ],
+        "rejetes": [
+          {
+            "file": "Code/Dataset/aps_failure_training_set_SMALLER.csv",
+            "reason": "nom signalant une transformation"
+          },
+          {
+            "file": "Code/test_processed_aps.csv",
+            "reason": "nom signalant une transformation"
+          },
+          {
+            "file": "Code/train_processed_aps.csv",
+            "reason": "nom signalant une transformation"
+          }
+        ]
+      },
+      {
+        "repo": "Sunita778/Scania-Truck-Failures-Detection",
+        "commit": "88a6bb84d930dca4a7c50f6e0eef32e1eb9a7efa",
+        "conformes": [],
+        "rejetes": [
+          {
+            "file": "aps_failure_training_set1.csv",
+            "reason": "forme (36188, 171) != officiel (60000, 171) ou (16000, 171)"
+          }
+        ]
+      },
+      {
+        "repo": "Nisarg9795/Anomaly-Detection-APS-failures-in-Scania-trucks",
+        "commit": "3a0864215f8422c5fcfef90c5689173a3479b3b9",
+        "conformes": [],
+        "rejetes": []
+      },
+      {
+        "repo": "tianxiny/APS-Failure-at-Scania-Trucks",
+        "commit": "81f63a4de04f1d57021994d0f91f752ff0ba1169",
+        "conformes": [],
+        "rejetes": []
+      },
+      {
+        "repo": "mrunal46/APS-Failure-at-Scania-Trucks",
+        "commit": "81f63a4de04f1d57021994d0f91f752ff0ba1169",
+        "conformes": [],
+        "rejetes": []
+      },
+      {
+        "repo": "chaitra31595/Machine-Learning---APS-Failure-at-Scania-Trucks-Data-Set",
+        "commit": "b8c92d2cebf0ff0c219e0025d0f68ec239cf0dc8",
+        "conformes": [
+          "test"
+        ],
+        "rejetes": [
+          {
+            "file": "Data/aps_failure_training_set_SMALLER.csv",
+            "reason": "nom signalant une transformation"
+          }
+        ]
+      }
+    ],
+    "integrity_caveat": "l'original UCI est inatteignable depuis cet environnement (403 au CONNECT) ; le miroir ne peut donc pas etre verifie par somme de controle contre lui. Seule la conformite structurelle aux effectifs officiels est verifiee."
+  },
+  "SECOM": {
+    "status": "EXECUTABLE",
+    "missing": [],
+    "accepted": {
+      "data": {
+        "repo": "hnrosa/uci-secom-fault-detection",
+        "commit": "74344b62a87974e7a14b7b70777aaf8bb55ce0b1",
+        "path": "secom.data"
+      },
+      "labels": {
+        "repo": "hnrosa/uci-secom-fault-detection",
+        "commit": "74344b62a87974e7a14b7b70777aaf8bb55ce0b1",
+        "path": "secom_labels.data"
+      }
+    },
+    "candidates_probed": 1,
+    "trail": [
+      {
+        "repo": "hnrosa/uci-secom-fault-detection",
+        "commit": "74344b62a87974e7a14b7b70777aaf8bb55ce0b1",
+        "conformes": [
+          "data",
+          "labels"
+        ],
+        "rejetes": []
+      },
+      {
+        "repo": "Meena-Mani/SECOM_class_imbalance",
+        "status": "non sonde -- deja complet"
+      },
+      {
+        "repo": "klimburg/SECOM_Analysis",
+        "status": "non sonde -- deja complet"
+      },
+      {
+        "repo": "sharmaroshan/SECOM-Detecting-Defected-Items",
+        "status": "non sonde -- deja complet"
+      },
+      {
+        "repo": "Eason0227/Semiconductor-Manufacturing-Procees-Prediction",
+        "status": "non sonde -- deja complet"
+      },
+      {
+        "repo": "alalehrz/SECOM_classification",
+        "status": "non sonde -- deja complet"
+      }
+    ],
+    "integrity_caveat": "l'original UCI est inatteignable depuis cet environnement (403 au CONNECT) ; le miroir ne peut donc pas etre verifie par somme de controle contre lui. Seule la conformite structurelle aux effectifs officiels est verifiee."
+  },
+  "STEEL": {
+    "status": "EXECUTABLE",
+    "missing": [],
+    "accepted": {
+      "data": {
+        "repo": "tmbuthia/Steel-Plates-Faults-Prediction-Using-Neural-Networks",
+        "commit": "a4525c2570be0a7bedeff0883c6e7cf8c1a7236a",
+        "path": "Steel-Faults.nna"
+      }
+    },
+    "candidates_probed": 2,
+    "trail": [
+      {
+        "repo": "Sanikommus/Steel_Plates_Faults_Dataset",
+        "commit": "93ecafcf2cf4e995ca549be9cea706d8d652f046",
+        "conformes": [],
+        "rejetes": []
+      },
+      {
+        "repo": "tmbuthia/Steel-Plates-Faults-Prediction-Using-Neural-Networks",
+        "commit": "a4525c2570be0a7bedeff0883c6e7cf8c1a7236a",
+        "conformes": [
+          "data"
+        ],
+        "rejetes": []
+      },
+      {
+        "repo": "orestasdulinskas/steel_plate_defect_prediction",
+        "status": "non sonde -- deja complet"
+      },
+      {
+        "repo": "mrchandrayee/Steel-Plate-Defect-Prediction",
+        "status": "non sonde -- deja complet"
+      },
+      {
+        "repo": "ricardoevvargas/awesome-industry40-datasets",
+        "status": "non sonde -- deja complet"
+      },
+      {
+        "repo": "makinarocks/awesome-industrial-machine-datasets",
+        "status": "non sonde -- deja complet"
+      }
+    ],
+    "integrity_caveat": "l'original UCI est inatteignable depuis cet environnement (403 au CONNECT) ; le miroir ne peut donc pas etre verifie par somme de controle contre lui. Seule la conformite structurelle aux effectifs officiels est verifiee."
+  },
+  "HAR": {
+    "status": "EXECUTABLE",
+    "missing": [],
+    "accepted": {
+      "X_train": {
+        "repo": "Cheukting/UCI_HAR_Dataset",
+        "commit": "bc80a16202a74e1f6e2130be3fdee1a65c6ce82c",
+        "path": "train/X_train.txt"
+      },
+      "y_train": {
+        "repo": "Cheukting/UCI_HAR_Dataset",
+        "commit": "bc80a16202a74e1f6e2130be3fdee1a65c6ce82c",
+        "path": "train/y_train.txt"
+      },
+      "s_train": {
+        "repo": "Cheukting/UCI_HAR_Dataset",
+        "commit": "bc80a16202a74e1f6e2130be3fdee1a65c6ce82c",
+        "path": "train/subject_train.txt"
+      },
+      "X_test": {
+        "repo": "Cheukting/UCI_HAR_Dataset",
+        "commit": "bc80a16202a74e1f6e2130be3fdee1a65c6ce82c",
+        "path": "test/X_test.txt"
+      },
+      "y_test": {
+        "repo": "Cheukting/UCI_HAR_Dataset",
+        "commit": "bc80a16202a74e1f6e2130be3fdee1a65c6ce82c",
+        "path": "test/y_test.txt"
+      },
+      "s_test": {
+        "repo": "Cheukting/UCI_HAR_Dataset",
+        "commit": "bc80a16202a74e1f6e2130be3fdee1a65c6ce82c",
+        "path": "test/subject_test.txt"
+      }
+    },
+    "candidates_probed": 3,
+    "trail": [
+      {
+        "repo": "KLEdlerILSTU/UCI-HAR-Dataset",
+        "commit": "02f6a2d645b9f7bc1f2910a3e4526a8788d1dbba",
+        "conformes": [],
+        "rejetes": []
+      },
+      {
+        "repo": "ahmedtadde/UCI-HAR-Dataset",
+        "commit": "02f6a2d645b9f7bc1f2910a3e4526a8788d1dbba",
+        "conformes": [],
+        "rejetes": []
+      },
+      {
+        "repo": "Cheukting/UCI_HAR_Dataset",
+        "commit": "bc80a16202a74e1f6e2130be3fdee1a65c6ce82c",
+        "conformes": [
+          "X_train",
+          "y_train",
+          "s_train",
+          "X_test",
+          "y_test",
+          "s_test"
+        ],
+        "rejetes": []
+      },
+      {
+        "repo": "martiniblack/UCI-HAR",
+        "status": "non sonde -- deja complet"
+      },
+      {
+        "repo": "sudar/UCI-HAR-Dataset-Analysis",
+        "status": "non sonde -- deja complet"
+      },
+      {
+        "repo": "connorcl/processed-uci-har-dataset",
+        "status": "non sonde -- deja complet"
+      }
+    ],
+    "integrity_caveat": "l'original UCI est inatteignable depuis cet environnement (403 au CONNECT) ; le miroir ne peut donc pas etre verifie par somme de controle contre lui. Seule la conformite structurelle aux effectifs officiels est verifiee."
+  }
+}
