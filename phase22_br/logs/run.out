@@ -85,3 +85,102 @@
   warnings.warn(
 /usr/local/lib/python3.11/dist-packages/sklearn/svm/_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
   warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/svm/_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/svm/_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+  CREDIT/M2_rbf_svm: hp={'C': 1.0, 'gamma': 'scale'} prob_best=B1_max_prob AUROC_calib=0.637 -> CONFIDENCE_WEAK (33s)
+  CREDIT/M2_rbf_svm: TEST acc=0.8168 err=1099 dAUROC=+0.0063 [-0.0068;+0.0187] p=0.3340 dAURC=+0.00506
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+  CREDIT/M3_random_forest: hp={'max_features': 0.3, 'min_samples_leaf': 5} prob_best=B1_max_prob AUROC_calib=0.697 -> CONFIDENCE_WEAK (30s)
+  CREDIT/M3_random_forest: TEST acc=0.8198 err=1081 dAUROC=-0.0002 [-0.0020;+0.0015] p=0.8470 dAURC=+0.00003
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+  CREDIT/M4_hist_gradient_boosting: hp={'learning_rate': 0.05, 'max_leaf_nodes': 31} prob_best=B1_max_prob AUROC_calib=0.702 -> confident (2s)
+  CREDIT/M4_hist_gradient_boosting: TEST acc=0.8203 err=1078 dAUROC=+0.0007 [-0.0007;+0.0022] p=0.3060 dAURC=+0.00107
+
+== DRYBEAN [main] == X(13611, 16) -> Z(13611, 16) {'n_features_kept': 16, 'n_missing_indicators': 0, 'n_features_final': 16}
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+  DRYBEAN/M1_logreg: hp={'C': 10.0} prob_best=B1_max_prob AUROC_calib=0.910 -> confident (1s)
+  DRYBEAN/M1_logreg: TEST acc=0.9236 err=208 dAUROC=-0.0108 [-0.0186;-0.0034] p=0.0000 dAURC=-0.00136
+/usr/local/lib/python3.11/dist-packages/sklearn/svm/_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/svm/_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/svm/_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/svm/_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/svm/_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+  DRYBEAN/M2_rbf_svm: hp={'C': 10.0, 'gamma': 'scale'} prob_best=B3_margin AUROC_calib=0.907 -> confident (3s)
+  DRYBEAN/M2_rbf_svm: TEST acc=0.9302 err=190 dAUROC=-0.0087 [-0.0185;+0.0001] p=0.0550 dAURC=-0.00054
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+  DRYBEAN/M3_random_forest: hp={'max_features': 'sqrt', 'min_samples_leaf': 1} prob_best=B1_max_prob AUROC_calib=0.920 -> confident (15s)
+  DRYBEAN/M3_random_forest: TEST acc=0.9239 err=207 dAUROC=+0.0028 [-0.0030;+0.0093] p=0.3820 dAURC=+0.00089
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+/usr/local/lib/python3.11/dist-packages/sklearn/linear_model/_logistic.py:1403: FutureWarning: 'penalty' was deprecated in version 1.8 and will be removed in 1.10. To avoid this warning, leave 'penalty' set to its default value and use 'l1_ratio' or 'C' instead. Use l1_ratio=0 instead of penalty='l2', l1_ratio=1 instead of penalty='l1', l1_ratio set to a float between 0 and 1 instead of penalty='elasticnet', and C=np.inf instead of penalty=None.
+  warnings.warn(
+  DRYBEAN/M4_hist_gradient_boosting: hp={'learning_rate': 0.05, 'max_leaf_nodes': 31} prob_best=B2_entropy AUROC_calib=0.914 -> confident (11s)
+  DRYBEAN/M4_hist_gradient_boosting: TEST acc=0.9232 err=209 dAUROC=-0.0051 [-0.0102;+0.0002] p=0.0590 dAURC=-0.00029
+
+=== CRITERES ===
+{
+ "1_datasets_positive_median": 1,
+ "1_pass": false,
+ "2_model_families_participating": 3,
+ "2_pass": true,
+ "3_global_median_delta_auroc": 0.006315956762830366,
+ "3_pass": false,
+ "4_stratified_ci": [
+  -0.0005780967544815663,
+  0.01763014247105208
+ ],
+ "4_pass": false,
+ "5_holm_confirmed_cells": 1,
+ "5_holm_confirmed_datasets": 1,
+ "5_pass": false,
+ "6_without_rf": {
+  "n_cells": 2,
+  "datasets_positive_median": 1,
+  "families": 2,
+  "median_delta": 0.010119072971241538,
+  "holm_confirmed_cells": 1,
+  "holm_confirmed_datasets": 1
+ },
+ "7_stratified_median_delta_aurc": 0.005058283327306179,
+ "7_pass": true,
+ "8_meta_iso_beats_meta_base": true,
+ "6_pass": false,
+ "8_pass": true
+}
+
+=== VERDICTS ===
+REGIME_IDENTIFIABLE            NO
+INCREMENTAL_REGIME             NO
+ROBUST_ACROSS_DATASETS         NO
+ROBUST_ACROSS_MODELS           NO
+PROBABILITY_BASELINE_BEATEN    NO
+PHASE22_RESULT                 FALSIFIED
+BRANCH_DECISION: CLOSE_ISOLABILITY_TECH_BRANCH
+(376s)

@@ -1,0 +1,70 @@
+{
+  "verbatim_check": {
+    "verbatim": true,
+    "sha256_function": "492c42dbee0b88c6e45867374da1c146a0d4d4df6fb6adf634b65931d57d6318",
+    "source_file": "src/phase20_dr_run.py",
+    "sha256_source_file": "b66cb9de732a62743677acddd3be4e1ab5eb6e6655ec64b1ecdd5b9f0558e89b"
+  },
+  "protocol_sha256": "3e48e6091655935e1aaf4cabeb7852540d7094d48d6e6ca1af02d3bfd86ce89b",
+  "gate_b": {
+    "GAS": "EXECUTABLE",
+    "SENSORLESS": "NOT_EXECUTABLE",
+    "CREDIT": "EXECUTABLE",
+    "DRYBEAN": "EXECUTABLE"
+  },
+  "confidence_weak_datasets": [
+    "CREDIT"
+  ],
+  "n_weak_cells": 3,
+  "criteria": {
+    "1_datasets_positive_median": 1,
+    "1_pass": false,
+    "2_model_families_participating": 3,
+    "2_pass": true,
+    "3_global_median_delta_auroc": 0.006315956762830366,
+    "3_pass": false,
+    "4_stratified_ci": [
+      -0.0005780967544815663,
+      0.01763014247105208
+    ],
+    "4_pass": false,
+    "5_holm_confirmed_cells": 1,
+    "5_holm_confirmed_datasets": 1,
+    "5_pass": false,
+    "6_without_rf": {
+      "n_cells": 2,
+      "datasets_positive_median": 1,
+      "families": 2,
+      "median_delta": 0.010119072971241538,
+      "holm_confirmed_cells": 1,
+      "holm_confirmed_datasets": 1
+    },
+    "7_stratified_median_delta_aurc": 0.005058283327306179,
+    "7_pass": true,
+    "8_meta_iso_beats_meta_base": true,
+    "6_pass": false,
+    "8_pass": true
+  },
+  "per_dataset_median_delta": {
+    "CREDIT": 0.00632
+  },
+  "per_model_median_delta": {
+    "M1_logreg": 0.01392,
+    "M2_rbf_svm": 0.00632,
+    "M3_random_forest": -0.00021
+  },
+  "verdicts": {
+    "REGIME_IDENTIFIABLE": "NO",
+    "INCREMENTAL_REGIME": "NO",
+    "ROBUST_ACROSS_DATASETS": "NO",
+    "ROBUST_ACROSS_MODELS": "NO",
+    "PROBABILITY_BASELINE_BEATEN": "NO",
+    "PHASE22_RESULT": "FALSIFIED"
+  },
+  "branch_decision": "CLOSE_ISOLABILITY_TECH_BRANCH",
+  "natural_shift": {
+    "weak_cells": 2,
+    "median_delta_auroc": 0.0512639545157102,
+    "holm_confirmed": 1
+  }
+}

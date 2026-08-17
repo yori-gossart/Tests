@@ -1,0 +1,5 @@
+dataset,model,hp,prob_best,auroc_calib_prob_best,confidence_weak,calib_accuracy,n_train,n_calib,n_test,n_errors_calib,n_classes,seconds_pre_test,analysis,preprocess
+GAS,M1_logreg,{'C': 10.0},B3_margin,0.9500682848520625,False,0.7921505806968362,3436,2497,7977,519,6,34.4,shift,"{'n_features_kept': 128, 'n_missing_indicators': 0, 'n_features_final': 128}"
+GAS,M2_rbf_svm,"{'C': 10.0, 'gamma': 'scale'}",B3_margin,0.6124634935297731,True,0.7140568682418903,3436,2497,7977,714,6,1.6,shift,"{'n_features_kept': 128, 'n_missing_indicators': 0, 'n_features_final': 128}"
+GAS,M3_random_forest,"{'max_features': 'sqrt', 'min_samples_leaf': 1}",B2_entropy,0.8307976822389239,False,0.7224669603524229,3436,2497,7977,693,6,16.8,shift,"{'n_features_kept': 128, 'n_missing_indicators': 0, 'n_features_final': 128}"
+GAS,M4_hist_gradient_boosting,"{'learning_rate': 0.1, 'max_leaf_nodes': 63}",B1_max_prob,0.660412367910961,True,0.7116539847817381,3436,2497,7977,720,6,18.3,shift,"{'n_features_kept': 128, 'n_missing_indicators': 0, 'n_features_final': 128}"

@@ -1,0 +1,65 @@
+GAS/M1_logreg: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M1_logreg: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M1_logreg: hp={'C': 10.0} prob_best=B3_margin AUROC_calib=0.847 -> confident (40s)
+GAS/M1_logreg: TEST acc=0.9914 err=24 dAUROC=+0.0905 [-0.0327;+0.2385] p=0.1760 dAURC=+0.00298
+GAS/M2_rbf_svm: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M2_rbf_svm: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M2_rbf_svm: hp={'C': 10.0, 'gamma': 0.01} prob_best=B3_margin AUROC_calib=0.878 -> confident (9s)
+GAS/M2_rbf_svm: TEST acc=0.9939 err=17 dAUROC=+0.0473 [-0.0321;+0.1697] p=0.3720 dAURC=+0.00259
+GAS/M3_random_forest: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M3_random_forest: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M3_random_forest: hp={'max_features': 'sqrt', 'min_samples_leaf': 1} prob_best=B1_max_prob AUROC_calib=0.948 -> confident (56s)
+GAS/M3_random_forest: TEST acc=0.9914 err=24 dAUROC=-0.0089 [-0.0237;+0.0012] p=0.1050 dAURC=-0.00010
+GAS/M4_hist_gradient_boosting: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M4_hist_gradient_boosting: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M4_hist_gradient_boosting: hp={'learning_rate': 0.1, 'max_leaf_nodes': 31} prob_best=B2_entropy AUROC_calib=0.877 -> confident (22s)
+GAS/M4_hist_gradient_boosting: TEST acc=0.9921 err=22 dAUROC=-0.0215 [-0.0436;-0.0015] p=0.0380 dAURC=-0.00022
+GAS/M1_logreg: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M1_logreg: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M1_logreg: hp={'C': 10.0} prob_best=B3_margin AUROC_calib=0.950 -> confident (34s)
+GAS/M1_logreg: TEST acc=0.5627 err=3488 dAUROC=-0.1177 [-0.1318;-0.1030] p=0.0000 dAURC=-0.12442
+GAS/M2_rbf_svm: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M2_rbf_svm: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M2_rbf_svm: hp={'C': 10.0, 'gamma': 'scale'} prob_best=B3_margin AUROC_calib=0.612 -> CONFIDENCE_WEAK (2s)
+GAS/M2_rbf_svm: TEST acc=0.5646 err=3473 dAUROC=+0.1388 [+0.1239;+0.1541] p=0.0000 dAURC=+0.12374
+GAS/M3_random_forest: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M3_random_forest: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M3_random_forest: hp={'max_features': 'sqrt', 'min_samples_leaf': 1} prob_best=B2_entropy AUROC_calib=0.831 -> confident (17s)
+GAS/M3_random_forest: TEST acc=0.4844 err=4113 dAUROC=-0.1066 [-0.1186;-0.0943] p=0.0000 dAURC=-0.06617
+GAS/M4_hist_gradient_boosting: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M4_hist_gradient_boosting: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+GAS/M4_hist_gradient_boosting: hp={'learning_rate': 0.1, 'max_leaf_nodes': 63} prob_best=B1_max_prob AUROC_calib=0.660 -> CONFIDENCE_WEAK (18s)
+GAS/M4_hist_gradient_boosting: TEST acc=0.5275 err=3769 dAUROC=-0.0363 [-0.0497;-0.0221] p=0.0000 dAURC=-0.07287
+CREDIT/M1_logreg: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+CREDIT/M1_logreg: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+CREDIT/M1_logreg: hp={'C': 1.0} prob_best=B1_max_prob AUROC_calib=0.656 -> CONFIDENCE_WEAK (0s)
+CREDIT/M1_logreg: TEST acc=0.8105 err=1137 dAUROC=+0.0139 [+0.0055;+0.0225] p=0.0020 dAURC=+0.00727
+CREDIT/M2_rbf_svm: SVM sous-echantillonne a 10000 lignes de TRAIN (regle gelee)
+CREDIT/M2_rbf_svm: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+CREDIT/M2_rbf_svm: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+CREDIT/M2_rbf_svm: hp={'C': 1.0, 'gamma': 'scale'} prob_best=B1_max_prob AUROC_calib=0.637 -> CONFIDENCE_WEAK (33s)
+CREDIT/M2_rbf_svm: TEST acc=0.8168 err=1099 dAUROC=+0.0063 [-0.0068;+0.0187] p=0.3340 dAURC=+0.00506
+CREDIT/M3_random_forest: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+CREDIT/M3_random_forest: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+CREDIT/M3_random_forest: hp={'max_features': 0.3, 'min_samples_leaf': 5} prob_best=B1_max_prob AUROC_calib=0.697 -> CONFIDENCE_WEAK (30s)
+CREDIT/M3_random_forest: TEST acc=0.8198 err=1081 dAUROC=-0.0002 [-0.0020;+0.0015] p=0.8470 dAURC=+0.00003
+CREDIT/M4_hist_gradient_boosting: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+CREDIT/M4_hist_gradient_boosting: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+CREDIT/M4_hist_gradient_boosting: hp={'learning_rate': 0.05, 'max_leaf_nodes': 31} prob_best=B1_max_prob AUROC_calib=0.702 -> confident (2s)
+CREDIT/M4_hist_gradient_boosting: TEST acc=0.8203 err=1078 dAUROC=+0.0007 [-0.0007;+0.0022] p=0.3060 dAURC=+0.00107
+DRYBEAN/M1_logreg: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+DRYBEAN/M1_logreg: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+DRYBEAN/M1_logreg: hp={'C': 10.0} prob_best=B1_max_prob AUROC_calib=0.910 -> confident (1s)
+DRYBEAN/M1_logreg: TEST acc=0.9236 err=208 dAUROC=-0.0108 [-0.0186;-0.0034] p=0.0000 dAURC=-0.00136
+DRYBEAN/M2_rbf_svm: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+DRYBEAN/M2_rbf_svm: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+DRYBEAN/M2_rbf_svm: hp={'C': 10.0, 'gamma': 'scale'} prob_best=B3_margin AUROC_calib=0.907 -> confident (3s)
+DRYBEAN/M2_rbf_svm: TEST acc=0.9302 err=190 dAUROC=-0.0087 [-0.0185;+0.0001] p=0.0550 dAURC=-0.00054
+DRYBEAN/M3_random_forest: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+DRYBEAN/M3_random_forest: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+DRYBEAN/M3_random_forest: hp={'max_features': 'sqrt', 'min_samples_leaf': 1} prob_best=B1_max_prob AUROC_calib=0.920 -> confident (15s)
+DRYBEAN/M3_random_forest: TEST acc=0.9239 err=207 dAUROC=+0.0028 [-0.0030;+0.0093] p=0.3820 dAURC=+0.00089
+DRYBEAN/M4_hist_gradient_boosting: B4_platt inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+DRYBEAN/M4_hist_gradient_boosting: B5_isotonic inapplicable (The 'cv' parameter of CalibratedClassifierCV must be an int in the range [2, inf), an object implementing 'split' and 'get_n_splits', an iterable or None. Got 'prefit' instead.)
+DRYBEAN/M4_hist_gradient_boosting: hp={'learning_rate': 0.05, 'max_leaf_nodes': 31} prob_best=B2_entropy AUROC_calib=0.914 -> confident (11s)
+DRYBEAN/M4_hist_gradient_boosting: TEST acc=0.9232 err=209 dAUROC=-0.0051 [-0.0102;+0.0002] p=0.0590 dAURC=-0.00029
