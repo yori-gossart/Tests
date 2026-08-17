@@ -1,0 +1,12 @@
+=== Phase 23-RT : sondage d'acces, 2026-08-17T16:08:33Z ===
+https://www.openml.org/api/v1/json/study/99                000
+FAIL(000)
+https://api.openml.org/api/v1/json/study/99                000
+FAIL(000)
+https://openml.org                                         000
+FAIL(000)
+https://test.openml.org                                    000
+FAIL(000)
+https://pypi.org/simple/openml/                            200
+https://raw.githubusercontent.com                          301
+https://api.github.com                                     200
