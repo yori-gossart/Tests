@@ -1,0 +1,180 @@
+dataset,stage,reason,n_instances,n_features,n_classes
+GAMETES_Epistasis_2_Way_1000atts_0.4H_EDM_1_EDM_1_1,inelig_manifeste,"p=1000 hors [5, 500]",1600.0,1000.0,2.0
+GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1,candidat,,1600.0,20.0,2.0
+GAMETES_Epistasis_2_Way_20atts_0.4H_EDM_1_1,exclu_amendement1,amendement 1: famille 'gametes' deja representee,1600.0,20.0,2.0
+GAMETES_Epistasis_3_Way_20atts_0.2H_EDM_1_1,exclu_amendement1,amendement 1: famille 'gametes' deja representee,1600.0,20.0,2.0
+GAMETES_Heterogeneity_20atts_1600_Het_0.4_0.2_50_EDM_2_001,exclu_amendement1,amendement 1: famille 'gametes' deja representee,1600.0,20.0,2.0
+GAMETES_Heterogeneity_20atts_1600_Het_0.4_0.2_75_EDM_2_001,exclu_amendement1,amendement 1: famille 'gametes' deja representee,1600.0,20.0,2.0
+Hill_Valley_with_noise,candidat,,1212.0,100.0,2.0
+Hill_Valley_without_noise,exclu_amendement1,amendement 1: famille 'hill' deja representee,1212.0,100.0,2.0
+_deprecated_australian,inelig_manifeste,"n=690 hors [1000, 100000]",690.0,14.0,2.0
+_deprecated_auto,inelig_manifeste,"n=202 hors [1000, 100000]",202.0,25.0,5.0
+_deprecated_breast,inelig_manifeste,"n=699 hors [1000, 100000]",699.0,10.0,2.0
+_deprecated_breast_cancer_wisconsin,inelig_manifeste,"n=569 hors [1000, 100000]",569.0,30.0,2.0
+_deprecated_breast_w,inelig_manifeste,"n=699 hors [1000, 100000]",699.0,9.0,2.0
+_deprecated_buggyCrx,inelig_manifeste,"n=690 hors [1000, 100000]",690.0,15.0,2.0
+_deprecated_car,exclu_amendement1,amendement 1: _deprecated_*,1728.0,6.0,4.0
+_deprecated_car_evaluation,exclu_amendement1,amendement 1: _deprecated_*,1728.0,21.0,4.0
+_deprecated_cleve,inelig_manifeste,"n=303 hors [1000, 100000]",303.0,13.0,2.0
+_deprecated_cleveland,inelig_manifeste,"n=303 hors [1000, 100000]",303.0,13.0,5.0
+_deprecated_cleveland_nominal,inelig_manifeste,"n=303 hors [1000, 100000]",303.0,7.0,5.0
+_deprecated_cmc,exclu_amendement1,amendement 1: _deprecated_*,1473.0,9.0,3.0
+_deprecated_colic,inelig_manifeste,"n=368 hors [1000, 100000]",368.0,22.0,2.0
+_deprecated_contraceptive,exclu_amendement1,amendement 1: _deprecated_*,1473.0,9.0,3.0
+_deprecated_credit_a,exclu_historique,jeton d'exclusion historique 'credit',,,
+_deprecated_credit_g,exclu_historique,jeton d'exclusion historique 'credit',,,
+_deprecated_crx,inelig_manifeste,"n=690 hors [1000, 100000]",690.0,15.0,2.0
+_deprecated_diabetes,inelig_manifeste,"n=768 hors [1000, 100000]",768.0,8.0,2.0
+_deprecated_flare,exclu_amendement1,amendement 1: _deprecated_*,1066.0,10.0,2.0
+_deprecated_german,exclu_amendement1,amendement 1: _deprecated_*,1000.0,20.0,2.0
+_deprecated_glass,inelig_manifeste,"n=205 hors [1000, 100000]",205.0,9.0,5.0
+_deprecated_heart_c,inelig_manifeste,"n=303 hors [1000, 100000]",303.0,13.0,2.0
+_deprecated_heart_h,inelig_manifeste,"n=294 hors [1000, 100000]",294.0,13.0,2.0
+_deprecated_heart_statlog,inelig_manifeste,"n=270 hors [1000, 100000]",270.0,13.0,2.0
+_deprecated_horse_colic,inelig_manifeste,"n=368 hors [1000, 100000]",368.0,22.0,2.0
+_deprecated_house_votes_84,inelig_manifeste,"n=435 hors [1000, 100000]",435.0,16.0,2.0
+_deprecated_hungarian,inelig_manifeste,"n=294 hors [1000, 100000]",294.0,13.0,2.0
+_deprecated_pima,inelig_manifeste,"n=768 hors [1000, 100000]",768.0,8.0,2.0
+_deprecated_prnn_fglass,inelig_manifeste,"n=205 hors [1000, 100000]",205.0,9.0,5.0
+_deprecated_solar_flare_1,inelig_manifeste,"n=315 hors [1000, 100000]",315.0,12.0,5.0
+_deprecated_solar_flare_2,exclu_amendement1,amendement 1: _deprecated_*,1066.0,12.0,6.0
+_deprecated_vote,inelig_manifeste,"n=435 hors [1000, 100000]",435.0,16.0,2.0
+_deprecated_wdbc,inelig_manifeste,"n=569 hors [1000, 100000]",569.0,30.0,2.0
+adult,candidat,,48842.0,14.0,2.0
+agaricus_lepiota,candidat,,8145.0,22.0,2.0
+allbp,candidat,,3772.0,29.0,3.0
+allhyper,candidat,,3771.0,29.0,4.0
+allhypo,candidat,,3770.0,29.0,3.0
+allrep,candidat,,3772.0,29.0,4.0
+analcatdata_aids,inelig_manifeste,"n=50 hors [1000, 100000]; p=4 hors [5, 500]",50.0,4.0,2.0
+analcatdata_asbestos,inelig_manifeste,"n=83 hors [1000, 100000]; p=3 hors [5, 500]",83.0,3.0,2.0
+analcatdata_authorship,inelig_manifeste,"n=841 hors [1000, 100000]",841.0,70.0,4.0
+analcatdata_bankruptcy,inelig_manifeste,"n=50 hors [1000, 100000]",50.0,6.0,2.0
+analcatdata_boxing1,inelig_manifeste,"n=120 hors [1000, 100000]; p=3 hors [5, 500]",120.0,3.0,2.0
+analcatdata_boxing2,inelig_manifeste,"n=132 hors [1000, 100000]; p=3 hors [5, 500]",132.0,3.0,2.0
+analcatdata_creditscore,exclu_historique,jeton d'exclusion historique 'credit',,,
+analcatdata_cyyoung8092,inelig_manifeste,"n=97 hors [1000, 100000]",97.0,10.0,2.0
+analcatdata_cyyoung9302,inelig_manifeste,"n=92 hors [1000, 100000]",92.0,10.0,2.0
+analcatdata_dmft,inelig_manifeste,"n=797 hors [1000, 100000]; p=4 hors [5, 500]",797.0,4.0,6.0
+analcatdata_fraud,inelig_manifeste,"n=42 hors [1000, 100000]",42.0,11.0,2.0
+analcatdata_germangss,inelig_manifeste,"n=400 hors [1000, 100000]",400.0,5.0,4.0
+analcatdata_happiness,inelig_manifeste,"n=60 hors [1000, 100000]; p=3 hors [5, 500]",60.0,3.0,3.0
+analcatdata_japansolvent,inelig_manifeste,"n=52 hors [1000, 100000]",52.0,9.0,2.0
+analcatdata_lawsuit,inelig_manifeste,"n=264 hors [1000, 100000]; p=4 hors [5, 500]",264.0,4.0,2.0
+ann_thyroid,candidat,,7200.0,21.0,3.0
+appendicitis,inelig_manifeste,"n=106 hors [1000, 100000]",106.0,7.0,2.0
+auto_insurance_symboling,inelig_manifeste,"n=205 hors [1000, 100000]",205.0,24.0,6.0
+backache,inelig_manifeste,"n=180 hors [1000, 100000]",180.0,32.0,2.0
+balance_scale,inelig_manifeste,"n=625 hors [1000, 100000]; p=4 hors [5, 500]",625.0,4.0,3.0
+banana,inelig_manifeste,"p=2 hors [5, 500]",5300.0,2.0,2.0
+biomed,inelig_manifeste,"n=209 hors [1000, 100000]",209.0,8.0,2.0
+breast_cancer,inelig_manifeste,"n=286 hors [1000, 100000]",286.0,9.0,2.0
+breast_cancer_wisconsin_diagnostic,inelig_manifeste,"n=569 hors [1000, 100000]",569.0,30.0,2.0
+breast_cancer_wisconsin_original,inelig_manifeste,"n=699 hors [1000, 100000]",699.0,9.0,2.0
+bupa,inelig_manifeste,"n=345 hors [1000, 100000]",345.0,5.0,2.0
+calendarDOW,inelig_manifeste,"n=399 hors [1000, 100000]",399.0,32.0,5.0
+car_evaluation,candidat,,1728.0,6.0,4.0
+cars,inelig_manifeste,"n=392 hors [1000, 100000]",392.0,8.0,3.0
+chess,candidat,,3196.0,36.0,2.0
+churn,candidat,,5000.0,20.0,2.0
+clean1,inelig_manifeste,"n=476 hors [1000, 100000]",476.0,168.0,2.0
+clean2,candidat,,6598.0,168.0,2.0
+cloud,inelig_manifeste,"n=108 hors [1000, 100000]",108.0,7.0,4.0
+coil2000,candidat,,9822.0,85.0,2.0
+collins,inelig_manifeste,"n=485 hors [1000, 100000]",485.0,23.0,13.0
+confidence,inelig_manifeste,"n=72 hors [1000, 100000]; p=3 hors [5, 500]",72.0,3.0,6.0
+congressional_voting_records,inelig_manifeste,"n=435 hors [1000, 100000]",435.0,16.0,2.0
+connect_4,candidat,,67557.0,42.0,3.0
+contraceptive_method,candidat,,1473.0,9.0,3.0
+corral,inelig_manifeste,"n=160 hors [1000, 100000]",160.0,6.0,2.0
+credit_approval_australia,exclu_historique,jeton d'exclusion historique 'credit',,,
+credit_approval_germany,exclu_historique,jeton d'exclusion historique 'credit',,,
+dermatology,inelig_manifeste,"n=366 hors [1000, 100000]",366.0,34.0,6.0
+dis,candidat,,3772.0,29.0,2.0
+dna,candidat,,3186.0,180.0,3.0
+ecoli,inelig_manifeste,"n=327 hors [1000, 100000]",327.0,7.0,5.0
+fars,inelig_manifeste,"n=100968 hors [1000, 100000]",100968.0,29.0,8.0
+flags,inelig_manifeste,"n=178 hors [1000, 100000]",178.0,43.0,5.0
+glass2,inelig_manifeste,"n=163 hors [1000, 100000]",163.0,9.0,2.0
+haberman,inelig_manifeste,"n=306 hors [1000, 100000]; p=3 hors [5, 500]",306.0,3.0,2.0
+hayes_roth,inelig_manifeste,"n=160 hors [1000, 100000]; p=4 hors [5, 500]",160.0,4.0,3.0
+heart_disease_cleveland,inelig_manifeste,"n=303 hors [1000, 100000]",303.0,13.0,2.0
+heart_disease_hungarian,inelig_manifeste,"n=294 hors [1000, 100000]",294.0,13.0,2.0
+heart_disease_va_long_beach,inelig_manifeste,"n=200 hors [1000, 100000]",200.0,13.0,2.0
+heart_disease_zurich,inelig_manifeste,"n=123 hors [1000, 100000]",123.0,12.0,2.0
+hepatitis,inelig_manifeste,"n=155 hors [1000, 100000]",155.0,19.0,2.0
+horse_colic_lesion_type,inelig_manifeste,"n=368 hors [1000, 100000]",368.0,20.0,5.0
+horse_colic_outcome,inelig_manifeste,"n=366 hors [1000, 100000]",366.0,21.0,3.0
+horse_colic_surgery,inelig_manifeste,"n=368 hors [1000, 100000]",368.0,20.0,2.0
+hypothyroid,candidat,,3163.0,25.0,2.0
+ionosphere,inelig_manifeste,"n=351 hors [1000, 100000]",351.0,34.0,2.0
+iris,inelig_manifeste,"n=150 hors [1000, 100000]; p=4 hors [5, 500]",150.0,4.0,3.0
+irish,inelig_manifeste,"n=500 hors [1000, 100000]",500.0,5.0,2.0
+kddcup,inelig_manifeste,"n=494020 hors [1000, 100000]",494020.0,41.0,23.0
+kr_vs_kp,candidat,,3196.0,36.0,2.0
+krkopt,candidat,,28056.0,6.0,18.0
+labor,inelig_manifeste,"n=57 hors [1000, 100000]",57.0,16.0,2.0
+led24,candidat,,3200.0,24.0,10.0
+led7,candidat,,3200.0,7.0,10.0
+letter,candidat,,20000.0,16.0,26.0
+lupus,inelig_manifeste,"n=87 hors [1000, 100000]; p=3 hors [5, 500]",87.0,3.0,2.0
+lymphography,inelig_manifeste,"n=148 hors [1000, 100000]",148.0,18.0,4.0
+magic,candidat,,19020.0,10.0,2.0
+mfeat_factors,exclu_amendement1,"amendement 1: mfeat_* (UCI Multiple Features, meme source que digits Phase 13A)",2000.0,216.0,10.0
+mfeat_fourier,exclu_amendement1,"amendement 1: mfeat_* (UCI Multiple Features, meme source que digits Phase 13A)",2000.0,76.0,10.0
+mfeat_karhunen,exclu_amendement1,"amendement 1: mfeat_* (UCI Multiple Features, meme source que digits Phase 13A)",2000.0,64.0,10.0
+mfeat_morphological,exclu_amendement1,"amendement 1: mfeat_* (UCI Multiple Features, meme source que digits Phase 13A)",2000.0,6.0,10.0
+mfeat_pixel,exclu_amendement1,"amendement 1: mfeat_* (UCI Multiple Features, meme source que digits Phase 13A)",2000.0,240.0,10.0
+mfeat_zernike,exclu_amendement1,"amendement 1: mfeat_* (UCI Multiple Features, meme source que digits Phase 13A)",2000.0,47.0,10.0
+mnist,inelig_manifeste,"p=784 hors [5, 500]",70000.0,784.0,10.0
+mofn_3_7_10,candidat,,1324.0,10.0,2.0
+molecular_biology_promoters,inelig_manifeste,"n=106 hors [1000, 100000]",106.0,57.0,2.0
+monk1,inelig_manifeste,"n=556 hors [1000, 100000]",556.0,6.0,2.0
+monk2,inelig_manifeste,"n=601 hors [1000, 100000]",601.0,6.0,2.0
+monk3,inelig_manifeste,"n=554 hors [1000, 100000]",554.0,6.0,2.0
+movement_libras,inelig_manifeste,"n=360 hors [1000, 100000]",360.0,90.0,15.0
+mushroom,candidat,,8124.0,22.0,2.0
+mux6,inelig_manifeste,"n=128 hors [1000, 100000]",128.0,6.0,2.0
+new_thyroid,inelig_manifeste,"n=215 hors [1000, 100000]",215.0,5.0,3.0
+nursery,candidat,,12958.0,8.0,4.0
+optdigits,exclu_historique,jeton d'exclusion historique 'digit',,,
+page_blocks,candidat,,5473.0,10.0,5.0
+parity5,inelig_manifeste,"n=32 hors [1000, 100000]",32.0,5.0,2.0
+parity5+5,candidat,,1124.0,10.0,2.0
+pendigits,exclu_historique,jeton d'exclusion historique 'digit',,,
+penguins,inelig_manifeste,"n=344 hors [1000, 100000]",344.0,7.0,3.0
+phoneme,candidat,,5404.0,5.0,2.0
+poker,inelig_manifeste,"n=1025010 hors [1000, 100000]",1025010.0,10.0,10.0
+postoperative_patient_data,inelig_manifeste,"n=88 hors [1000, 100000]",88.0,8.0,2.0
+prnn_crabs,inelig_manifeste,"n=200 hors [1000, 100000]",200.0,7.0,2.0
+prnn_synth,inelig_manifeste,"n=250 hors [1000, 100000]; p=2 hors [5, 500]",250.0,2.0,2.0
+profb,inelig_manifeste,"n=672 hors [1000, 100000]",672.0,9.0,2.0
+ring,candidat,,7400.0,20.0,2.0
+saheart,inelig_manifeste,"n=462 hors [1000, 100000]",462.0,9.0,2.0
+satimage,candidat,,6435.0,36.0,6.0
+schizo,inelig_manifeste,"n=340 hors [1000, 100000]",340.0,14.0,3.0
+segmentation,candidat,,2310.0,19.0,7.0
+shuttle,candidat,,58000.0,9.0,7.0
+sleep,inelig_manifeste,"n=105908 hors [1000, 100000]",105908.0,13.0,5.0
+sonar,inelig_manifeste,"n=208 hors [1000, 100000]",208.0,60.0,2.0
+soybean,exclu_historique,jeton d'exclusion historique 'bean',,,
+spambase,candidat,,4601.0,57.0,2.0
+spect,inelig_manifeste,"n=267 hors [1000, 100000]",267.0,22.0,2.0
+spectf,inelig_manifeste,"n=349 hors [1000, 100000]",349.0,44.0,2.0
+splice,candidat,,3188.0,60.0,3.0
+tae,inelig_manifeste,"n=151 hors [1000, 100000]",151.0,5.0,3.0
+texture,candidat,,5500.0,40.0,11.0
+threeOf9,inelig_manifeste,"n=512 hors [1000, 100000]",512.0,9.0,2.0
+tic_tac_toe,inelig_manifeste,"n=958 hors [1000, 100000]",958.0,9.0,2.0
+titanic,candidat,,2207.0,8.0,2.0
+tokyo1,inelig_manifeste,"n=959 hors [1000, 100000]",959.0,44.0,2.0
+twonorm,candidat,,7400.0,20.0,2.0
+vehicle,inelig_manifeste,"n=846 hors [1000, 100000]",846.0,18.0,4.0
+vowel,inelig_manifeste,"n=990 hors [1000, 100000]",990.0,13.0,11.0
+waveform_21,candidat,,5000.0,21.0,3.0
+waveform_40,exclu_amendement1,amendement 1: famille 'waveform' deja representee,5000.0,40.0,3.0
+wine_quality_red,candidat,,1599.0,11.0,6.0
+wine_quality_white,exclu_amendement1,amendement 1: famille 'wine' deja representee,4898.0,11.0,7.0
+wine_recognition,inelig_manifeste,"n=178 hors [1000, 100000]",178.0,13.0,3.0
+xd6,inelig_manifeste,"n=973 hors [1000, 100000]",973.0,9.0,2.0
+yeast,candidat,,1479.0,8.0,9.0

@@ -1,0 +1,420 @@
+{
+  "protocol_sha256": "19c17f5265926ec6a89a888f5c400078d600ad1155aa1e2f1b50ac238c33829e",
+  "TEST_OPENED": "NO",
+  "source_pool_requested": "OpenML-CC18 (inatteignable, cf. protocole par. 2)",
+  "source_pool_used": "PMLB",
+  "manifest_url": "https://raw.githubusercontent.com/EpistasisLab/pmlb/master/pmlb/all_summary_stats.tsv",
+  "manifest_sha256": "d658820a844a555776273a2c1b6766eba983bb078e3bcc539141b1ac2cc33960",
+  "n_classification_datasets_in_pool": 179,
+  "n_excluded_historical": 8,
+  "n_ineligible_manifest": 108,
+  "n_excluded_amendment1": 20,
+  "n_candidates_before_amendment1": 63,
+  "n_candidates": 43,
+  "deterministic_order_first_20": [
+    "GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1",
+    "Hill_Valley_with_noise",
+    "adult",
+    "agaricus_lepiota",
+    "allbp",
+    "allhyper",
+    "allhypo",
+    "allrep",
+    "ann_thyroid",
+    "car_evaluation",
+    "chess",
+    "churn",
+    "clean2",
+    "coil2000",
+    "connect_4",
+    "contraceptive_method",
+    "dis",
+    "dna",
+    "hypothyroid",
+    "kr_vs_kp"
+  ],
+  "acquisition_trail": [
+    {
+      "dataset": "GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1",
+      "status": "EXECUTABLE",
+      "n_instances": 1600,
+      "n_features_usable": 20,
+      "n_classes": 2,
+      "min_class_count": 800,
+      "dropped_quasi_identifiers": [],
+      "sha256_tsv_gz": "679309c8e1362d0d1fe175f3368995f2d560a31e7d51988a2efe3ea99c4bbf37",
+      "n_bytes": 8934,
+      "class_distribution": {
+        "0": 800,
+        "1": 800
+      },
+      "n_nan": 0,
+      "split_counts": {
+        "train": 960,
+        "calib": 320,
+        "test": 320
+      },
+      "all_classes_present_in_every_split": true,
+      "splits_partition_exactly": true
+    },
+    {
+      "dataset": "Hill_Valley_with_noise",
+      "status": "NOT_ELIGIBLE",
+      "reason": "p=0 hors [5, 500]",
+      "n_instances": 1212,
+      "n_features_usable": 0,
+      "n_classes": 2,
+      "min_class_count": 606,
+      "dropped_quasi_identifiers": [
+        "X1",
+        "X2",
+        "X3",
+        "X4",
+        "X5",
+        "X6",
+        "X7",
+        "X8",
+        "X9",
+        "X10",
+        "X11",
+        "X12",
+        "X13",
+        "X14",
+        "X15",
+        "X16",
+        "X17",
+        "X18",
+        "X19",
+        "X20",
+        "X21",
+        "X22",
+        "X23",
+        "X24",
+        "X25",
+        "X26",
+        "X27",
+        "X28",
+        "X29",
+        "X30",
+        "X31",
+        "X32",
+        "X33",
+        "X34",
+        "X35",
+        "X36",
+        "X37",
+        "X38",
+        "X39",
+        "X40",
+        "X41",
+        "X42",
+        "X43",
+        "X44",
+        "X45",
+        "X46",
+        "X47",
+        "X48",
+        "X49",
+        "X50",
+        "X51",
+        "X52",
+        "X53",
+        "X54",
+        "X55",
+        "X56",
+        "X57",
+        "X58",
+        "X59",
+        "X60",
+        "X61",
+        "X62",
+        "X63",
+        "X64",
+        "X65",
+        "X66",
+        "X67",
+        "X68",
+        "X69",
+        "X70",
+        "X71",
+        "X72",
+        "X73",
+        "X74",
+        "X75",
+        "X76",
+        "X77",
+        "X78",
+        "X79",
+        "X80",
+        "X81",
+        "X82",
+        "X83",
+        "X84",
+        "X85",
+        "X86",
+        "X87",
+        "X88",
+        "X89",
+        "X90",
+        "X91",
+        "X92",
+        "X93",
+        "X94",
+        "X95",
+        "X96",
+        "X97",
+        "X98",
+        "X99",
+        "X100"
+      ]
+    },
+    {
+      "dataset": "adult",
+      "status": "EXECUTABLE",
+      "n_instances": 48842,
+      "n_features_usable": 14,
+      "n_classes": 2,
+      "min_class_count": 11687,
+      "dropped_quasi_identifiers": [],
+      "sha256_tsv_gz": "fb8bc76eafa39558b6044907f23416faf99099cefb8afd06a2cf5afbdae1b506",
+      "n_bytes": 497131,
+      "class_distribution": {
+        "0": 11687,
+        "1": 37155
+      },
+      "n_nan": 0,
+      "split_counts": {
+        "train": 29305,
+        "calib": 9769,
+        "test": 9768
+      },
+      "all_classes_present_in_every_split": true,
+      "splits_partition_exactly": true
+    },
+    {
+      "dataset": "agaricus_lepiota",
+      "status": "EXECUTABLE",
+      "n_instances": 8145,
+      "n_features_usable": 22,
+      "n_classes": 2,
+      "min_class_count": 3917,
+      "dropped_quasi_identifiers": [],
+      "sha256_tsv_gz": "cd9fc8d6cdc07793f16b8455caef2522528727a40e0ecc1d4f83cf506769b1be",
+      "n_bytes": 29237,
+      "class_distribution": {
+        "0": 4228,
+        "1": 3917
+      },
+      "n_nan": 0,
+      "split_counts": {
+        "train": 4887,
+        "calib": 1629,
+        "test": 1629
+      },
+      "all_classes_present_in_every_split": true,
+      "splits_partition_exactly": true
+    },
+    {
+      "dataset": "allbp",
+      "status": "NOT_ELIGIBLE",
+      "reason": "plus petite classe = 14 < 50",
+      "n_instances": 3772,
+      "n_features_usable": 29,
+      "n_classes": 3,
+      "min_class_count": 14,
+      "dropped_quasi_identifiers": []
+    },
+    {
+      "dataset": "allhyper",
+      "status": "NOT_ELIGIBLE",
+      "reason": "plus petite classe = 10 < 50",
+      "n_instances": 3771,
+      "n_features_usable": 29,
+      "n_classes": 4,
+      "min_class_count": 10,
+      "dropped_quasi_identifiers": []
+    },
+    {
+      "dataset": "allhypo",
+      "status": "EXECUTABLE",
+      "n_instances": 3770,
+      "n_features_usable": 29,
+      "n_classes": 3,
+      "min_class_count": 95,
+      "dropped_quasi_identifiers": [],
+      "sha256_tsv_gz": "7e9d156208d5310d69e4887cad2e167622528bf389747859aca3efd90599e84c",
+      "n_bytes": 39902,
+      "class_distribution": {
+        "0": 194,
+        "1": 3481,
+        "2": 95
+      },
+      "n_nan": 0,
+      "split_counts": {
+        "train": 2262,
+        "calib": 754,
+        "test": 754
+      },
+      "all_classes_present_in_every_split": true,
+      "splits_partition_exactly": true
+    }
+  ],
+  "retained": {
+    "GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1": {
+      "status": "EXECUTABLE",
+      "n_instances": 1600,
+      "n_features_usable": 20,
+      "n_classes": 2,
+      "min_class_count": 800,
+      "dropped_quasi_identifiers": [],
+      "sha256_tsv_gz": "679309c8e1362d0d1fe175f3368995f2d560a31e7d51988a2efe3ea99c4bbf37",
+      "n_bytes": 8934,
+      "class_distribution": {
+        "0": 800,
+        "1": 800
+      },
+      "n_nan": 0,
+      "split_counts": {
+        "train": 960,
+        "calib": 320,
+        "test": 320
+      },
+      "class_counts_per_split": {
+        "train": {
+          "0": 480,
+          "1": 480
+        },
+        "calib": {
+          "0": 160,
+          "1": 160
+        },
+        "test": {
+          "0": 160,
+          "1": 160
+        }
+      },
+      "all_classes_present_in_every_split": true,
+      "splits_partition_exactly": true
+    },
+    "adult": {
+      "status": "EXECUTABLE",
+      "n_instances": 48842,
+      "n_features_usable": 14,
+      "n_classes": 2,
+      "min_class_count": 11687,
+      "dropped_quasi_identifiers": [],
+      "sha256_tsv_gz": "fb8bc76eafa39558b6044907f23416faf99099cefb8afd06a2cf5afbdae1b506",
+      "n_bytes": 497131,
+      "class_distribution": {
+        "0": 11687,
+        "1": 37155
+      },
+      "n_nan": 0,
+      "split_counts": {
+        "train": 29305,
+        "calib": 9769,
+        "test": 9768
+      },
+      "class_counts_per_split": {
+        "train": {
+          "0": 7012,
+          "1": 22293
+        },
+        "calib": {
+          "0": 2338,
+          "1": 7431
+        },
+        "test": {
+          "0": 2337,
+          "1": 7431
+        }
+      },
+      "all_classes_present_in_every_split": true,
+      "splits_partition_exactly": true
+    },
+    "agaricus_lepiota": {
+      "status": "EXECUTABLE",
+      "n_instances": 8145,
+      "n_features_usable": 22,
+      "n_classes": 2,
+      "min_class_count": 3917,
+      "dropped_quasi_identifiers": [],
+      "sha256_tsv_gz": "cd9fc8d6cdc07793f16b8455caef2522528727a40e0ecc1d4f83cf506769b1be",
+      "n_bytes": 29237,
+      "class_distribution": {
+        "0": 4228,
+        "1": 3917
+      },
+      "n_nan": 0,
+      "split_counts": {
+        "train": 4887,
+        "calib": 1629,
+        "test": 1629
+      },
+      "class_counts_per_split": {
+        "train": {
+          "0": 2537,
+          "1": 2350
+        },
+        "calib": {
+          "0": 845,
+          "1": 784
+        },
+        "test": {
+          "0": 846,
+          "1": 783
+        }
+      },
+      "all_classes_present_in_every_split": true,
+      "splits_partition_exactly": true
+    },
+    "allhypo": {
+      "status": "EXECUTABLE",
+      "n_instances": 3770,
+      "n_features_usable": 29,
+      "n_classes": 3,
+      "min_class_count": 95,
+      "dropped_quasi_identifiers": [],
+      "sha256_tsv_gz": "7e9d156208d5310d69e4887cad2e167622528bf389747859aca3efd90599e84c",
+      "n_bytes": 39902,
+      "class_distribution": {
+        "0": 194,
+        "1": 3481,
+        "2": 95
+      },
+      "n_nan": 0,
+      "split_counts": {
+        "train": 2262,
+        "calib": 754,
+        "test": 754
+      },
+      "class_counts_per_split": {
+        "train": {
+          "0": 116,
+          "1": 2089,
+          "2": 57
+        },
+        "calib": {
+          "0": 39,
+          "1": 696,
+          "2": 19
+        },
+        "test": {
+          "0": 39,
+          "1": 696,
+          "2": 19
+        }
+      },
+      "all_classes_present_in_every_split": true,
+      "splits_partition_exactly": true
+    }
+  },
+  "seed": 23260823,
+  "split": {
+    "train": 0.6,
+    "calib": 0.2,
+    "test": 0.2
+  },
+  "n_retained": 4,
+  "gate_status": "OK"
+}

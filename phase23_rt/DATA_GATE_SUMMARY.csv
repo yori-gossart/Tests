@@ -1,0 +1,5 @@
+dataset,n,p,K,min_class,sha256,train,calib,test
+GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1,1600,20,2,800,679309c8e1362d0d...,960,320,320
+adult,48842,14,2,11687,fb8bc76eafa39558...,29305,9769,9768
+agaricus_lepiota,8145,22,2,3917,cd9fc8d6cdc07793...,4887,1629,1629
+allhypo,3770,29,3,95,7e9d156208d5310d...,2262,754,754

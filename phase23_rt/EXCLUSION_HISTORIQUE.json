@@ -1,0 +1,181 @@
+{
+  "tokens_found": {
+    "3w": [
+      "phase17a_3w/AUDIT_SUMMARY.json",
+      "phase17a_3w/RAPPORT_PHASE17A_GATE0_3W.md",
+      "phase17a_3w/SHA256SUMS.txt",
+      "phase19_hydraulic/RAPPORT_PHASE19_GATE_BANC_PHYSIQUE.md",
+      "src/phase17a_3w_audit.py",
+      "src/phase23_rt_gate.py"
+    ],
+    "aps": [
+      "phase10_reset/AUDIT_BASELINES.md",
+      "phase14_tep/PROTOCOLE_PREENREGISTRE_TEP.json",
+      "phase17a_3w/RAPPORT_PHASE17A_GATE0_3W.md",
+      "phase21_ir/CELL_SCORES.csv",
+      "phase21_ir/GATE_A.json",
+      "phase21_ir/GATE_A_SUMMARY.csv"
+    ],
+    "bean": [
+      "phase22_br/CELLS_MAIN.csv",
+      "phase22_br/GATE_B.json",
+      "phase22_br/GATE_B_SUMMARY.csv",
+      "phase22_br/ORACLE_ANNEX.csv",
+      "phase22_br/PHASE22_BR_RESULTS.json",
+      "phase22_br/PROTOCOLE_PHASE22_BR.md"
+    ],
+    "credit": [
+      "phase22_br/CELLS_MAIN.csv",
+      "phase22_br/DELTAS_WEAK_CELLS.csv",
+      "phase22_br/GATE_B.json",
+      "phase22_br/GATE_B_SUMMARY.csv",
+      "phase22_br/ORACLE_ANNEX.csv",
+      "phase22_br/PHASE22_BR_RESULTS.json"
+    ],
+    "digit": [
+      "phase13a_digits/GATE_13A_CHECKS.json",
+      "phase13a_digits/RAPPORT_PHASE13A_TRANSPOSABILITE.md",
+      "phase14_tep/RAPPORT_TEP_TEST_FO.md",
+      "phase14_tep/RAPPORT_TEP_VALIDATION_TERRAIN.md",
+      "src/phase13a_transposability_gate.py",
+      "src/phase17a_3w_audit.py"
+    ],
+    "eastman": [
+      "phase14_tep/PROTOCOLE_PREENREGISTRE_TEP.json",
+      "phase14_tep/RAPPORT_TEP_VALIDATION_TERRAIN.md",
+      "phase14_tep/evidence/tep_validation.json",
+      "src/phase14_tep_analyse.py",
+      "src/phase14_tep_harness.py",
+      "src/phase14_tep_verdict.py"
+    ],
+    "epanet": [
+      "phase10_reset/EPA_DATA_MANIFEST.json",
+      "phase10_reset/audit_summary.json",
+      "phase11_epa/EPA_DATA_MANIFEST.json",
+      "phase11_epa/PHASE11_GATES.json",
+      "phase11_epa/RAPPORT_PHASE11C_REPRODUCTION_OFFICIELLE.md",
+      "phase11_epa/RAPPORT_PHASE11_FINAL.md"
+    ],
+    "gas": [
+      "phase12_gate0/RAPPORT_PHASE12A_GATE0.md",
+      "phase12_gate0/evidence/accessibility_probe.json",
+      "phase12_gate0/evidence/inventory.json",
+      "phase21_ir/GATE_A.json",
+      "phase22_br/CELLS_MAIN.csv",
+      "phase22_br/CELLS_SHIFT.csv"
+    ],
+    "har": [
+      "phase21_ir/CELL_CONTRASTS.csv",
+      "phase21_ir/CELL_SCORES.csv",
+      "phase21_ir/CELL_SUMMARY.csv",
+      "phase21_ir/GATE_A.json",
+      "phase21_ir/GATE_A_SUMMARY.csv",
+      "phase21_ir/PHASE21_IR_RESULTS.json"
+    ],
+    "hydraulic": [
+      "phase10_reset/AUDIT_BASELINES.md",
+      "phase19_hydraulic/AUDIT_HYDRAULIC.json",
+      "phase19_hydraulic/RAPPORT_PHASE19_GATE_BANC_PHYSIQUE.md",
+      "phase19_hydraulic/SHA256SUMS.txt",
+      "src/audit_data.py",
+      "src/phase11d_reproduce.py"
+    ],
+    "leak": [
+      "phase10_reset/EVENT_LEVEL_BATTLEDIM.csv",
+      "phase10_reset/FO_DIAGNOSTIC_RESULTS.csv",
+      "phase10_reset/audit_summary.json",
+      "phase12_gate0/RAPPORT_PHASE12A_ACQUISITION.md",
+      "phase12_gate0/RAPPORT_PHASE12A_GATE0.md",
+      "phase12_gate0/SHA256SUMS.txt"
+    ],
+    "scania": [
+      "phase21_ir/GATE_A.json",
+      "phase21_ir/PROTOCOLE_PHASE21_IR.md",
+      "phase21_ir/RAPPORT_PHASE21_IR.md",
+      "phase22_br/PROTOCOLE_PHASE22_BR.md",
+      "src/phase21_ir_acquire.py",
+      "src/phase23_rt_gate.py"
+    ],
+    "secom": [
+      "phase21_ir/CELL_CONTRASTS.csv",
+      "phase21_ir/CELL_SCORES.csv",
+      "phase21_ir/CELL_SUMMARY.csv",
+      "phase21_ir/GATE_A.json",
+      "phase21_ir/GATE_A_SUMMARY.csv",
+      "phase21_ir/PHASE21_IR_RESULTS.json"
+    ],
+    "sensorless": [
+      "phase22_br/GATE_B.json",
+      "phase22_br/GATE_B_SUMMARY.csv",
+      "phase22_br/PHASE22_BR_RESULTS.json",
+      "phase22_br/PROTOCOLE_PHASE22_BR.md",
+      "phase22_br/RAPPORT_PHASE22_BR.md",
+      "src/phase22_br_gate.py"
+    ],
+    "steel": [
+      "phase21_ir/CELL_CONTRASTS.csv",
+      "phase21_ir/CELL_SCORES.csv",
+      "phase21_ir/CELL_SUMMARY.csv",
+      "phase21_ir/GATE_A.json",
+      "phase21_ir/GATE_A_SUMMARY.csv",
+      "phase21_ir/PHASE21_IR_RESULTS.json"
+    ],
+    "tennessee": [
+      "phase14_tep/PROTOCOLE_PREENREGISTRE_TEP.json",
+      "phase14_tep/RAPPORT_TEP_VALIDATION_TERRAIN.md",
+      "phase14_tep/evidence/tep_validation.json",
+      "src/phase14_tep_analyse.py",
+      "src/phase14_tep_harness.py",
+      "src/phase14_tep_verdict.py"
+    ],
+    "zema": [
+      "phase19_hydraulic/RAPPORT_PHASE19_GATE_BANC_PHYSIQUE.md",
+      "phase20_dr/PROTOCOLE_PHASE20_DR.md",
+      "phase20_dr/RAPPORT_PHASE20_DR_PHYSICAL.md",
+      "phase21_ir/PROTOCOLE_PHASE21_IR.md",
+      "phase21_ir/RAPPORT_PHASE21_IR.md",
+      "src/phase19_hydraulic_audit.py"
+    ]
+  },
+  "n_tokens": 17,
+  "mandated": [
+    "CREDIT",
+    "GAS",
+    "DRYBEAN",
+    "SENSORLESS",
+    "HAR",
+    "ZeMA"
+  ],
+  "from_repo_scan": [
+    "SECOM",
+    "STEEL",
+    "SCANIA/APS",
+    "TENNESSEE/TEP",
+    "LEAKDB",
+    "EPANET",
+    "3W",
+    "DIGITS",
+    "HYDRAULIC"
+  ],
+  "exclusion_tokens": [
+    "credit",
+    "gas",
+    "bean",
+    "sensorless",
+    "zema",
+    "secom",
+    "steel",
+    "scania",
+    "aps",
+    "tennessee",
+    "eastman",
+    "leak",
+    "epanet",
+    "3w",
+    "digit",
+    "hydraulic"
+  ],
+  "exclusion_word_tokens": [
+    "har"
+  ]
+}
