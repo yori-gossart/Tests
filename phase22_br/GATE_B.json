@@ -1,0 +1,256 @@
+{
+  "protocol_sha256": "3e48e6091655935e1aaf4cabeb7852540d7094d48d6e6ca1af02d3bfd86ce89b",
+  "official_hosts": {
+    "archive.ics.uci.edu": "403 CONNECT (politique du relais)",
+    "www.openml.org": "403 CONNECT",
+    "api.openml.org": "403 CONNECT"
+  },
+  "integrity_caveat": "l'original UCI est inatteignable depuis cet environnement ; aucun miroir ne peut etre verifie par somme de controle contre lui. Seule la conformite structurelle aux effectifs officiels est etablie.",
+  "datasets": {
+    "GAS": {
+      "status": "EXECUTABLE",
+      "accepted": {
+        "repo": "Dalageo/ml-gas-sensor-drift",
+        "commit": "df121e57543a94bd2c653df9de70cf4738fde9a1",
+        "found": {
+          "batch1": "Gas Sensor Array Drift at Different Concentrations - Dataset/batch1.dat",
+          "batch2": "Gas Sensor Array Drift at Different Concentrations - Dataset/batch2.dat",
+          "batch3": "Gas Sensor Array Drift at Different Concentrations - Dataset/batch3.dat",
+          "batch4": "Gas Sensor Array Drift at Different Concentrations - Dataset/batch4.dat",
+          "batch5": "Gas Sensor Array Drift at Different Concentrations - Dataset/batch5.dat",
+          "batch6": "Gas Sensor Array Drift at Different Concentrations - Dataset/batch6.dat",
+          "batch7": "Gas Sensor Array Drift at Different Concentrations - Dataset/batch7.dat",
+          "batch8": "Gas Sensor Array Drift at Different Concentrations - Dataset/batch8.dat",
+          "batch9": "Gas Sensor Array Drift at Different Concentrations - Dataset/batch9.dat",
+          "batch10": "Gas Sensor Array Drift at Different Concentrations - Dataset/batch10.dat"
+        },
+        "sha256": {
+          "batch1": "6b62f3e71b90f95dd9c2157fa91ffce32571faa7f474dd52f29a4ae769144625",
+          "batch2": "4ea9490068457badf9efd0c22f359fbfce12c208cdd440526b97ac91d31b9002",
+          "batch3": "aabf06bf8b8200740156235dc59458e06d99aa8faba4d6764a22c6b6c2674ff4",
+          "batch4": "ffc87c5146001bbe8ce90c4b2f7dad5b390ca3079f51b559032df53ffe5ff0af",
+          "batch5": "dcad4939c300a6c7d9f41b9470a9253eecc0ebc5c2c4e940d8ae20b8fc4240d0",
+          "batch6": "297d3a8b594dee4e2f4d7d2c4f5c485939fa708c10b5a11ed5cce95e05049afb",
+          "batch7": "eb5801d38a59beaae4a2412195d8ded790175ed1611159e083649ee9fe03d150",
+          "batch8": "58146b3e2dd68b125b2d5432cdd4968ec1fff47464ceb04282382181932d49be",
+          "batch9": "51f368ae8dee5d285be7f2029770e10eb12f342578830bc40ea852db19d19c9b",
+          "batch10": "b8309e8ff205b9d0350761989809f31f8feaefb8582aecb05f1d0f694b91184e"
+        },
+        "n_rows": 13910,
+        "batch_sizes": [
+          445,
+          1244,
+          1586,
+          161,
+          197,
+          2300,
+          3613,
+          294,
+          470,
+          3600
+        ],
+        "n_features": 128,
+        "n_classes": 5
+      },
+      "candidates_probed": 3,
+      "trail": [
+        {
+          "repo": "alexdbatista/gas-sensor-drift-monitoring",
+          "commit": "275a484de87c65a630f7037118a89ebf2cd74453",
+          "conforme": false,
+          "rejetes": []
+        },
+        {
+          "repo": "abob7/gas-drift",
+          "commit": "c946ae6f7a840a7ca51a92320d797e36685dff9c",
+          "conforme": false,
+          "rejetes": []
+        },
+        {
+          "repo": "Dalageo/ml-gas-sensor-drift",
+          "commit": "df121e57543a94bd2c653df9de70cf4738fde9a1",
+          "conforme": true,
+          "rejetes": []
+        },
+        {
+          "repo": "jbrownlee/Datasets",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "thuwangzw/gas-sensor-drift",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "sisl/gas-sensor-array-drift",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "nishantsethi/Gas-Sensor-Array-Drift",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "Vini2/gas-sensor-drift",
+          "status": "non sonde -- deja conforme"
+        }
+      ]
+    },
+    "SENSORLESS": {
+      "status": "NOT_EXECUTABLE",
+      "accepted": null,
+      "candidates_probed": 8,
+      "trail": [
+        {
+          "repo": "siddharth691/Unsupervised-Learning",
+          "commit": "874dfae783e2f91207986975a66557c43004547c",
+          "conforme": false,
+          "rejetes": []
+        },
+        {
+          "repo": "sravya-bhimavarapu/Sensor-less-drive-diagnosis",
+          "commit": "34dad1aeb6378ba616d7b5ef48d12ec0bf8a6f7e",
+          "conforme": false,
+          "rejetes": []
+        },
+        {
+          "repo": "ohmytiannn/Sensorless-Drive-Diagnosis",
+          "commit": "902cedc1c0c44e63ef09ddb54059d600df44a5e0",
+          "conforme": false,
+          "rejetes": []
+        },
+        {
+          "repo": "tirthajyoti/UCI-ML-API",
+          "commit": "7bdc0e74ebbfa561cfe3040acbc36475eaf85b97",
+          "conforme": false,
+          "rejetes": []
+        },
+        {
+          "repo": "jbrownlee/Datasets",
+          "commit": "d20fcb6402ae34e653d4513b00f39257bb37ed7f",
+          "conforme": false,
+          "rejetes": []
+        },
+        {
+          "repo": "mvarrone/sensorless-drive-diagnosis",
+          "status": "clone impossible"
+        },
+        {
+          "repo": "AlexWang1900/Sensorless_drive_diagnosis",
+          "status": "clone impossible"
+        },
+        {
+          "repo": "Hsins/UCI-Sensorless-Drive-Diagnosis",
+          "status": "clone impossible"
+        }
+      ]
+    },
+    "CREDIT": {
+      "status": "EXECUTABLE",
+      "accepted": {
+        "repo": "MatteoM95/Default-of-Credit-Card-Clients-Dataset-Analisys",
+        "commit": "585f77c33dff5a14dac8e5396bec24820d3db2f8",
+        "found": {
+          "data": "dataset/default_of_credit_card_clients.csv",
+          "target_col": "default payment next month",
+          "has_id": true
+        },
+        "sha256": {
+          "data": "4edce6da569b2c30788a85fd98a9bafb1a983e8ca1a7aac875dd7ff853cbd0bb"
+        },
+        "n_rows": 30000,
+        "n_features": 23,
+        "n_classes": 2,
+        "n_default": 6636
+      },
+      "candidates_probed": 1,
+      "trail": [
+        {
+          "repo": "MatteoM95/Default-of-Credit-Card-Clients-Dataset-Analisys",
+          "commit": "585f77c33dff5a14dac8e5396bec24820d3db2f8",
+          "conforme": true,
+          "rejetes": []
+        },
+        {
+          "repo": "robertofranceschi/Default-Credit-Card-Prediction",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "irenebenedetto/default-of-credit-card-clients",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "thomasXwang/UCI-Credit-card-defaults",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "ubc-mds/credit_default_prediction_group_20",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "macychan/default_credit_card_client_predictor",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "sharmaroshan/Credit-Card-Default-Prediction",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "jbrownlee/Datasets",
+          "status": "non sonde -- deja conforme"
+        }
+      ]
+    },
+    "DRYBEAN": {
+      "status": "EXECUTABLE",
+      "accepted": {
+        "repo": "mehmetsen1/DryBeanDataset",
+        "commit": "be919f583ca72a6ab520d1f23ebb2c92d8a60e3e",
+        "found": {
+          "data": "Dry Bean Dataset Data Set.xlsx"
+        },
+        "sha256": {
+          "data": "11506251d94106d8d9face72e7cb097fca4edf6e5cf66c44796acca5f9171006"
+        },
+        "n_rows": 13611,
+        "n_features": 16,
+        "n_classes": 7
+      },
+      "candidates_probed": 1,
+      "trail": [
+        {
+          "repo": "mehmetsen1/DryBeanDataset",
+          "commit": "be919f583ca72a6ab520d1f23ebb2c92d8a60e3e",
+          "conforme": true,
+          "rejetes": []
+        },
+        {
+          "repo": "BetulKarakaya/Dry-Bean-Dataset-Analysis-And-Classification",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "DPershall/Computer_Vision_System_Dry_Beans",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "ShefaaSaied/Dry-Bean-Classification",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "selva86/datasets",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "jbrownlee/Datasets",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "AmirhosseinAbaskohi/Dry-Bean-Classification",
+          "status": "non sonde -- deja conforme"
+        },
+        {
+          "repo": "sinanazeri/dry_bean_dataset",
+          "status": "non sonde -- deja conforme"
+        }
+      ]
+    }
+  }
+}

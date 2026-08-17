@@ -1,0 +1,32 @@
+
+===== GAS =====
+  alexdbatista/gas-sensor-drift-monitoring                     conforme=False
+  abob7/gas-drift                                              conforme=False
+  Dalageo/ml-gas-sensor-drift                                  conforme=True
+  --> GAS: EXECUTABLE
+
+===== SENSORLESS =====
+  siddharth691/Unsupervised-Learning                           conforme=False
+  sravya-bhimavarapu/Sensor-less-drive-diagnosis               conforme=False
+  ohmytiannn/Sensorless-Drive-Diagnosis                        conforme=False
+  tirthajyoti/UCI-ML-API                                       conforme=False
+  jbrownlee/Datasets                                           conforme=False
+  mvarrone/sensorless-drive-diagnosis                          clone impossible
+  AlexWang1900/Sensorless_drive_diagnosis                      clone impossible
+  Hsins/UCI-Sensorless-Drive-Diagnosis                         clone impossible
+  --> SENSORLESS: NOT_EXECUTABLE
+
+===== CREDIT =====
+  MatteoM95/Default-of-Credit-Card-Clients-Dataset-Analisys    conforme=True
+  --> CREDIT: EXECUTABLE
+
+===== DRYBEAN =====
+  mehmetsen1/DryBeanDataset                                    conforme=True
+  --> DRYBEAN: EXECUTABLE
+
+=== GATE B ===
+   dataset         status                                                      repo       commit  candidates_probed
+       GAS     EXECUTABLE                               Dalageo/ml-gas-sensor-drift df121e57543a                  3
+SENSORLESS NOT_EXECUTABLE                                                       NaN          NaN                  8
+    CREDIT     EXECUTABLE MatteoM95/Default-of-Credit-Card-Clients-Dataset-Analisys 585f77c33dff                  1
+   DRYBEAN     EXECUTABLE                                 mehmetsen1/DryBeanDataset be919f583ca7                  1
