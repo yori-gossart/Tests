@@ -1,0 +1,102 @@
+{
+  "aggregation": {
+    "n_cells": 12,
+    "n_datasets": 4,
+    "n_models": 4,
+    "MEDIAN_DELTA_AUGRC_ALL": 0.0013436757591067166,
+    "MEAN_DELTA_AUGRC_ALL": 0.00263909385681136,
+    "MEDIAN_DELTA_ERROR_CAPTURE_10_ALL": 0.004088842882217926,
+    "MEDIAN_DELTA_RESIDUAL_ERROR_10_ALL": 0.0014219087703332897,
+    "MEDIAN_DELTA_AUGRC_NO_RF": 0.001969693615885268,
+    "MEDIAN_DELTA_ERROR_CAPTURE_10_NO_RF": 0.005882352941176464,
+    "MEDIAN_DELTA_RESIDUAL_ERROR_10_NO_RF": 0.002502559435786589,
+    "n_positive_augrc": 10,
+    "n_negative_augrc": 2,
+    "n_ci_contains_zero": 8,
+    "per_dataset_median_delta_augrc": {
+      "GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1": 0.007139,
+      "adult": 0.000165,
+      "agaricus_lepiota": 0.00251,
+      "allhypo": 0.000519
+    },
+    "per_dataset_median_delta_ec10": {
+      "GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1": 0.039282,
+      "adult": 0.008496,
+      "agaricus_lepiota": 0.0,
+      "allhypo": 0.0
+    },
+    "per_model_median_delta_augrc": {
+      "M1_logreg": 0.001395,
+      "M2_random_forest": 0.000519,
+      "M3_gradient_boosting": 0.000971,
+      "M4_rbf_svm": 0.00197
+    },
+    "per_model_median_delta_ec10": {
+      "M1_logreg": 0.002941,
+      "M2_random_forest": 0.002295,
+      "M3_gradient_boosting": 0.015232,
+      "M4_rbf_svm": 0.014696
+    },
+    "median_auroc_iso_pred": 0.6986209284568481,
+    "STRATIFIED_MEDIAN_DELTA_AUGRC": 0.0015145
+  },
+  "gates": {
+    "GATE1_ERROR_RISK_REPLICATED": {
+      "median_auroc_iso": 0.6986209284568481,
+      "frac_ci_above_half": 0.5833333333333334,
+      "n_datasets": 2,
+      "n_models": 4,
+      "no_rf_median_auroc": 0.694959226811781,
+      "no_rf_frac_ci_above_half": 0.5555555555555556,
+      "no_rf_n_datasets": 2,
+      "no_rf_n_models": 3,
+      "pass": false
+    },
+    "GATE2_INCREMENTAL_TRIAGE": {
+      "median_delta_augrc": 0.0013436757591067166,
+      "median_delta_ec10": 0.004088842882217926,
+      "n_significant_positive_cells": 3,
+      "n_datasets_with_significant_positive": 2,
+      "stratified_median": 0.0015145,
+      "pass": true
+    },
+    "GATE3_ROBUST_ACROSS_DATASETS": {
+      "positive_datasets": [
+        "GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1",
+        "adult"
+      ],
+      "n_positive": 2,
+      "n_datasets": 4,
+      "required": 3,
+      "pass": false
+    },
+    "GATE4_ROBUST_ACROSS_MODELS": {
+      "positive_families": [
+        "M1_logreg",
+        "M2_random_forest",
+        "M3_gradient_boosting",
+        "M4_rbf_svm"
+      ],
+      "n_positive": 4,
+      "median_delta_augrc_no_rf": 0.001969693615885268,
+      "median_delta_ec10_no_rf": 0.005882352941176464,
+      "pass": true
+    },
+    "GATE5_OPERATIONAL_GAIN": {
+      "median_delta_ec10": 0.004088842882217926,
+      "threshold": 0.05,
+      "median_delta_residual_error_10": 0.0014219087703332897,
+      "pass": false
+    }
+  },
+  "verdicts": {
+    "ERROR_RISK_REPLICATED": "NO",
+    "INCREMENTAL_TRIAGE": "YES",
+    "ROBUST_ACROSS_DATASETS": "NO",
+    "ROBUST_ACROSS_MODELS": "YES",
+    "OPERATIONAL_GAIN": "NO",
+    "PHASE23_RESULT": "FALSIFIED",
+    "BRANCH_DECISION": "CLOSE_APPLICATIVE_ISO_BRANCH"
+  },
+  "TEST_OPENED": "YES"
+}
