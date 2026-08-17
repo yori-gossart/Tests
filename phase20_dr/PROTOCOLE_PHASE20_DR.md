@@ -327,3 +327,42 @@ utilisent la même définition corrigée.
 
 Aucun résultat n'existait au moment de cet amendement : il est commité avant l'exécution, et
 la chronologie est vérifiable dans l'historique git.
+
+---
+
+## AMENDEMENT 2 — 2026-08-17, avant tout résultat
+
+**Objet : provenance de la référence saine pour l'axe Visibilité.**
+
+Le §4.1 disait « cycles du **même split** ». Vérification faite avant exécution, cette
+formulation pose deux problèmes.
+
+**(i) Fuite au test.** Pour un cycle de TEST, prendre la référence saine dans le TEST revient
+à supposer connu quels cycles du jour sont sains — précisément ce que le diagnostic cherche à
+établir. C'est circulaire. **La référence saine est donc prise dans TRAIN uniquement**, ce qui
+correspond aussi à la réalité d'un déploiement, où la ligne de base vient de la mise en
+service.
+
+**(ii) Couverture incomplète.** Le tirage du split, gelé, ne garantit pas qu'un contexte
+(états des trois autres composants) présent au TEST ait un homologue sain dans TRAIN.
+Couverture mesurée :
+
+| Cible | TRAIN | VALID | TEST |
+|---|---|---|---|
+| vanne | 0,571 | 0,722 | 0,519 |
+| pompe | 0,554 | 0,688 | 0,583 |
+
+**Règle de repli, à deux niveaux, déclarée ici :**
+
+1. référence = cycles sains de TRAIN au **contexte exactement identique** (états des trois
+   autres composants) ;
+2. à défaut, référence = **ensemble marginal** des cycles sains de TRAIN pour cette cible, tous
+   contextes confondus.
+
+Le **taux de recours au repli est rapporté** pour chaque split et chaque cible, et une analyse
+de sensibilité compare les résultats sur le sous-ensemble à appariement exact contre
+l'ensemble complet.
+
+Aucun résultat n'existait au moment de cet amendement. Le split lui-même n'est pas modifié :
+il reste celui gelé au §2, graine 20260817, et la répartition obtenue est exactement
+7 / 2 / 3 configurations par cellule vanne × pompe, soit 849 / 240 / 360 cycles.
