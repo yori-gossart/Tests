@@ -462,3 +462,76 @@ lieu un jour, elle devrait d'abord réparer trois choses établies ici :
 
 Aucune de ces réparations n'est entreprise ici : ce serait ajuster l'architecture après avoir
 vu les résultats du test, ce que le protocole interdit.
+
+---
+
+# ERRATUM — ajouté à l'ouverture de la Phase 21-IR
+
+**Objet : l'axe Isolabilité de la Phase 20-DR utilise l'étiquette vraie du TEST.
+La conclusion du §9 « Ce qui survit » est retirée.**
+
+Cet erratum est écrit avant toute exécution de la Phase 21-IR et n'a été motivé par aucun
+résultat de la Phase 21. Il résulte d'une relecture du code gelé `src/phase20_dr_run.py`.
+
+## Le défaut
+
+```python
+def isolability(X, y, cents, Sinv):
+    ...
+    own = np.array([ks.index(v) for v in y])          # <-- y = etiquette VRAIE
+    d_own  = np.sqrt(d2[np.arange(len(y)), own])
+    d_near = np.sqrt(np.where(mask, d2, np.inf).min(axis=1))
+    cmin   = np.array([cd[own[i]].min() for i in range(len(y))])
+    return {"iso_d_nearest": d_near,
+            "iso_margin_ratio": d_near / (d_own + 1.0),
+            "iso_centroid_min": cmin}
+```
+
+`y` est `prof[target].to_numpy()`, l'étiquette vraie de **tous** les cycles, TEST compris.
+L'indice `own` en dérive, et les **trois** variables d'isolabilité en dépendent :
+`iso_d_nearest` exclut la classe vraie, `iso_margin_ratio` divise par la distance à la classe
+vraie, `iso_centroid_min` est une simple table de correspondance sur la classe vraie.
+
+Vérification sur les données produites :
+
+| Cible | classes vraies | valeurs distinctes de `iso_centroid_min` |
+|---|---|---|
+| vanne | 4 | **3** |
+| pompe | 3 | **2** |
+
+`iso_centroid_min` vaut 0,714–0,866 pour tout cycle de vanne et 1,414–1,561 pour tout cycle de
+pompe. Poolées, les deux cibles ont des taux d'échec de 0,347 et 0,003. Un modèle logistique
+sur ces variables peut donc atteindre une AUROC élevée **en lisant l'étiquette vraie pour
+identifier le composant**, sans rien prédire.
+
+## Ce qui est invalidé
+
+- **La phrase du §3.3 « Isolabilité : c'est tout le signal » et le §9 « Ce qui survit » sont
+  retirés.** L'AUROC de 0,845 de R2 n'est pas une prédiction d'échec sans étiquette.
+- Toute affirmation du rapport selon laquelle l'isolabilité est « calculée sans étiquette de
+  test » est **fausse** et doit être lue comme retirée. Elle apparaît au §3.3, au §9 et dans le
+  message du commit `473b47d`.
+- Les modèles R2, R4, R6 et R7 sont contaminés, ainsi que les contrastes qui les impliquent.
+
+## Ce qui n'est pas affecté
+
+- **Les huit verdicts sont inchangés**, et pour la plupart renforcés. Ils étaient déjà
+  défavorables ; la contamination jouait *en faveur* de l'architecture. R7 perd contre R2 alors
+  même que R2 triche : le constat d'échec est plus net, pas moins.
+- L'axe **Visibilité** (`vis_mahalanobis`, `vis_effect_size`, `vis_wasserstein`) n'utilise pas
+  l'étiquette : `mu` et `sd` viennent des cycles sains de TRAIN via le contexte expérimental.
+  Son verdict `NO`, et sa performance sous le hasard en appariement exact, tiennent.
+- L'axe **Robustesse** hérite du défaut par `iso_full` passé à `rob_loco_min` ;
+  `rob_effective_rank` et `rob_redundancy` en sont exempts. Le verdict `YES` de
+  ROBUSTNESS_PHYSICAL_VALUE doit donc être lu comme **partiellement contaminé**.
+- Les §7 (grille de perturbations inerte), §5 (test d'action) et §6 (sensibilité) ne dépendent
+  pas de l'isolabilité et tiennent intégralement.
+
+## Conséquence pour la Phase 21-IR
+
+La prémisse de la Phase 21-IR — « le score d'isolabilité prédit les erreurs sans étiquette de
+test » — est **fausse pour l'implémentation gelée telle quelle**. La Phase 21-IR ne peut donc
+pas la répliquer directement. Le traitement retenu, déclaré dans son protocole gelé, est de
+tester deux variantes séparées : la variante gelée telle quelle, réservée à la référence et
+incapable de fonder un verdict, et une variante où l'étiquette vraie est remplacée par
+l'étiquette **prédite** — seule adaptation d'interface, sans changement mathématique.
