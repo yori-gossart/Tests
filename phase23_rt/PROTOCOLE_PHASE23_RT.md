@@ -507,3 +507,74 @@ splits, les modèles et les gates n'ont pas changé, et produire la section
 **Graine globale : 23260823. Bootstrap : 10 000. Correction : Holm.
 Seuil opérationnel : +0,05 de `DELTA_ERROR_CAPTURE_10` en médiane. AUGRC : plus bas est
 meilleur.**
+
+---
+
+## AMENDEMENT 1 — 2026-08-17, avant toute ouverture du TEST
+
+```
+TEST_OPENED: NO
+```
+
+**Objet : l'ordre lexicographique gelé du §5 sélectionne des jeux quasi-dupliqués.**
+
+Vérification faite après application des §3 et §4 au manifeste PMLB, **avant tout téléchargement
+de données et avant tout modèle** : sur 179 jeux de classification, 8 sont exclus par
+l'historique et 108 sont inéligibles sur métadonnées, laissant 63 candidats. Les sept premiers
+dans l'ordre lexicographique gelé sont :
+
+```
+GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1
+GAMETES_Epistasis_2_Way_20atts_0.4H_EDM_1_1
+GAMETES_Epistasis_3_Way_20atts_0.2H_EDM_1_1
+GAMETES_Heterogeneity_20atts_1600_Het_0.4_0.2_50_EDM_2_001
+GAMETES_Heterogeneity_20atts_1600_Het_0.4_0.2_75_EDM_2_001
+Hill_Valley_with_noise
+Hill_Valley_without_noise
+```
+
+Appliquer la règle à la lettre retiendrait **quatre variantes du même simulateur GAMETES**,
+différant seulement par leur héritabilité. Les gates 2, 3 et 4 exigent une robustesse « sur
+plusieurs jeux indépendants » ; quatre paramétrages d'un même générateur ne sont pas des jeux
+indépendants, et le gate `ROBUST_ACROSS_DATASETS` serait vidé de sens. De même,
+`Hill_Valley_with_noise` et `_without_noise` sont la même base.
+
+**Correction retenue, purement structurelle et aveugle aux résultats.** Trois règles s'ajoutent
+au §5, appliquées *avant* le tri :
+
+1. **Déduplication par famille.** Clé de famille = **premier jeton du nom découpé sur `_`**, en
+   minuscules. Au plus **un** jeu par famille est conservé : le **premier dans l'ordre
+   lexicographique**. Mécanique, sans jugement.
+2. **Exclusion des jeux `_deprecated_*`**, que PMLB marque comme remplacés et qui dupliquent des
+   jeux conservés par ailleurs.
+3. **Exclusion des jeux `mfeat_*`** — UCI *Multiple Features*, chiffres manuscrits : même source
+   que les données `digits` employées en Phase 13A, que le jeton `digit` du §3 ne captait pas.
+
+Ces règles ne dépendent d'aucune performance, d'aucun modèle, d'aucune métrique et d'aucune
+donnée téléchargée : uniquement des **noms** du manifeste. Elles retirent 20 candidats et en
+laissent **43**. Les quatre premiers deviennent :
+
+| # | Jeu | n | p | K |
+|---|---|---|---|---|
+| 1 | `GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1` | 1 600 | 20 | 2 |
+| 2 | `Hill_Valley_with_noise` | 1 212 | 100 | 2 |
+| 3 | `adult` | 48 842 | 14 | 2 |
+| 4 | `agaricus_lepiota` | 8 145 | 22 | 2 |
+
+**Objet second : évaluabilité d'une cellule, seuils gelés ici.**
+
+1. **Avant TEST**, sur CALIBRATION uniquement : une cellule dont le classifieur produit
+   **moins de 20 erreurs sur CALIBRATION** est déclarée `NOT_EXECUTABLE`, car ni les
+   méta-modèles ni le seuil opérationnel ne peuvent y être ajustés. Si **les quatre familles**
+   d'un jeu échouent ainsi, ce jeu est `NOT_EXECUTABLE` et la marche déterministe **continue au
+   candidat suivant**, exactement comme le prévoit le §5 pour toute tâche non exécutable.
+2. **Après ouverture du TEST** : une cellule comptant **moins de 20 erreurs sur TEST** est
+   déclarée `NOT_EVALUABLE_LOW_EVENTS`, rapportée avec son effectif, et **exclue des
+   agrégations**. Elle n'est pas remplacée.
+
+Ces deux seuils sont gelés ici, avant tout accès au TEST, et reprennent la valeur déjà utilisée
+en Phase 21-IR.
+
+Aucun résultat, aucune métrique et aucune donnée téléchargée n'existaient au moment de cet
+amendement : la chronologie est vérifiable dans l'historique git. Cet amendement ne pourra pas
+être révisé.
