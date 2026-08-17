@@ -51,9 +51,10 @@ def fig_ladder(res):
     ax.set_xticklabels([lab[m] for m in order], fontsize=8)
     ax.set_ylabel("AUROC sur TEST — prédiction de l'échec du diagnostic")
     ax.set_ylim(0.45, max(v) + 0.06)
-    d = con["R7-R0"]
+    best = max(["R1", "R2", "R3"], key=lambda m: te.auroc[m])
+    d = con[f"R7-{best}"]
     ax.set_title("Échelle de readiness R0–R7, TEST jamais ouvert avant cet endpoint\n"
-                 f"R7 − R0 = {d['delta_auroc']:+.3f} "
+                 f"contraste majeur R7 − {best} = {d['delta_auroc']:+.3f} "
                  f"[{d['ci_low']:+.3f}; {d['ci_high']:+.3f}] — verdict {d['verdict']}")
     despine(ax)
     fig.tight_layout()
@@ -62,7 +63,8 @@ def fig_ladder(res):
 
 
 def fig_contrasts(res):
-    con = pd.DataFrame(res["ladder"]["contrasts"])
+    con = pd.DataFrame(res["ladder"]["contrasts"]).drop_duplicates(
+        "contrast").reset_index(drop=True)
     fig, ax = plt.subplots(figsize=(7.6, 3.9))
     y = np.arange(len(con))[::-1]
     for i, r in con.iterrows():
@@ -74,8 +76,10 @@ def fig_contrasts(res):
     ax.axvline(0, color=INK, lw=1.0)
     for s in (-0.02, 0.02):
         ax.axvline(s, color=ORANGE, lw=0.9, ls="--")
-    ax.text(0.02, len(con) - 0.4, "seuil de pertinence pratique ±0,02",
-            fontsize=8, color=ORANGE, ha="left")
+    ax.set_xlim(min(con.ci_low.min(), -0.05) - 0.02, con.ci_high.max() + 0.09)
+    ax.text(0.03, -0.72, "seuil de pertinence pratique ±0,02",
+            fontsize=8, color=ORANGE, ha="left", va="center")
+    ax.set_ylim(-1.1, len(con) - 0.4)
     ax.set_yticks(y)
     ax.set_yticklabels(con.contrast, fontsize=8.5)
     ax.set_xlabel("Δ AUROC sur TEST — IC 95 % bootstrap apparié, 2 000 tirages "
@@ -103,7 +107,7 @@ def fig_degradation():
             labs.append(f"{f}\n(n={len(v)})")
         b = s[s.condition == "baseline"].balanced_accuracy.iloc[0]
         ax.axhline(b, color=MUTE, lw=1.0, ls="--")
-        ax.text(6.4, b + 0.006, f"référence {b:.3f}", ha="right", fontsize=8, color=MUTE)
+        ax.text(3.0, b - 0.03, f"référence {b:.3f}", ha="center", fontsize=8, color=MUTE)
         ax.set_xticks(pos)
         ax.set_xticklabels(labs, fontsize=7.5)
         ax.set_title(f"cible : {tgt}")
@@ -151,7 +155,9 @@ def fig_action(res):
     fig, axes = plt.subplots(1, 2, figsize=(10.2, 4.1),
                              gridspec_kw={"width_ratios": [1.55, 1]})
     ax = axes[0]
-    lab = [f"{r.group}\n{r.target}" for r in pc.itertuples()]
+    ab = {"PRESSURE": "PRESS.", "TEMPERATURE": "TEMP.", "FLOW": "FLOW", "OTHER": "AUTRES"}
+    tb = {"valve": "vanne", "pump": "pompe"}
+    lab = [f"{ab[r.group]}\n{tb[r.target]}" for r in pc.itertuples()]
     x = np.arange(len(pc))
     w = 0.2
     for k, (s, c, nm) in enumerate([("degraded", MUTE, "dégradé"),
@@ -162,8 +168,8 @@ def fig_action(res):
     ax.set_xticks(x)
     ax.set_xticklabels(lab, fontsize=7.5)
     ax.set_ylabel("exactitude équilibrée sur TEST après action")
-    ax.legend(fontsize=8, ncol=4, loc="upper center", bbox_to_anchor=(0.5, 1.16))
-    ax.set_title("Par cas dégradé (groupe supprimé × composant)", pad=22)
+    ax.legend(fontsize=8, ncol=4, loc="lower center", bbox_to_anchor=(0.5, -0.32))
+    ax.set_title("Par cas dégradé (groupe supprimé × composant)")
     despine(ax)
 
     ax = axes[1]
@@ -189,6 +195,64 @@ def fig_action(res):
     plt.close(fig)
 
 
+GROUPS = {"PRESSURE": ["PS1", "PS2", "PS3", "PS4", "PS5", "PS6"],
+          "TEMPERATURE": ["TS1", "TS2", "TS3", "TS4"],
+          "FLOW": ["FS1", "FS2"], "OTHER": ["EPS1", "VS1", "SE", "CE", "CP"]}
+
+
+def fig_restore_grid(res):
+    """Every possible restoration, so the reader sees the whole choice space the
+    three strategies were picking from."""
+    te = pd.read_csv(OUT / "CLASSIFIER_METRICS.csv")
+    te = te[te.split == "test"]
+    cases = {(c["group"], c["target"]): c for c in res["action_test"]["cases"]}
+    fig, axes = plt.subplots(1, 4, figsize=(11.4, 3.9), sharey=True)
+    for ax, g in zip(axes, GROUPS):
+        ss = GROUPS[g]
+        deg = te[(te.condition == f"dropgroup_{g}") & (te.target == "valve")
+                 ].balanced_accuracy.iloc[0]
+        v = [te[(te.condition == f"restore_{g}_{s}") & (te.target == "valve")
+                ].balanced_accuracy.iloc[0] for s in ss]
+        c = cases[(g, "valve")]
+        cols = []
+        for s in ss:
+            if s == c["guided"]:
+                cols.append(ORANGE)
+            elif s == c["generic"]:
+                cols.append(BLUE)
+            elif s == c["random"]:
+                cols.append(AQUA)
+            else:
+                cols.append(GRID)
+        ax.bar(range(len(ss)), v, color=cols, width=0.66)
+        for i, s in enumerate(ss):
+            tags = [t for t, k in (("gui", "guided"), ("gén", "generic"),
+                                   ("alé", "random")) if c[k] == s]
+            if len(tags) > 1:
+                ax.text(i, v[i] - 0.014, "+".join(tags), ha="center", va="top",
+                        fontsize=6.8, color="white")
+        ax.axhline(deg, color=INK, lw=1.1, ls="--")
+        ax.axhline(float(np.mean(v)), color=MUTE, lw=1.0, ls=":")
+        ax.set_xticks(range(len(ss)))
+        ax.set_xticklabels(ss, fontsize=7.5, rotation=45)
+        sub = c["cause"].replace("_", " ").lower()
+        if c["guided"] is None:
+            sub += " → aucune restauration"
+        ax.set_title(f"{g}\ncause attribuée : {sub}", fontsize=8.6)
+        despine(ax)
+    axes[0].set_ylabel("exactitude équilibrée sur TEST, cible vanne")
+    axes[0].set_ylim(0.35, 0.72)
+    h = [plt.Rectangle((0, 0), 1, 1, color=k) for k in (ORANGE, BLUE, AQUA, GRID)]
+    axes[3].legend(h, ["guidé", "générique", "aléatoire (tirage gelé)", "non choisi"],
+                   fontsize=7.5, loc="lower right")
+    fig.suptitle("Espace complet des restaurations possibles, cible vanne — tiret : "
+                 "niveau dégradé ; pointillé : espérance d'un tirage aléatoire",
+                 fontsize=10, fontweight="bold")
+    fig.tight_layout()
+    fig.savefig(FIG / "fig6_restore_grid.png", bbox_inches="tight")
+    plt.close(fig)
+
+
 def main() -> int:
     FIG.mkdir(parents=True, exist_ok=True)
     res = json.load(open(OUT / "PHASE20_DR_RESULTS.json"))
@@ -197,6 +261,7 @@ def main() -> int:
     fig_degradation()
     fig_attribution(res)
     fig_action(res)
+    fig_restore_grid(res)
     print("figures written to", FIG)
     return 0
 

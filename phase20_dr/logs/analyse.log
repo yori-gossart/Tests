@@ -1,0 +1,69 @@
+events=159390 main=110124 failure_rate=0.0920 (1s)
+model  n_features    auroc    auprc    brier  log_loss  calibration_slope  base_rate     n
+   R0           1 0.523882 0.221033 0.191378  0.663044           0.408104   0.210855 27360
+   R1           3 0.557526 0.299647 0.186688  0.651645           0.200228   0.210855 27360
+   R2           3 0.845461 0.518771 0.161406  0.510394           0.898108   0.210855 27360
+   R3           3 0.641032 0.378146 0.187639  0.647828           1.483240   0.210855 27360
+   R4           6 0.811705 0.471637 0.163072  0.525872           0.761368   0.210855 27360
+   R5           6 0.587775 0.389682 0.185205  0.649004           0.668573   0.210855 27360
+   R6           6 0.850746 0.535129 0.161548  0.511976           0.926824   0.210855 27360
+   R7           9 0.818267 0.479587 0.163405  0.525420           0.781874   0.210855 27360
+bootstrap done (50s)
+contrast  delta_auroc    ci_low  ci_high  delta_brier  brier_ci_low  brier_ci_high verdict
+   R1-R0     0.033644 -0.090067 0.157215    -0.004690     -0.009602      -0.000189      NO
+   R2-R0     0.321579  0.258588 0.376011    -0.029972     -0.045986      -0.017034     YES
+   R3-R0     0.117150  0.054645 0.176463    -0.003739     -0.004883      -0.002327     YES
+   R7-R0     0.294385  0.238262 0.346739    -0.027973     -0.041897      -0.016346     YES
+   R7-R2    -0.027194 -0.057925 0.002660     0.001999     -0.003245       0.007877      NO
+   R7-R4     0.006562 -0.002924 0.017091     0.000333     -0.001058       0.001613      NO
+   R7-R2    -0.027194 -0.057925 0.002660     0.001999     -0.003245       0.007877      NO
+   R7-R1     0.260740  0.129948 0.403228    -0.023283     -0.037509      -0.012483     YES
+   R7-R2    -0.027194 -0.057925 0.002660     0.001999     -0.003245       0.007877      NO
+   R7-R3     0.177235  0.090032 0.254914    -0.024234     -0.038708      -0.012164     YES
+amendment-2 sensitivity: exact-context TEST rows 10640/27360
+/usr/local/lib/python3.11/dist-packages/sklearn/feature_selection/_univariate_selection.py:110: UserWarning: Features [ 10  18 114] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/usr/local/lib/python3.11/dist-packages/sklearn/feature_selection/_univariate_selection.py:111: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+/usr/local/lib/python3.11/dist-packages/sklearn/feature_selection/_univariate_selection.py:110: UserWarning: Features [ 10  18 114] are constant.
+  warnings.warn("Features %s are constant." % constant_features_idx, UserWarning)
+/usr/local/lib/python3.11/dist-packages/sklearn/feature_selection/_univariate_selection.py:111: RuntimeWarning: invalid value encountered in divide
+  f = msb / msw
+global sensor ranking: ['FS1', 'VS1', 'EPS1', 'TS1', 'TS2', 'SE', 'PS5', 'PS4', 'PS6', 'CP', 'PS3', 'PS2', 'TS3', 'PS1', 'CE', 'TS4', 'FS2']
+attribution strict=0.260 lenient=0.353 chance=0.247 nmi=0.157 n=3626
+      group target             condition              cause  mixed_resolved random generic guided
+   PRESSURE  valve    dropgroup_PRESSURE    LOW_ISOLABILITY            True    PS2     PS5    PS3
+   PRESSURE   pump    dropgroup_PRESSURE CLASSIFIER_LIMITED           False    PS2     PS5    NaN
+TEMPERATURE  valve dropgroup_TEMPERATURE    LOW_ISOLABILITY            True    TS3     TS1    TS1
+TEMPERATURE   pump dropgroup_TEMPERATURE CLASSIFIER_LIMITED           False    TS3     TS1    NaN
+       FLOW  valve        dropgroup_FLOW    LOW_ISOLABILITY            True    FS2     FS1    FS1
+       FLOW   pump        dropgroup_FLOW CLASSIFIER_LIMITED           False    FS2     FS1    NaN
+      OTHER  valve       dropgroup_OTHER CLASSIFIER_LIMITED           False     CE     VS1    NaN
+      OTHER   pump       dropgroup_OTHER CLASSIFIER_LIMITED           False     CE     VS1    NaN
+      group target              cause  balacc_degraded sensor_degraded  balacc_random sensor_random  balacc_generic sensor_generic  balacc_guided sensor_guided
+   PRESSURE  valve    LOW_ISOLABILITY         0.411111            None       0.636111           PS2        0.405556            PS5       0.400000           PS3
+   PRESSURE   pump CLASSIFIER_LIMITED         0.991667            None       0.988889           PS2        0.991667            PS5       0.991667           NaN
+TEMPERATURE  valve    LOW_ISOLABILITY         0.672222            None       0.675000           TS3        0.666667            TS1       0.666667           TS1
+TEMPERATURE   pump CLASSIFIER_LIMITED         0.994444            None       0.994444           TS3        0.994444            TS1       0.994444           NaN
+       FLOW  valve    LOW_ISOLABILITY         0.594444            None       0.605556           FS2        0.647222            FS1       0.647222           FS1
+       FLOW   pump CLASSIFIER_LIMITED         0.997222            None       0.997222           FS2        0.997222            FS1       0.997222           NaN
+      OTHER  valve CLASSIFIER_LIMITED         0.577778            None       0.558333            CE        0.563889            VS1       0.577778           NaN
+      OTHER   pump CLASSIFIER_LIMITED         0.997222            None       0.994444            CE        0.997222            VS1       0.997222           NaN
+        contrast  delta_balanced_accuracy    ci_low   ci_high  significant
+  guided-generic                 0.001042 -0.003308  0.005504        False
+   guided-random                -0.022222 -0.032717 -0.012413         True
+ guided-degraded                 0.004514 -0.003175  0.012987        False
+generic-degraded                 0.003472 -0.004587  0.012651        False
+ random-degraded                 0.026736  0.014522  0.040152         True
+  generic-random                -0.023264 -0.034091 -0.012594         True
+
+=== VERDICTS ===
+VISIBILITY_PHYSICAL_VALUE            NO
+ISOLABILITY_PHYSICAL_VALUE           YES
+ROBUSTNESS_PHYSICAL_VALUE            YES
+READINESS_FAILURE_PREDICTION         NOT_SUPPORTED
+FAILURE_CAUSE_ATTRIBUTION            NOT_SUPPORTED
+READINESS_GUIDED_ACTION              EQUIVALENT
+PHYSICAL_ARCHITECTURE_VALIDATION     FAIL
+PRODUCT_PROTOTYPE_JUSTIFIED          NO
+(59s)

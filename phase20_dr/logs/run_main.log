@@ -1,0 +1,89 @@
+cycles=1449 split={'train': 849, 'test': 360, 'valid': 240} (17s)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+  5/55 conditions (60s)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+  10/55 conditions (101s)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+  15/55 conditions (144s)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+  20/55 conditions (183s)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+  25/55 conditions (231s)
+  30/55 conditions (276s)
+  35/55 conditions (319s)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+  40/55 conditions (358s)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+  45/55 conditions (393s)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+  50/55 conditions (434s)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+/home/user/Tests/src/phase20_dr_run.py:287: RuntimeWarning: Mean of empty slice
+  mu_tr = np.nanmean(np.where(np.isnan(X), np.nan, X)[tr], axis=0)
+  55/55 conditions (474s)
+events=159390 (479s)
