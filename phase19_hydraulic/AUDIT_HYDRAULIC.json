@@ -1,0 +1,471 @@
+{
+  "source": {
+    "official_host": "archive.ics.uci.edu",
+    "official_host_reachable": false,
+    "mirror_used": "github.com/Machine-Learning-FGA/Hydraulic-systems (data/)",
+    "integrity_caveat": "the UCI original is unreachable from this environment, so the mirror cannot be checksum-verified against it. Structural conformance to the official documentation is verified instead."
+  },
+  "A_integrity": {
+    "n_cycles": 2205,
+    "expected_2205": true,
+    "sensors": {
+      "PS1": {
+        "shape": [
+          2205,
+          6000
+        ],
+        "expected_cols": 6000,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 133.13,
+        "max": 191.92
+      },
+      "PS2": {
+        "shape": [
+          2205,
+          6000
+        ],
+        "expected_cols": 6000,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 0.0,
+        "max": 167.77
+      },
+      "PS3": {
+        "shape": [
+          2205,
+          6000
+        ],
+        "expected_cols": 6000,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 0.0,
+        "max": 18.828
+      },
+      "PS4": {
+        "shape": [
+          2205,
+          6000
+        ],
+        "expected_cols": 6000,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 0.0,
+        "max": 10.266
+      },
+      "PS5": {
+        "shape": [
+          2205,
+          6000
+        ],
+        "expected_cols": 6000,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 8.318,
+        "max": 10.041
+      },
+      "PS6": {
+        "shape": [
+          2205,
+          6000
+        ],
+        "expected_cols": 6000,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 8.268,
+        "max": 9.91
+      },
+      "EPS1": {
+        "shape": [
+          2205,
+          6000
+        ],
+        "expected_cols": 6000,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 2097.8,
+        "max": 2995.2
+      },
+      "FS1": {
+        "shape": [
+          2205,
+          600
+        ],
+        "expected_cols": 600,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 0.0,
+        "max": 20.479
+      },
+      "FS2": {
+        "shape": [
+          2205,
+          600
+        ],
+        "expected_cols": 600,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 8.764,
+        "max": 10.453
+      },
+      "TS1": {
+        "shape": [
+          2205,
+          60
+        ],
+        "expected_cols": 60,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 34.984,
+        "max": 58.207
+      },
+      "TS2": {
+        "shape": [
+          2205,
+          60
+        ],
+        "expected_cols": 60,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 40.707,
+        "max": 62.176
+      },
+      "TS3": {
+        "shape": [
+          2205,
+          60
+        ],
+        "expected_cols": 60,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 38.145,
+        "max": 59.539
+      },
+      "TS4": {
+        "shape": [
+          2205,
+          60
+        ],
+        "expected_cols": 60,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 30.355,
+        "max": 53.145
+      },
+      "VS1": {
+        "shape": [
+          2205,
+          60
+        ],
+        "expected_cols": 60,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 0.483,
+        "max": 2.546
+      },
+      "SE": {
+        "shape": [
+          2205,
+          60
+        ],
+        "expected_cols": 60,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 0.0,
+        "max": 100.6
+      },
+      "CE": {
+        "shape": [
+          2205,
+          60
+        ],
+        "expected_cols": 60,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 17.042,
+        "max": 48.777
+      },
+      "CP": {
+        "shape": [
+          2205,
+          60
+        ],
+        "expected_cols": 60,
+        "cols_ok": true,
+        "rows_ok": true,
+        "n_nan": 0,
+        "n_inf": 0,
+        "min": 1.016,
+        "max": 2.909
+      }
+    },
+    "total_attributes": 43680,
+    "expected_43680": true,
+    "profile_nan": 0
+  },
+  "A_states": {
+    "cooler_pct": {
+      "3": 732,
+      "20": 732,
+      "100": 741
+    },
+    "valve_pct": {
+      "73": 360,
+      "80": 360,
+      "90": 360,
+      "100": 1125
+    },
+    "pump_leak": {
+      "0": 1221,
+      "1": 492,
+      "2": 492
+    },
+    "accumulator_bar": {
+      "90": 808,
+      "100": 399,
+      "115": 399,
+      "130": 599
+    },
+    "stable": {
+      "0": 1449,
+      "1": 756
+    }
+  },
+  "B_independence": {
+    "per_column_sequencing": {
+      "cooler_pct": {
+        "n_runs": 3,
+        "n_changes": 2,
+        "median_run_length": 732.0,
+        "max_run_length": 741,
+        "min_run_length": 732,
+        "longest_runs": [
+          741,
+          732,
+          732
+        ]
+      },
+      "valve_pct": {
+        "n_runs": 145,
+        "n_changes": 144,
+        "median_run_length": 10.0,
+        "max_run_length": 221,
+        "min_run_length": 10,
+        "longest_runs": [
+          221,
+          221,
+          211,
+          21,
+          21
+        ]
+      },
+      "pump_leak": {
+        "n_runs": 37,
+        "n_changes": 36,
+        "median_run_length": 41.0,
+        "max_run_length": 251,
+        "min_run_length": 41,
+        "longest_runs": [
+          251,
+          251,
+          210,
+          51,
+          51
+        ]
+      },
+      "accumulator_bar": {
+        "n_runs": 12,
+        "n_changes": 11,
+        "median_run_length": 133.0,
+        "max_run_length": 333,
+        "min_run_length": 133,
+        "longest_runs": [
+          333,
+          333,
+          333,
+          142,
+          133
+        ]
+      },
+      "stable": {
+        "n_runs": 72,
+        "n_changes": 71,
+        "median_run_length": 40.0,
+        "max_run_length": 211,
+        "min_run_length": 1,
+        "longest_runs": [
+          211,
+          211,
+          211,
+          49,
+          40
+        ]
+      }
+    },
+    "distinct_configurations": 144,
+    "configuration_runs": {
+      "n_runs": 194,
+      "median_run_length": 10.0,
+      "max_run_length": 210
+    },
+    "prob_consecutive_cycles_same_configuration": 0.912431941923775,
+    "cycles_per_configuration": {
+      "min": 10,
+      "median": 10.0,
+      "max": 230
+    },
+    "n_configurations_with_1_cycle": 0,
+    "power_by_component": {
+      "cooler_pct": {
+        "levels": {
+          "3": 732,
+          "20": 732,
+          "100": 741
+        },
+        "n_blocks": 3,
+        "note": "a leakage-free split must keep whole configuration blocks together"
+      },
+      "valve_pct": {
+        "levels": {
+          "73": 360,
+          "80": 360,
+          "90": 360,
+          "100": 1125
+        },
+        "n_blocks": 145,
+        "note": "a leakage-free split must keep whole configuration blocks together"
+      },
+      "pump_leak": {
+        "levels": {
+          "0": 1221,
+          "1": 492,
+          "2": 492
+        },
+        "n_blocks": 37,
+        "note": "a leakage-free split must keep whole configuration blocks together"
+      },
+      "accumulator_bar": {
+        "levels": {
+          "90": 808,
+          "100": 399,
+          "115": 399,
+          "130": 599
+        },
+        "n_blocks": 12,
+        "note": "a leakage-free split must keep whole configuration blocks together"
+      }
+    }
+  },
+  "C_baseline": {
+    "n_fully_healthy_cycles": 21,
+    "n_fully_healthy_and_stable": 10,
+    "fully_healthy_positions": {
+      "first": 1664,
+      "last": 1796,
+      "n_contiguous_blocks": 3
+    },
+    "matched_context_coverage": [
+      {
+        "component": "cooler_pct",
+        "level": 3,
+        "n_cycles": 732,
+        "frac_with_matched_healthy_context": 1.0
+      },
+      {
+        "component": "cooler_pct",
+        "level": 20,
+        "n_cycles": 732,
+        "frac_with_matched_healthy_context": 1.0
+      },
+      {
+        "component": "valve_pct",
+        "level": 73,
+        "n_cycles": 360,
+        "frac_with_matched_healthy_context": 1.0
+      },
+      {
+        "component": "valve_pct",
+        "level": 80,
+        "n_cycles": 360,
+        "frac_with_matched_healthy_context": 1.0
+      },
+      {
+        "component": "valve_pct",
+        "level": 90,
+        "n_cycles": 360,
+        "frac_with_matched_healthy_context": 1.0
+      },
+      {
+        "component": "pump_leak",
+        "level": 1,
+        "n_cycles": 492,
+        "frac_with_matched_healthy_context": 1.0
+      },
+      {
+        "component": "pump_leak",
+        "level": 2,
+        "n_cycles": 492,
+        "frac_with_matched_healthy_context": 1.0
+      },
+      {
+        "component": "accumulator_bar",
+        "level": 90,
+        "n_cycles": 808,
+        "frac_with_matched_healthy_context": 1.0
+      },
+      {
+        "component": "accumulator_bar",
+        "level": 100,
+        "n_cycles": 399,
+        "frac_with_matched_healthy_context": 1.0
+      },
+      {
+        "component": "accumulator_bar",
+        "level": 115,
+        "n_cycles": 399,
+        "frac_with_matched_healthy_context": 1.0
+      }
+    ]
+  },
+  "D_sigma": {
+    "n_blocks_used": 144,
+    "median_R2_drift_across_sensors": 0.1954597703498689,
+    "median_variance_share_from_drift": 0.41436179010509344,
+    "min_variance_share_from_drift": 0.2262637657648604,
+    "max_variance_share_from_drift": 0.8428157202180577,
+    "worst_drift_sensor": "TS2",
+    "SIGMA_SOURCE": "EFFECTIVE_VARIABILITY_ONLY"
+  }
+}

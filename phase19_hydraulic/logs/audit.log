@@ -1,0 +1,252 @@
+profile.txt: (2205, 5)
+  PS1   (2205, 6000)  nan=0  inf=0
+  PS2   (2205, 6000)  nan=0  inf=0
+  PS3   (2205, 6000)  nan=0  inf=0
+  PS4   (2205, 6000)  nan=0  inf=0
+  PS5   (2205, 6000)  nan=0  inf=0
+  PS6   (2205, 6000)  nan=0  inf=0
+  EPS1  (2205, 6000)  nan=0  inf=0
+  FS1   (2205, 600)  nan=0  inf=0
+  FS2   (2205, 600)  nan=0  inf=0
+  TS1   (2205, 60)  nan=0  inf=0
+  TS2   (2205, 60)  nan=0  inf=0
+  TS3   (2205, 60)  nan=0  inf=0
+  TS4   (2205, 60)  nan=0  inf=0
+  VS1   (2205, 60)  nan=0  inf=0
+  SE    (2205, 60)  nan=0  inf=0
+  CE    (2205, 60)  nan=0  inf=0
+  CP    (2205, 60)  nan=0  inf=0
+
+=== A integrity ===
+cycles=2205 expected2205=True total_attributes=43680 expected43680=True
+NaN across all sensors: 0
+
+=== A component states ===
+{
+ "cooler_pct": {
+  "3": 732,
+  "20": 732,
+  "100": 741
+ },
+ "valve_pct": {
+  "73": 360,
+  "80": 360,
+  "90": 360,
+  "100": 1125
+ },
+ "pump_leak": {
+  "0": 1221,
+  "1": 492,
+  "2": 492
+ },
+ "accumulator_bar": {
+  "90": 808,
+  "100": 399,
+  "115": 399,
+  "130": 599
+ },
+ "stable": {
+  "0": 1449,
+  "1": 756
+ }
+}
+
+=== B independence ===
+{
+ "per_column_sequencing": {
+  "cooler_pct": {
+   "n_runs": 3,
+   "n_changes": 2,
+   "median_run_length": 732.0,
+   "max_run_length": 741,
+   "min_run_length": 732,
+   "longest_runs": [
+    741,
+    732,
+    732
+   ]
+  },
+  "valve_pct": {
+   "n_runs": 145,
+   "n_changes": 144,
+   "median_run_length": 10.0,
+   "max_run_length": 221,
+   "min_run_length": 10,
+   "longest_runs": [
+    221,
+    221,
+    211,
+    21,
+    21
+   ]
+  },
+  "pump_leak": {
+   "n_runs": 37,
+   "n_changes": 36,
+   "median_run_length": 41.0,
+   "max_run_length": 251,
+   "min_run_length": 41,
+   "longest_runs": [
+    251,
+    251,
+    210,
+    51,
+    51
+   ]
+  },
+  "accumulator_bar": {
+   "n_runs": 12,
+   "n_changes": 11,
+   "median_run_length": 133.0,
+   "max_run_length": 333,
+   "min_run_length": 133,
+   "longest_runs": [
+    333,
+    333,
+    333,
+    142,
+    133
+   ]
+  },
+  "stable": {
+   "n_runs": 72,
+   "n_changes": 71,
+   "median_run_length": 40.0,
+   "max_run_length": 211,
+   "min_run_length": 1,
+   "longest_runs": [
+    211,
+    211,
+    211,
+    49,
+    40
+   ]
+  }
+ },
+ "distinct_configurations": 144,
+ "configuration_runs": {
+  "n_runs": 194,
+  "median_run_length": 10.0,
+  "max_run_length": 210
+ },
+ "prob_consecutive_cycles_same_configuration": 0.912431941923775,
+ "cycles_per_configuration": {
+  "min": 10,
+  "median": 10.0,
+  "max": 230
+ },
+ "n_configurations_with_1_cycle": 0,
+ "power_by_component": {
+  "cooler_pct": {
+   "levels": {
+    "3": 732,
+    "20": 732,
+    "100": 741
+   },
+   "n_blocks": 3,
+   "note": "a leakage-free split must keep whole configuration blocks together"
+  },
+  "valve_pct": {
+   "levels": {
+    "73": 360,
+    "80": 360,
+    "90": 360,
+    "100": 1125
+   },
+   "n_blocks": 145,
+   "note": "a leakage-free split must keep whole configuration blocks together"
+  },
+  "pump_leak": {
+   "levels": {
+    "0": 1221,
+    "1": 492,
+    "2": 492
+   },
+   "n_blocks": 37,
+   "note": "a leakage-free split must keep whole configuration blocks together"
+  },
+  "accumulator_bar": {
+   "levels": {
+    "90": 808,
+    "100": 399,
+    "115": 399,
+    "130": 599
+   },
+   "n_blocks": 12,
+   "note": "a leakage-free split must keep whole configuration blocks together"
+  }
+ }
+}
+
+=== C baseline ===
+{
+ "n_fully_healthy_cycles": 21,
+ "n_fully_healthy_and_stable": 10,
+ "fully_healthy_positions": {
+  "first": 1664,
+  "last": 1796,
+  "n_contiguous_blocks": 3
+ },
+ "matched_context_coverage": [
+  {
+   "component": "cooler_pct",
+   "level": 3,
+   "n_cycles": 732,
+   "frac_with_matched_healthy_context": 1.0
+  },
+  {
+   "component": "cooler_pct",
+   "level": 20,
+   "n_cycles": 732,
+   "frac_with_matched_healthy_context": 1.0
+  },
+  {
+   "component": "valve_pct",
+   "level": 73,
+   "n_cycles": 360,
+   "frac_with_matched_healthy_context": 1.0
+  },
+  {
+   "component": "valve_pct",
+   "level": 80,
+   "n_cycles": 360,
+   "frac_with_matched_healthy_context": 1.0
+  },
+  {
+   "component": "valve_pct",
+   "level": 90,
+   "n_cycles": 360,
+   "frac_with_matched_healthy_context": 1.0
+  },
+  {
+   "component": "pump_leak",
+   "level": 1,
+   "n_cycles": 492,
+   "frac_with_matched_healthy_context": 1.0
+  },
+  {
+   "component": "pump_leak",
+   "level": 2,
+   "n_cycles": 492,
+   "frac_with_matched_healthy_context": 1.0
+  },
+  {
+   "component": "accumulator_bar",
+   "level": 90,
+   "n_cycles": 808,
+   "frac_with_matched_healthy_context": 1.0
+  },
+  {
+   "component": "accumulator_bar",
+   "level": 100,
+   "n_cycles": 399,
+   "frac_with_matched_healthy_context": 1.0
+  },
+  {
+   "component": "accumulator_bar",
+   "level": 115,
+   "n_cycles": 399,
+   "frac_with_matched_healthy_context": 1.0
+  }
+ ]
+}

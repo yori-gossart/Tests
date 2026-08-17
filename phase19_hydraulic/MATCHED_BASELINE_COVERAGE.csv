@@ -1,0 +1,11 @@
+component,level,n_cycles,frac_with_matched_healthy_context
+cooler_pct,3,732,1.0
+cooler_pct,20,732,1.0
+valve_pct,73,360,1.0
+valve_pct,80,360,1.0
+valve_pct,90,360,1.0
+pump_leak,1,492,1.0
+pump_leak,2,492,1.0
+accumulator_bar,90,808,1.0
+accumulator_bar,100,399,1.0
+accumulator_bar,115,399,1.0
