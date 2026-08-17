@@ -292,3 +292,38 @@ Le banc ZeMA est un **banc d'essai physique de laboratoire**. Un résultat posit
 une validation sur système physique réel et contrôlé — ce qui est strictement plus fort qu'un
 simulateur, et strictement plus faible qu'un déploiement industriel. Aucune généralisation à
 d'autres domaines ne sera tirée.
+
+---
+
+## AMENDEMENT 1 — 2026-08-17, avant tout résultat
+
+**Objet : définition de `STRESS_SCALE`.**
+
+Le §5 indiquait que l'échelle du stresseur de bruit serait « l'écart-type intra-configuration
+mesuré en Phase 19 ». Vérification faite avant toute exécution, cette grandeur est une
+dispersion **de moyennes de cycles**, et non une échelle du signal brut :
+
+| Capteur | Écart-type Phase 19 (moyennes de cycles) | Écart-type intra-cycle du signal brut | Rapport |
+|---|---|---|---|
+| PS1 | 0,0159 | 14,73 | **925 ×** |
+| FS1 | 0,0049 | 2,98 | 607 × |
+| PS3 | 0,0057 | 0,887 | 154 × |
+| EPS1 | 1,92 | 196,1 | 102 × |
+| TS1 | 0,0288 | 0,193 | 6,7 × |
+| VS1 | 0,0046 | 0,0323 | 7,0 × |
+
+Injecté sur chaque échantillon brut, un bruit à cette échelle déplacerait la moyenne du cycle
+de `échelle / √n`, soit **2·10⁻⁴ à 2·10⁻²** unités — numériquement inerte. Les conditions de
+bruit ×2/×4/×8 auraient été indiscernables de la référence, et l'axe Robustesse n'aurait rien
+mesuré.
+
+**Correction retenue** : `STRESS_SCALE_j` = **médiane sur les cycles de l'écart-type
+intra-cycle du capteur j sur le signal brut**. C'est l'échelle du niveau auquel la
+perturbation est appliquée. Elle reste une grandeur purement descriptive du banc, et **n'est
+en aucun cas un σ FO**.
+
+Les conditions de biais (2 × `STRESS_SCALE`) et de dérive (rampe 0 → 4 × `STRESS_SCALE`)
+utilisent la même définition corrigée.
+
+Aucun résultat n'existait au moment de cet amendement : il est commité avant l'exécution, et
+la chronologie est vérifiable dans l'historique git.
