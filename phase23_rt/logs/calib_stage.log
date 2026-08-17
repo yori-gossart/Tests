@@ -1,0 +1,17 @@
+GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1/M1_logreg: hp={'C': 0.1} acc_calib=0.5094 err_calib=157 (0s)
+GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1/M2_random_forest: hp={'min_samples_leaf': 1} acc_calib=0.5750 err_calib=136 (3s)
+GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1/M3_gradient_boosting: hp={'learning_rate': 0.1} acc_calib=0.5969 err_calib=129 (1s)
+GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1/M4_rbf_svm: hp={'C': 1.0} acc_calib=0.5781 err_calib=135 (0s)
+adult/M1_logreg: hp={'C': 10.0} acc_calib=0.8188 err_calib=1770 (0s)
+adult/M2_random_forest: hp={'min_samples_leaf': 5} acc_calib=0.8630 err_calib=1338 (6s)
+adult/M3_gradient_boosting: hp={'learning_rate': 0.1} acc_calib=0.8738 err_calib=1233 (4s)
+adult/M4_rbf_svm: SVM sur 10000 lignes TRAIN (regle gelee)
+adult/M4_rbf_svm: hp={'C': 10.0} acc_calib=0.8402 err_calib=1561 (17s)
+agaricus_lepiota/M1_logreg: hp={'C': 10.0} acc_calib=0.9583 err_calib=68 (0s)
+agaricus_lepiota/M2_random_forest: NOT_EXECUTABLE, 0 erreurs CALIB < 20
+agaricus_lepiota/M3_gradient_boosting: NOT_EXECUTABLE, 0 erreurs CALIB < 20
+agaricus_lepiota/M4_rbf_svm: NOT_EXECUTABLE, 0 erreurs CALIB < 20
+allhypo/M1_logreg: hp={'C': 1.0} acc_calib=0.9390 err_calib=46 (0s)
+allhypo/M2_random_forest: hp={'min_samples_leaf': 1} acc_calib=0.9549 err_calib=34 (3s)
+allhypo/M3_gradient_boosting: NOT_EXECUTABLE, 14 erreurs CALIB < 20
+allhypo/M4_rbf_svm: hp={'C': 10.0} acc_calib=0.9430 err_calib=43 (0s)

@@ -1,0 +1,583 @@
+{
+  "verbatim_check": {
+    "verbatim": true,
+    "sha256_function": "492c42dbee0b88c6e45867374da1c146a0d4d4df6fb6adf634b65931d57d6318",
+    "source_file": "src/phase20_dr_run.py",
+    "sha256_source_file": "b66cb9de732a62743677acddd3be4e1ab5eb6e6655ec64b1ecdd5b9f0558e89b"
+  },
+  "cells": [
+    {
+      "dataset": "GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1",
+      "model": "M1_logreg",
+      "status": "OK",
+      "hp": {
+        "C": 0.1
+      },
+      "grid": [
+        {
+          "hp": {
+            "C": 0.1
+          },
+          "calib_accuracy": 0.509375
+        },
+        {
+          "hp": {
+            "C": 1.0
+          },
+          "calib_accuracy": 0.50625
+        },
+        {
+          "hp": {
+            "C": 10.0
+          },
+          "calib_accuracy": 0.50625
+        }
+      ],
+      "n_errors_calib": 157,
+      "calib_accuracy": 0.509375,
+      "n_train": 960,
+      "n_calib": 320,
+      "n_test": 320,
+      "n_classes": 2,
+      "svm_subsample": null,
+      "thresholds_calib": {
+        "MCP_RISK": 0.4892809647973431,
+        "ENTROPY_RISK": 0.999668449438531,
+        "MARGIN_RISK": 0.9785619295946862,
+        "ISO_PRED": -0.7850138289364663,
+        "STANDARD_META": 0.5043120466593151,
+        "ISO_META": 0.5099635404036308
+      },
+      "preprocess": {
+        "n_features_kept": 20,
+        "n_missing_indicators": 0,
+        "n_features_final": 20
+      }
+    },
+    {
+      "dataset": "GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1",
+      "model": "M2_random_forest",
+      "status": "OK",
+      "hp": {
+        "min_samples_leaf": 1
+      },
+      "grid": [
+        {
+          "hp": {
+            "min_samples_leaf": 1
+          },
+          "calib_accuracy": 0.575
+        },
+        {
+          "hp": {
+            "min_samples_leaf": 5
+          },
+          "calib_accuracy": 0.571875
+        }
+      ],
+      "n_errors_calib": 136,
+      "calib_accuracy": 0.575,
+      "n_train": 960,
+      "n_calib": 320,
+      "n_test": 320,
+      "n_classes": 2,
+      "svm_subsample": null,
+      "thresholds_calib": {
+        "MCP_RISK": 0.4866666666666667,
+        "ENTROPY_RISK": 0.99948698095089,
+        "MARGIN_RISK": 0.9733333333333334,
+        "ISO_PRED": -0.7750029890318506,
+        "STANDARD_META": 0.4442555928489757,
+        "ISO_META": 0.46601694054679793
+      },
+      "preprocess": {
+        "n_features_kept": 20,
+        "n_missing_indicators": 0,
+        "n_features_final": 20
+      }
+    },
+    {
+      "dataset": "GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1",
+      "model": "M3_gradient_boosting",
+      "status": "OK",
+      "hp": {
+        "learning_rate": 0.1
+      },
+      "grid": [
+        {
+          "hp": {
+            "learning_rate": 0.05
+          },
+          "calib_accuracy": 0.584375
+        },
+        {
+          "hp": {
+            "learning_rate": 0.1
+          },
+          "calib_accuracy": 0.596875
+        }
+      ],
+      "n_errors_calib": 129,
+      "calib_accuracy": 0.596875,
+      "n_train": 960,
+      "n_calib": 320,
+      "n_test": 320,
+      "n_classes": 2,
+      "svm_subsample": null,
+      "thresholds_calib": {
+        "MCP_RISK": 0.45355206125732594,
+        "ENTROPY_RISK": 0.9937660114967869,
+        "MARGIN_RISK": 0.9071041225146519,
+        "ISO_PRED": -0.7728573238567569,
+        "STANDARD_META": 0.45123941208518165,
+        "ISO_META": 0.47295566116120247
+      },
+      "preprocess": {
+        "n_features_kept": 20,
+        "n_missing_indicators": 0,
+        "n_features_final": 20
+      }
+    },
+    {
+      "dataset": "GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1",
+      "model": "M4_rbf_svm",
+      "status": "OK",
+      "hp": {
+        "C": 1.0
+      },
+      "grid": [
+        {
+          "hp": {
+            "C": 1.0
+          },
+          "calib_accuracy": 0.575
+        },
+        {
+          "hp": {
+            "C": 10.0
+          },
+          "calib_accuracy": 0.55625
+        }
+      ],
+      "n_errors_calib": 135,
+      "calib_accuracy": 0.578125,
+      "n_train": 960,
+      "n_calib": 320,
+      "n_test": 320,
+      "n_classes": 2,
+      "svm_subsample": null,
+      "thresholds_calib": {
+        "MCP_RISK": 0.4804443078381708,
+        "ENTROPY_RISK": 0.9988962729178427,
+        "MARGIN_RISK": 0.9608886156763417,
+        "ISO_PRED": -0.7780025847148864,
+        "STANDARD_META": 0.4574003138823999,
+        "ISO_META": 0.49943997576890076
+      },
+      "preprocess": {
+        "n_features_kept": 20,
+        "n_missing_indicators": 0,
+        "n_features_final": 20
+      }
+    },
+    {
+      "dataset": "adult",
+      "model": "M1_logreg",
+      "status": "OK",
+      "hp": {
+        "C": 10.0
+      },
+      "grid": [
+        {
+          "hp": {
+            "C": 0.1
+          },
+          "calib_accuracy": 0.8186098884225612
+        },
+        {
+          "hp": {
+            "C": 1.0
+          },
+          "calib_accuracy": 0.8187122530453476
+        },
+        {
+          "hp": {
+            "C": 10.0
+          },
+          "calib_accuracy": 0.8188146176681339
+        }
+      ],
+      "n_errors_calib": 1770,
+      "calib_accuracy": 0.8188146176681339,
+      "n_train": 29305,
+      "n_calib": 9769,
+      "n_test": 9768,
+      "n_classes": 2,
+      "svm_subsample": null,
+      "thresholds_calib": {
+        "MCP_RISK": 0.4047108396232294,
+        "ENTROPY_RISK": 0.9736396444386658,
+        "MARGIN_RISK": 0.8094216792464588,
+        "ISO_PRED": -0.6982494552425482,
+        "STANDARD_META": 0.4364336052211874,
+        "ISO_META": 0.42332321387296656
+      },
+      "preprocess": {
+        "n_features_kept": 14,
+        "n_missing_indicators": 0,
+        "n_features_final": 14
+      }
+    },
+    {
+      "dataset": "adult",
+      "model": "M2_random_forest",
+      "status": "OK",
+      "hp": {
+        "min_samples_leaf": 5
+      },
+      "grid": [
+        {
+          "hp": {
+            "min_samples_leaf": 1
+          },
+          "calib_accuracy": 0.8563824342307299
+        },
+        {
+          "hp": {
+            "min_samples_leaf": 5
+          },
+          "calib_accuracy": 0.8630361347118436
+        }
+      ],
+      "n_errors_calib": 1338,
+      "calib_accuracy": 0.8630361347118436,
+      "n_train": 29305,
+      "n_calib": 9769,
+      "n_test": 9768,
+      "n_classes": 2,
+      "svm_subsample": null,
+      "thresholds_calib": {
+        "MCP_RISK": 0.4002087459776429,
+        "ENTROPY_RISK": 0.971072571969866,
+        "MARGIN_RISK": 0.800417491955286,
+        "ISO_PRED": -0.7079173540867835,
+        "STANDARD_META": 0.4033854810486539,
+        "ISO_META": 0.4025097599177989
+      },
+      "preprocess": {
+        "n_features_kept": 14,
+        "n_missing_indicators": 0,
+        "n_features_final": 14
+      }
+    },
+    {
+      "dataset": "adult",
+      "model": "M3_gradient_boosting",
+      "status": "OK",
+      "hp": {
+        "learning_rate": 0.1
+      },
+      "grid": [
+        {
+          "hp": {
+            "learning_rate": 0.05
+          },
+          "calib_accuracy": 0.8716347630258983
+        },
+        {
+          "hp": {
+            "learning_rate": 0.1
+          },
+          "calib_accuracy": 0.8737844201044119
+        }
+      ],
+      "n_errors_calib": 1233,
+      "calib_accuracy": 0.8737844201044119,
+      "n_train": 29305,
+      "n_calib": 9769,
+      "n_test": 9768,
+      "n_classes": 2,
+      "svm_subsample": null,
+      "thresholds_calib": {
+        "MCP_RISK": 0.38717074512529115,
+        "ENTROPY_RISK": 0.96294939677078,
+        "MARGIN_RISK": 0.7743414902505823,
+        "ISO_PRED": -0.7086693032649292,
+        "STANDARD_META": 0.3975700239123083,
+        "ISO_META": 0.396804326909312
+      },
+      "preprocess": {
+        "n_features_kept": 14,
+        "n_missing_indicators": 0,
+        "n_features_final": 14
+      }
+    },
+    {
+      "dataset": "adult",
+      "model": "M4_rbf_svm",
+      "status": "OK",
+      "hp": {
+        "C": 10.0
+      },
+      "grid": [
+        {
+          "hp": {
+            "C": 1.0
+          },
+          "calib_accuracy": 0.8397993653393387
+        },
+        {
+          "hp": {
+            "C": 10.0
+          },
+          "calib_accuracy": 0.8401064592076978
+        }
+      ],
+      "n_errors_calib": 1561,
+      "calib_accuracy": 0.8402088238304841,
+      "n_train": 29305,
+      "n_calib": 9769,
+      "n_test": 9768,
+      "n_classes": 2,
+      "svm_subsample": 10000,
+      "thresholds_calib": {
+        "MCP_RISK": 0.339667659784932,
+        "ENTROPY_RISK": 0.9245003215076432,
+        "MARGIN_RISK": 0.679335319569864,
+        "ISO_PRED": -0.7033554075323288,
+        "STANDARD_META": 0.41266313630803275,
+        "ISO_META": 0.38718053126142427
+      },
+      "preprocess": {
+        "n_features_kept": 14,
+        "n_missing_indicators": 0,
+        "n_features_final": 14
+      }
+    },
+    {
+      "dataset": "agaricus_lepiota",
+      "model": "M1_logreg",
+      "status": "OK",
+      "hp": {
+        "C": 10.0
+      },
+      "grid": [
+        {
+          "hp": {
+            "C": 0.1
+          },
+          "calib_accuracy": 0.9349294045426643
+        },
+        {
+          "hp": {
+            "C": 1.0
+          },
+          "calib_accuracy": 0.9429097605893186
+        },
+        {
+          "hp": {
+            "C": 10.0
+          },
+          "calib_accuracy": 0.958256599140577
+        }
+      ],
+      "n_errors_calib": 68,
+      "calib_accuracy": 0.958256599140577,
+      "n_train": 4887,
+      "n_calib": 1629,
+      "n_test": 1629,
+      "n_classes": 2,
+      "svm_subsample": null,
+      "thresholds_calib": {
+        "MCP_RISK": 0.18020108285546138,
+        "ENTROPY_RISK": 0.6805167257382398,
+        "MARGIN_RISK": 0.36040216571092276,
+        "ISO_PRED": -0.8476837034452671,
+        "STANDARD_META": 0.07945551263251588,
+        "ISO_META": 0.047953241827668726
+      },
+      "preprocess": {
+        "n_features_kept": 21,
+        "n_missing_indicators": 0,
+        "n_features_final": 21
+      }
+    },
+    {
+      "dataset": "agaricus_lepiota",
+      "model": "M2_random_forest",
+      "status": "NOT_EXECUTABLE",
+      "reason": "0 erreurs sur CALIBRATION < 20",
+      "hp": {
+        "min_samples_leaf": 1
+      },
+      "n_errors_calib": 0,
+      "calib_accuracy": 1.0
+    },
+    {
+      "dataset": "agaricus_lepiota",
+      "model": "M3_gradient_boosting",
+      "status": "NOT_EXECUTABLE",
+      "reason": "0 erreurs sur CALIBRATION < 20",
+      "hp": {
+        "learning_rate": 0.05
+      },
+      "n_errors_calib": 0,
+      "calib_accuracy": 1.0
+    },
+    {
+      "dataset": "agaricus_lepiota",
+      "model": "M4_rbf_svm",
+      "status": "NOT_EXECUTABLE",
+      "reason": "0 erreurs sur CALIBRATION < 20",
+      "hp": {
+        "C": 1.0
+      },
+      "n_errors_calib": 0,
+      "calib_accuracy": 1.0
+    },
+    {
+      "dataset": "allhypo",
+      "model": "M1_logreg",
+      "status": "OK",
+      "hp": {
+        "C": 1.0
+      },
+      "grid": [
+        {
+          "hp": {
+            "C": 0.1
+          },
+          "calib_accuracy": 0.9336870026525199
+        },
+        {
+          "hp": {
+            "C": 1.0
+          },
+          "calib_accuracy": 0.9389920424403183
+        },
+        {
+          "hp": {
+            "C": 10.0
+          },
+          "calib_accuracy": 0.9363395225464191
+        }
+      ],
+      "n_errors_calib": 46,
+      "calib_accuracy": 0.9389920424403183,
+      "n_train": 2262,
+      "n_calib": 754,
+      "n_test": 754,
+      "n_classes": 3,
+      "svm_subsample": null,
+      "thresholds_calib": {
+        "MCP_RISK": 0.2342672324992548,
+        "ENTROPY_RISK": 0.5575053285661506,
+        "MARGIN_RISK": 0.411552632765489,
+        "ISO_PRED": -0.7272488402212598,
+        "STANDARD_META": 0.1830274359687349,
+        "ISO_META": 0.18026181198316732
+      },
+      "preprocess": {
+        "n_features_kept": 27,
+        "n_missing_indicators": 0,
+        "n_features_final": 27
+      }
+    },
+    {
+      "dataset": "allhypo",
+      "model": "M2_random_forest",
+      "status": "OK",
+      "hp": {
+        "min_samples_leaf": 1
+      },
+      "grid": [
+        {
+          "hp": {
+            "min_samples_leaf": 1
+          },
+          "calib_accuracy": 0.9549071618037135
+        },
+        {
+          "hp": {
+            "min_samples_leaf": 5
+          },
+          "calib_accuracy": 0.9363395225464191
+        }
+      ],
+      "n_errors_calib": 34,
+      "calib_accuracy": 0.9549071618037135,
+      "n_train": 2262,
+      "n_calib": 754,
+      "n_test": 754,
+      "n_classes": 3,
+      "svm_subsample": null,
+      "thresholds_calib": {
+        "MCP_RISK": 0.2366666666666667,
+        "ENTROPY_RISK": 0.5706808231683301,
+        "MARGIN_RISK": 0.44666666666666666,
+        "ISO_PRED": -0.7268542451415057,
+        "STANDARD_META": 0.10404350555398767,
+        "ISO_META": 0.04902987296053135
+      },
+      "preprocess": {
+        "n_features_kept": 27,
+        "n_missing_indicators": 0,
+        "n_features_final": 27
+      }
+    },
+    {
+      "dataset": "allhypo",
+      "model": "M3_gradient_boosting",
+      "status": "NOT_EXECUTABLE",
+      "reason": "14 erreurs sur CALIBRATION < 20",
+      "hp": {
+        "learning_rate": 0.05
+      },
+      "n_errors_calib": 14,
+      "calib_accuracy": 0.9814323607427056
+    },
+    {
+      "dataset": "allhypo",
+      "model": "M4_rbf_svm",
+      "status": "OK",
+      "hp": {
+        "C": 10.0
+      },
+      "grid": [
+        {
+          "hp": {
+            "C": 1.0
+          },
+          "calib_accuracy": 0.9230769230769231
+        },
+        {
+          "hp": {
+            "C": 10.0
+          },
+          "calib_accuracy": 0.9416445623342176
+        }
+      ],
+      "n_errors_calib": 43,
+      "calib_accuracy": 0.9429708222811671,
+      "n_train": 2262,
+      "n_calib": 754,
+      "n_test": 754,
+      "n_classes": 3,
+      "svm_subsample": null,
+      "thresholds_calib": {
+        "MCP_RISK": 0.1659282512432742,
+        "ENTROPY_RISK": 0.49545144041640654,
+        "MARGIN_RISK": 0.2901721365351749,
+        "ISO_PRED": -0.7302602955905249,
+        "STANDARD_META": 0.12553150524719092,
+        "ISO_META": 0.13599285869046704
+      },
+      "preprocess": {
+        "n_features_kept": 27,
+        "n_missing_indicators": 0,
+        "n_features_final": 27
+      }
+    }
+  ],
+  "TEST_OPENED": "NO"
+}

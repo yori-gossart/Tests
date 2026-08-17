@@ -1,0 +1,17 @@
+dataset,model,status,hp,n_errors_calib,calib_accuracy,n_train,n_calib,n_test,n_classes,svm_subsample,reason
+GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1,M1_logreg,OK,{'C': 0.1},157,0.509375,960.0,320.0,320.0,2.0,,
+GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1,M2_random_forest,OK,{'min_samples_leaf': 1},136,0.575,960.0,320.0,320.0,2.0,,
+GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1,M3_gradient_boosting,OK,{'learning_rate': 0.1},129,0.596875,960.0,320.0,320.0,2.0,,
+GAMETES_Epistasis_2_Way_20atts_0.1H_EDM_1_1,M4_rbf_svm,OK,{'C': 1.0},135,0.578125,960.0,320.0,320.0,2.0,,
+adult,M1_logreg,OK,{'C': 10.0},1770,0.8188146176681339,29305.0,9769.0,9768.0,2.0,,
+adult,M2_random_forest,OK,{'min_samples_leaf': 5},1338,0.8630361347118436,29305.0,9769.0,9768.0,2.0,,
+adult,M3_gradient_boosting,OK,{'learning_rate': 0.1},1233,0.8737844201044119,29305.0,9769.0,9768.0,2.0,,
+adult,M4_rbf_svm,OK,{'C': 10.0},1561,0.8402088238304841,29305.0,9769.0,9768.0,2.0,10000.0,
+agaricus_lepiota,M1_logreg,OK,{'C': 10.0},68,0.958256599140577,4887.0,1629.0,1629.0,2.0,,
+agaricus_lepiota,M2_random_forest,NOT_EXECUTABLE,{'min_samples_leaf': 1},0,1.0,,,,,,0 erreurs sur CALIBRATION < 20
+agaricus_lepiota,M3_gradient_boosting,NOT_EXECUTABLE,{'learning_rate': 0.05},0,1.0,,,,,,0 erreurs sur CALIBRATION < 20
+agaricus_lepiota,M4_rbf_svm,NOT_EXECUTABLE,{'C': 1.0},0,1.0,,,,,,0 erreurs sur CALIBRATION < 20
+allhypo,M1_logreg,OK,{'C': 1.0},46,0.9389920424403183,2262.0,754.0,754.0,3.0,,
+allhypo,M2_random_forest,OK,{'min_samples_leaf': 1},34,0.9549071618037135,2262.0,754.0,754.0,3.0,,
+allhypo,M3_gradient_boosting,NOT_EXECUTABLE,{'learning_rate': 0.05},14,0.9814323607427056,,,,,,14 erreurs sur CALIBRATION < 20
+allhypo,M4_rbf_svm,OK,{'C': 10.0},43,0.9429708222811671,2262.0,754.0,754.0,3.0,,

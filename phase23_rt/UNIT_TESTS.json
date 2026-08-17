@@ -1,0 +1,70 @@
+{
+  "all_passed": true,
+  "tests": [
+    {
+      "test": "1_perfect_beats_random",
+      "passed": true,
+      "detail": "AUGRC perfect=0.02010 < random=0.10408"
+    },
+    {
+      "test": "2_inverted_is_worse_than_random",
+      "passed": true,
+      "detail": "AUGRC inverted=0.18010 > random=0.10408"
+    },
+    {
+      "test": "3_error_capture_10_equals_1",
+      "passed": true,
+      "detail": "= 1.000000"
+    },
+    {
+      "test": "4_lift_exact",
+      "passed": true,
+      "detail": "EC@10=0.4000 LIFT@10=4.0000"
+    },
+    {
+      "test": "5_augrc_lower_is_better",
+      "passed": true,
+      "detail": "0.02010 < 0.10408 < 0.18010"
+    },
+    {
+      "test": "6_meta_models_same_rows",
+      "passed": true,
+      "detail": "n=1000, colonnes communes identiques, ISO ajoute 1 colonne"
+    },
+    {
+      "test": "7_bootstrap_is_paired",
+      "passed": true,
+      "detail": "un seul jeu d'indices par tirage, reutilise pour les deux scores"
+    },
+    {
+      "test": "7b_bootstrap_returns_all_deltas",
+      "passed": true,
+      "detail": "{'delta_augrc': 200, 'delta_error_capture_10': 200, 'delta_residual_error_10': 200}"
+    },
+    {
+      "test": "8_iso_does_not_use_test_label",
+      "passed": true,
+      "detail": "ISO_PRED ne depend que de X, des centroides TRAIN et de l'etiquette PREDITE"
+    },
+    {
+      "test": "9_splits_disjoint_and_complete",
+      "passed": true,
+      "detail": "train=300 calib=100 test=100"
+    },
+    {
+      "test": "10_preprocessing_no_leak",
+      "passed": true,
+      "detail": "moyennes/echelles du scaler == statistiques de TRAIN uniquement"
+    },
+    {
+      "test": "11_holm_monotone",
+      "passed": true,
+      "detail": "arret au premier echec, comme Holm l'exige"
+    },
+    {
+      "test": "12_fast_kernel_matches_reference",
+      "passed": true,
+      "detail": "300 cas aleatoires, 0 divergence(s) au-dela de 1e-12"
+    }
+  ]
+}
