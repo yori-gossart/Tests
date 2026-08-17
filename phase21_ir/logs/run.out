@@ -20,3 +20,32 @@
   HAR/M1_logreg: acc=0.9416 err=172 ISO_FIT=0.813 best=B3_margin(0.901) (63s)
 /usr/local/lib/python3.11/dist-packages/sklearn/svm/_base.py:239: FutureWarning: The `probability` parameter was deprecated in 1.9 and will be removed in version 1.11. Use `CalibratedClassifierCV(SVC(), ensemble=False)` instead of `SVC(probability=True)`
   warnings.warn(
+  HAR/M2_rbf_svm: acc=0.9488 err=151 ISO_FIT=0.823 best=B3_margin(0.917) (70s)
+  HAR/M3_random_forest: acc=0.9189 err=239 ISO_FIT=0.852 best=B3_margin(0.904) (63s)
+  HAR/M4_hist_gradient_boosting: acc=0.9304 err=205 ISO_FIT=0.811 best=B3_margin(0.919) (66s)
+
+=== CRITERES ===
+{
+ "n_cells_ok": 12,
+ "c1_median_auroc": 0.730628722828427,
+ "c1_pass": true,
+ "c2_frac_ci_above_half": 1.0,
+ "c2_pass": true,
+ "c3_n_datasets": 3,
+ "c3_n_models": 4,
+ "c3_pass": true,
+ "c4_without_rf": {
+  "median_auroc": 0.7282372700831592,
+  "frac_ci_above_half": 1.0,
+  "n_datasets": 3,
+  "n_models": 3
+ },
+ "c4_pass": true
+}
+
+=== VERDICTS ===
+GENERALIZATION         YES
+INCREMENTAL_VALUE      YES
+NOVELTY_SIGNAL         SUPPORTED
+PHASE22_AUTHORIZED     YES
+(301s)

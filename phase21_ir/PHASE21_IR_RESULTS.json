@@ -1,0 +1,323 @@
+{
+  "verbatim_check": {
+    "verbatim": true,
+    "sha256_function": "492c42dbee0b88c6e45867374da1c146a0d4d4df6fb6adf634b65931d57d6318",
+    "source_file": "src/phase20_dr_run.py",
+    "sha256_source_file": "b66cb9de732a62743677acddd3be4e1ab5eb6e6655ec64b1ecdd5b9f0558e89b"
+  },
+  "gate_a": {
+    "APS": "NOT_EXECUTABLE",
+    "SECOM": "EXECUTABLE",
+    "STEEL": "EXECUTABLE",
+    "HAR": "EXECUTABLE"
+  },
+  "criteria": {
+    "n_cells_ok": 12,
+    "c1_median_auroc": 0.730628722828427,
+    "c1_pass": true,
+    "c2_frac_ci_above_half": 1.0,
+    "c2_pass": true,
+    "c3_n_datasets": 3,
+    "c3_n_models": 4,
+    "c3_pass": true,
+    "c4_without_rf": {
+      "median_auroc": 0.7282372700831592,
+      "frac_ci_above_half": 1.0,
+      "n_datasets": 3,
+      "n_models": 3
+    },
+    "c4_pass": true
+  },
+  "incremental": {
+    "iso_vs_best": {
+      "n_cells": 24,
+      "n_confirmed_gain": 0,
+      "median_delta": -0.07058424217119952,
+      "cells": []
+    },
+    "combo_vs_best": {
+      "n_cells": 12,
+      "n_confirmed_gain": 1,
+      "median_delta": -0.014218957687485767,
+      "cells": [
+        {
+          "dataset": "HAR",
+          "model": "M3_random_forest",
+          "delta_auroc": 0.05642664227486516
+        }
+      ]
+    }
+  },
+  "verdicts": {
+    "GENERALIZATION": "YES",
+    "INCREMENTAL_VALUE": "YES",
+    "NOVELTY_SIGNAL": "SUPPORTED",
+    "PHASE22_AUTHORIZED": "YES"
+  },
+  "cells": [
+    {
+      "dataset": "SECOM",
+      "model": "M1_logreg",
+      "status": "OK",
+      "n_train": 940,
+      "n_calib": 313,
+      "n_test": 314,
+      "n_errors_test": 43,
+      "test_accuracy": 0.8630573248407644,
+      "n_classes": 2,
+      "best_baseline_on_calib": "B1_max_prob",
+      "best_baseline_on_test": "B1_max_prob",
+      "iso_fit_auroc": 0.6661803827340599,
+      "iso_fit_ci_low": 0.5794584263777126,
+      "iso_fit_ci_high": 0.7557543508988429,
+      "bootstrap_unit": "ligne",
+      "preprocess": {
+        "n_features_kept": 474,
+        "n_missing_indicators": 52,
+        "n_features_final": 526
+      }
+    },
+    {
+      "dataset": "SECOM",
+      "model": "M2_rbf_svm",
+      "status": "OK",
+      "n_train": 940,
+      "n_calib": 313,
+      "n_test": 314,
+      "n_errors_test": 21,
+      "test_accuracy": 0.9331210191082803,
+      "n_classes": 2,
+      "best_baseline_on_calib": "B1_max_prob",
+      "best_baseline_on_test": "B1_max_prob",
+      "iso_fit_auroc": 0.7142857142857143,
+      "iso_fit_ci_low": 0.6126032282282282,
+      "iso_fit_ci_high": 0.8038710585585584,
+      "bootstrap_unit": "ligne",
+      "preprocess": {
+        "n_features_kept": 474,
+        "n_missing_indicators": 52,
+        "n_features_final": 526
+      }
+    },
+    {
+      "dataset": "SECOM",
+      "model": "M3_random_forest",
+      "status": "OK",
+      "n_train": 940,
+      "n_calib": 313,
+      "n_test": 314,
+      "n_errors_test": 21,
+      "test_accuracy": 0.9331210191082803,
+      "n_classes": 2,
+      "best_baseline_on_calib": "B1_max_prob",
+      "best_baseline_on_test": "B1_max_prob",
+      "iso_fit_auroc": 0.666991711360312,
+      "iso_fit_ci_low": 0.5430482205223199,
+      "iso_fit_ci_high": 0.7777103688049796,
+      "bootstrap_unit": "ligne",
+      "preprocess": {
+        "n_features_kept": 474,
+        "n_missing_indicators": 52,
+        "n_features_final": 526
+      }
+    },
+    {
+      "dataset": "SECOM",
+      "model": "M4_hist_gradient_boosting",
+      "status": "OK",
+      "n_train": 940,
+      "n_calib": 313,
+      "n_test": 314,
+      "n_errors_test": 21,
+      "test_accuracy": 0.9331210191082803,
+      "n_classes": 2,
+      "best_baseline_on_calib": "B1_max_prob",
+      "best_baseline_on_test": "B1_max_prob",
+      "iso_fit_auroc": 0.6661790996261986,
+      "iso_fit_ci_low": 0.5403511368994042,
+      "iso_fit_ci_high": 0.7776984834968778,
+      "bootstrap_unit": "ligne",
+      "preprocess": {
+        "n_features_kept": 474,
+        "n_missing_indicators": 52,
+        "n_features_final": 526
+      }
+    },
+    {
+      "dataset": "STEEL",
+      "model": "M1_logreg",
+      "status": "OK",
+      "n_train": 1165,
+      "n_calib": 388,
+      "n_test": 388,
+      "n_errors_test": 102,
+      "test_accuracy": 0.7371134020618557,
+      "n_classes": 7,
+      "best_baseline_on_calib": "B1_max_prob",
+      "best_baseline_on_test": "B1_max_prob",
+      "iso_fit_auroc": 0.7265528589058001,
+      "iso_fit_ci_low": 0.6696158166930565,
+      "iso_fit_ci_high": 0.7804926580286193,
+      "bootstrap_unit": "ligne",
+      "preprocess": {
+        "n_features_kept": 27,
+        "n_missing_indicators": 0,
+        "n_features_final": 27
+      }
+    },
+    {
+      "dataset": "STEEL",
+      "model": "M2_rbf_svm",
+      "status": "OK",
+      "n_train": 1165,
+      "n_calib": 388,
+      "n_test": 388,
+      "n_errors_test": 87,
+      "test_accuracy": 0.7757731958762887,
+      "n_classes": 7,
+      "best_baseline_on_calib": "B2_entropy",
+      "best_baseline_on_test": "B1_max_prob",
+      "iso_fit_auroc": 0.7521671058158629,
+      "iso_fit_ci_low": 0.6926943773818773,
+      "iso_fit_ci_high": 0.8119868169800235,
+      "bootstrap_unit": "ligne",
+      "preprocess": {
+        "n_features_kept": 27,
+        "n_missing_indicators": 0,
+        "n_features_final": 27
+      }
+    },
+    {
+      "dataset": "STEEL",
+      "model": "M3_random_forest",
+      "status": "OK",
+      "n_train": 1165,
+      "n_calib": 388,
+      "n_test": 388,
+      "n_errors_test": 86,
+      "test_accuracy": 0.7783505154639175,
+      "n_classes": 7,
+      "best_baseline_on_calib": "B1_max_prob",
+      "best_baseline_on_test": "B1_max_prob",
+      "iso_fit_auroc": 0.7330201755736947,
+      "iso_fit_ci_low": 0.6727877883805676,
+      "iso_fit_ci_high": 0.7958578329583222,
+      "bootstrap_unit": "ligne",
+      "preprocess": {
+        "n_features_kept": 27,
+        "n_missing_indicators": 0,
+        "n_features_final": 27
+      }
+    },
+    {
+      "dataset": "STEEL",
+      "model": "M4_hist_gradient_boosting",
+      "status": "OK",
+      "n_train": 1165,
+      "n_calib": 388,
+      "n_test": 388,
+      "n_errors_test": 79,
+      "test_accuracy": 0.7963917525773196,
+      "n_classes": 7,
+      "best_baseline_on_calib": "B2_entropy",
+      "best_baseline_on_test": "B2_entropy",
+      "iso_fit_auroc": 0.7282372700831592,
+      "iso_fit_ci_low": 0.6678860489882854,
+      "iso_fit_ci_high": 0.7917044131979614,
+      "bootstrap_unit": "ligne",
+      "preprocess": {
+        "n_features_kept": 27,
+        "n_missing_indicators": 0,
+        "n_features_final": 27
+      }
+    },
+    {
+      "dataset": "HAR",
+      "model": "M1_logreg",
+      "status": "OK",
+      "n_train": 5280,
+      "n_calib": 2072,
+      "n_test": 2947,
+      "n_errors_test": 172,
+      "test_accuracy": 0.9416355615880556,
+      "n_classes": 6,
+      "best_baseline_on_calib": "B3_margin",
+      "best_baseline_on_test": "B3_margin",
+      "iso_fit_auroc": 0.8132704797821076,
+      "iso_fit_ci_low": 0.6960854587288619,
+      "iso_fit_ci_high": 0.8962428760579493,
+      "bootstrap_unit": "sujet",
+      "preprocess": {
+        "n_features_kept": 561,
+        "n_missing_indicators": 0,
+        "n_features_final": 561
+      }
+    },
+    {
+      "dataset": "HAR",
+      "model": "M2_rbf_svm",
+      "status": "OK",
+      "n_train": 5280,
+      "n_calib": 2072,
+      "n_test": 2947,
+      "n_errors_test": 151,
+      "test_accuracy": 0.9487614523243977,
+      "n_classes": 6,
+      "best_baseline_on_calib": "B3_margin",
+      "best_baseline_on_test": "B1_max_prob",
+      "iso_fit_auroc": 0.8233071843409222,
+      "iso_fit_ci_low": 0.697902202080138,
+      "iso_fit_ci_high": 0.9150902571785461,
+      "bootstrap_unit": "sujet",
+      "preprocess": {
+        "n_features_kept": 561,
+        "n_missing_indicators": 0,
+        "n_features_final": 561
+      }
+    },
+    {
+      "dataset": "HAR",
+      "model": "M3_random_forest",
+      "status": "OK",
+      "n_train": 5280,
+      "n_calib": 2072,
+      "n_test": 2947,
+      "n_errors_test": 239,
+      "test_accuracy": 0.9189005768578216,
+      "n_classes": 6,
+      "best_baseline_on_calib": "B3_margin",
+      "best_baseline_on_test": "B3_margin",
+      "iso_fit_auroc": 0.8519882202431351,
+      "iso_fit_ci_low": 0.7975643263593182,
+      "iso_fit_ci_high": 0.922531611133522,
+      "bootstrap_unit": "sujet",
+      "preprocess": {
+        "n_features_kept": 561,
+        "n_missing_indicators": 0,
+        "n_features_final": 561
+      }
+    },
+    {
+      "dataset": "HAR",
+      "model": "M4_hist_gradient_boosting",
+      "status": "OK",
+      "n_train": 5280,
+      "n_calib": 2072,
+      "n_test": 2947,
+      "n_errors_test": 205,
+      "test_accuracy": 0.9304377332880895,
+      "n_classes": 6,
+      "best_baseline_on_calib": "B3_margin",
+      "best_baseline_on_test": "B3_margin",
+      "iso_fit_auroc": 0.8105032822757111,
+      "iso_fit_ci_low": 0.7588764454418343,
+      "iso_fit_ci_high": 0.8749535713447311,
+      "bootstrap_unit": "sujet",
+      "preprocess": {
+        "n_features_kept": 561,
+        "n_missing_indicators": 0,
+        "n_features_final": 561
+      }
+    }
+  ]
+}
